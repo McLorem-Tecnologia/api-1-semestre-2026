@@ -2,10 +2,10 @@
 
 <div align="center">
   <!-- Imagem que aparece apenas no Modo Escuro -->
-  <img src="docs/img/logo-mclorem-dark#gh-dark-mode-only" alt="logo da McLorem Tecnologia" width="200">
+  <img src="docs/img/logo-mclorem-dark.png#gh-dark-mode-only" alt="logo da McLorem Tecnologia" width="200">
   
   <!-- Imagem que aparece apenas no Modo Claro -->
-  <img src="docs/img/logo-mclorem-light#gh-light-mode-only" alt="logo da McLorem Tecnologia" width="200">
+  <img src="docs/img/logo-mclorem-light.png#gh-light-mode-only" alt="logo da McLorem Tecnologia" width="200">
   
   <h2>McLorem Tecnologia</h2>
 </div>
