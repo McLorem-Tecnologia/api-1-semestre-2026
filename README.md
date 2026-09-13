@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
  # API 1º Semestre ADS
 
 <div align="center">
@@ -17,9 +24,9 @@
   <a href ="#backlog"> Backlog do Produto</a>  |
   <a href ="#dor">DoR</a>  |
   <a href ="#dod">DoD</a>  |
-  <a href ="#sprint"> Cronograma de Sprints</a>  |
+  <!-- <a href ="#sprint"> Cronograma de Sprints</a>  | -->
   <a href ="#tecnologias">Tecnologias</a> |
-  <a href ="#manual">Manual de Instalação</a>  | 
+  <!-- <a href ="#manual">Manual de Instalação</a>  | -->
   <a href ="#equipe"> Equipe</a> |
 </p>
 
@@ -79,9 +86,7 @@ O diferencial da solução é a fricção zero com o usuário. A plataforma atua
 
 ---
 
-<br>
-
-## 🏅 DoR - Definition of Ready <a id="DoR"></a>
+## 🏅 DoR - Definition of Ready <a id="dor"></a>
 
 | Critério | Descrição |
 | :--- | :--- |
@@ -91,10 +96,8 @@ O diferencial da solução é a fricção zero com o usuário. A plataforma atua
 | **Compreensão Compartilhada** | A equipe entende o propósito e estimou o esforço da tarefa (Story Points definidos). |
 | **Mapeamento de Intenções** | Estão documentados exemplos reais de frases em linguagem natural que o usuário pode enviar (ex: "o que eu devo fazer hoje?", "tem produto pra agora?"). |
 | **Critérios Técnicos** | Está definido o que o modelo via **DSPy** precisará extrair da frase (parâmetros) e qual arquivo/coluna estática o **Pandas** deverá ler. |
----
-<br>
 
-## 🏅 DoD - Definition of Done <a id="DoD"></a>
+## 🏅 DoD - Definition of Done <a id="dod"></a>
 
 | Critério | Descrição |
 | :--- | :--- |
@@ -106,22 +109,102 @@ O diferencial da solução é a fricção zero com o usuário. A plataforma atua
 | **Validação do PO** | O Product Owner conversou de forma natural com o bot no Telegram e confirmou que o retorno atende à regra de negócio. |
 | **Pronto para Deploy** | O código está limpo, mergeado na branch principal e pronto para ser executado. |
 ---
-<br>
-
 <!--
-
-
 ## 📅 Cronograma de Sprints <a id="sprint"></a>
 
-<br>
+-->
 ## 💻 Tecnologias <a id="tecnologias"></a>
 
-<br>
+<h4 align="center">
+ <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"></a>
+ <a href="https://www.atlassian.com/software/jira"><img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"/></a>
+ <a href="https://miro.com/"><img src="https://img.shields.io/badge/Miro-1A1A1A?style=for-the-badge&logo=miro&logoColor=white"/></a>
+ <a href="https://github.com/"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a>
+</h4>
 
+<!--
 ## 📖 Manual de Instalação <a id="manual"></a>
 
-<br>
 
 ### 🛠 Pré-requisitos
 
 -->
+## 🎓 Equipe <a id="equipe"></a>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/hcastrosilva96">
+          <img src="https://github.com/hcastrosilva96.png" width="115px;" style="border-radius: 50%;" alt="Foto do Henrique de Castro"/><br>
+          <sub><b>Henrique de Castro</b></sub>
+        </a><br>
+        Product Owner
+      </td>
+      <td align="center">
+        <a href="https://github.com/FelipeMoraisOC">
+          <img src="https://github.com/FelipeMoraisOC.png" width="115px;" style="border-radius: 50%;" alt="Foto do Felipe Morais"/><br>
+          <sub><b>Felipe Morais</b></sub>
+        </a><br>
+        Scrum Master
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/mirelacristina">
+          <img src="https://github.com/mirelacristina.png" width="100px;" style="border-radius: 50%;" alt="Foto da Mirela Cristina"/><br>
+          <sub><b>Mirela Cristina</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+      <td align="center">
+        <a href="https://github.com/eduardogranja">
+          <img src="https://github.com/eduardogranja.png" width="100px;" style="border-radius: 50%;" alt="Foto do Eduardo Granja"/><br>
+          <sub><b>Eduardo Granja</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+      <td align="center">
+        <a href="https://github.com/IanVRV">
+          <img src="https://github.com/IanVRV.png" width="100px;" style="border-radius: 50%;" alt="Foto do Ian Victor"/><br>
+          <sub><b>Ian Victor</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+      <td align="center">
+        <a href="https://github.com/mvlsouza">
+          <img src="https://github.com/mvlsouza.png" width="100px;" style="border-radius: 50%;" alt="Foto do Marcus Vinicius"/><br>
+          <sub><b>Marcus Vinicius</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/leandrotc013-lab">
+          <img src="https://github.com/leandrotc013-lab.png" width="100px;" style="border-radius: 50%;" alt="Foto do Leandro"/><br>
+          <sub><b>Leandro</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+      <td align="center">
+        <a href="https://github.com/ag0ulart-dev">
+          <img src="https://github.com/ag0ulart-dev.png" width="100px;" style="border-radius: 50%;" alt="Foto do Adham Goulart"/><br>
+          <sub><b>Adham Goulart</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+      <td align="center">
+        <a href="https://github.com/MATHEUSORTEGA">
+          <img src="https://github.com/MATHEUSORTEGA.png" width="100px;" style="border-radius: 50%;" alt="Foto do Matheus Correia"/><br>
+          <sub><b>Matheus Correia</b></sub>
+        </a><br>
+        Dev Team
+      </td>
+    </tr>
+  </table>
+</div>
