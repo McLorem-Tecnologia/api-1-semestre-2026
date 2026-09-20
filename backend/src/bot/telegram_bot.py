@@ -11,8 +11,15 @@ def iniciar_bot(bot_key):
     
     @bot.message_handler(content_types=['text'])
     def receber_texto(message):
+        print(f"[Bot] Mensagem recebida: {message.text}")
+        mensagem_status = bot.reply_to(message, "Pensando...")
+        bot.send_chat_action(message.chat.id, "typing")
         resposta = processar_mensagem(message.text)
-        bot.reply_to(message, str(resposta))
+        bot.edit_message_text(
+            str(resposta),
+            message.chat.id,
+            mensagem_status.message_id,
+        )
     
     @bot.message_handler(content_types=tipos_nao_suportados)
     def receber_formatos_invalidos(message):
