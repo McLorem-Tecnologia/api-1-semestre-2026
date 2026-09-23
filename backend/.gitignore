@@ -1,3 +1,7 @@
+# venv
+venv/
+add_lib.py
+
 # enviroment 
 .env
 .env.local
