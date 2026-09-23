@@ -99,22 +99,24 @@ Desenvolver a base do Assistente de Análise de Dados integrado ao Telegram, per
 
 | Critério | Descrição |
 | :--- | :--- |
-| **Clareza e Usuário** | O objetivo das User Stories está claramente definido e o usuário da funcionalidade (Líder) está identificado. |
-| **Fontes de Dados** | Os produtos estão bem definidos no arquivo `produtos_mercado.csv`. Serão utilizados os arquivos: Regras, Vendas e Descartes do supermercado por mês e ano. |
-| **Regras de Negócio** | O método de cálculo está definido, baseando-se nas vendas anteriores, na temperatura do dia e no dia do mês. |
-| **Apresentação Visual** | Está definido como a quantidade recomendada e a lista de produtos serão apresentadas ao líder. |
-| **Critérios e Dependências** | Todos os critérios de aceite estão definidos e as dependências necessárias para o desenvolvimento foram identificadas. |
+| **Clareza na Descrição** | A User Story está escrita no formato: "Eu, como [papel], quero [ação], a fim de [objetivo/valor]". |
+| **Critérios de Aceitação** | A história possui critérios claros e pelo menos um cenário de teste básico (BDD) mapeado (Dado que... Quando... Então...). |
+| **Independente** | A história pode ser desenvolvida sem depender de tarefas bloqueantes dentro da mesma Sprint. |
+| **Compreensão Compartilhada** | A equipe entende o propósito e estimou o esforço da tarefa (Story Points definidos). |
+| **Mapeamento de Intenções** | Estão documentados exemplos reais de frases em linguagem natural que o usuário pode enviar (ex: "o que eu devo fazer hoje?", "tem produto pra agora?"). |
+| **Critérios Técnicos** | Está definido o que o modelo via **DSPy** precisará extrair da frase (parâmetros) e qual arquivo/coluna estática o **Pandas** deverá ler. |
 
 ## 🏅 DoD - Definition of Done <a id="dod"></a>
 
 | Critério | Descrição |
 | :--- | :--- |
-| **Identificação e Cálculo** | O sistema identifica corretamente quais produtos precisam ser produzidos e calcula a quantidade recomendada para cada um deles. |
-| **Fatores de Demanda** | O cálculo utiliza ativamente os dados do histórico de vendas e considera os fatores de demanda definidos (temperatura, feriados e finais de semana). |
-| **Apresentação de Dados** | O sistema apresenta de forma clara, ao líder, o nome do produto e a quantidade recomendada para produção. |
-| **Precisão e Regras** | Os cálculos foram validados com dados de referência e produtos sem necessidade de produção não são indevidamente recomendados. |
-| **Qualidade (Testes)** | A funcionalidade foi testada com diferentes cenários de demanda e não apresenta erros que impeçam o seu funcionamento. |
-| **Aprovação Final** | Todos os critérios de aceite foram atendidos e o líder ou responsável pelo projeto validou o resultado final da Sprint. |
+| **Critérios Atendidos** | Todos os critérios de aceitação e cenários de teste da User Story foram cumpridos e validados com sucesso. |
+| **Interpretação Validada (NLP)** | A IA interpretou corretamente diferentes variações da mesma pergunta em texto livre, acionando a filtragem correta no Pandas. |
+| **Código Revisado** | O código passou por Code Review (Pull Request revisado e aprovado por pelo menos um outro membro da equipe). |
+| **Documentação Atualizada** | As novas capacidades de interpretação do bot, a estrutura dos módulos DSPy e os mapeamentos dos CSVs estáticos foram atualizados no README.md. |
+| **Integração Validada** | A nova capacidade de resposta não confunde a IA em relação a outras perguntas já suportadas e o bot lida bem com frases fora de contexto. |
+| **Validação do PO** | O Product Owner conversou de forma natural com o bot no Telegram e confirmou que o retorno atende à regra de negócio. |
+| **Pronto para Deploy** | O código está limpo, mergeado na branch principal e pronto para ser executado. |
 
 ## 🎓 Equipe <a id="equipe"></a>
 
