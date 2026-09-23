@@ -10,6 +10,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from ia.procedures import procedures
+from ia.tools.utils import classificar_dia
 
 
 def media_vendas_produtos(vendas, setor=None):
@@ -57,3 +58,10 @@ def media_vendas_produtos(vendas, setor=None):
         )
 
     return resultado
+
+def dataframe_vendas_similares(data: str, filtro_dia: int) -> pd.DataFrame:
+    vendas = procedures.vendas.todas_as_vendas()
+    if classificar_dia(data) != filtro_dia:
+        return pd.DataFrame(columns=vendas.columns)
+    filtro = vendas["Data"].apply(classificar_dia) == filtro_dia
+    return vendas[filtro]
