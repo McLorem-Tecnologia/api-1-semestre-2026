@@ -2,18 +2,14 @@
 # Função para TOOLS do DSPY relacionadas a produção.
 import math
 import sys
-from pathlib import Path
+import traceback
 import pandas as pd
 from ia.procedures import procedures
-from ia.tools.utils import dspy_tool
-import traceback
+from ia.tools.utils import dspy_tool, classificar_dia
+from pathlib import Path
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-
-from ia.procedures import procedures
-from ia.tools.utils import classificar_dia
-
 
 def media_vendas_produtos(vendas, setor=None):
     """
@@ -144,3 +140,48 @@ def dataframe_vendas_similares(data: str, filtro_dia: int) -> pd.DataFrame:
         return pd.DataFrame(columns=vendas.columns)
     filtro = vendas["Data"].apply(classificar_dia) == filtro_dia
     return vendas[filtro]
+
+def estimativa_producao_passado(data: str, setor: str) -> str:
+    """Estima quanto deveria ser produzido em um dia passado para um setor.
+
+    Use esta ferramenta quando o gerente informar uma data específica no
+    passado e quiser saber a produção recomendada de cada produto de um setor.
+    O parâmetro ``data`` deve estar no formato ``DD/MM/AAAA`` e ``setor`` deve
+    conter o nome do setor, como "Padaria" ou "Confeitaria".
+
+    Use: python -c "from ia.tools.producao_tool import estimativa_producao_passado; print(estimativa_producao_passado('DD/MM/AAAA', 'SETOR'))"
+
+    Args:
+        data: Data do dia que será estimado, no formato ``DD/MM/AAAA``.
+        setor: Setor dos produtos que devem ser incluídos na estimativa.
+
+    Returns:
+        Uma string com a estimativa de produção de cada produto, ou uma
+        mensagem informando que não há vendas anteriores para a consulta.
+    """
+    try:
+        data_alvo = pd.to_datetime(data, format="%d/%m/%Y")
+    except (TypeError, ValueError) as erro:
+        raise ValueError(
+            "A data deve estar no formato DD/MM/AAAA."
+        ) from erro
+
+    vendas = procedures.vendas.todas_as_vendas().copy()
+    vendas["Data"] = pd.to_datetime(
+        vendas["Data"],
+        format="%d/%m/%Y",
+    )
+    vendas_anteriores = vendas[vendas["Data"] < data_alvo]
+
+    if vendas_anteriores.empty:
+        return "Não há vendas anteriores à data informada para calcular a estimativa."
+
+    vendas_anteriores = vendas_anteriores.assign(
+        Data=vendas_anteriores["Data"].dt.strftime("%d/%m/%Y")
+    )
+    estimativas = media_vendas_produtos(vendas_anteriores.to_dict("records"), setor)
+
+    if not estimativas:
+        return f"Não há vendas anteriores para o setor '{setor}'."
+
+    return "\n".join(estimativas)
