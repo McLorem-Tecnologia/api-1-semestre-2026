@@ -12,6 +12,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from ia.procedures import procedures
+from ia.tools.utils import classificar_dia
 
 
 def media_vendas_produtos(vendas, setor=None):
@@ -136,3 +137,10 @@ def producao_dia_pelo_setor(data: str, setor: str) -> str:
         
         # Força o bot a apresentar a causa raiz diretamente no chat
         return f"POR FAVOR, AVISE O DESENVOLVEDOR EXATAMENTE ISTO: Erro técnico no Python -> {type(e).__name__}: {str(e)}"
+      
+def dataframe_vendas_similares(data: str, filtro_dia: int) -> pd.DataFrame:
+    vendas = procedures.vendas.todas_as_vendas()
+    if classificar_dia(data) != filtro_dia:
+        return pd.DataFrame(columns=vendas.columns)
+    filtro = vendas["Data"].apply(classificar_dia) == filtro_dia
+    return vendas[filtro]
