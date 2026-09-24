@@ -73,5 +73,6 @@ def classificar_dia(data: str) -> int:
 # Sempre que criar um arquivo novo (ex: vendas.py), adicione um import genérico aqui:
 
 import ia.tools.produtos_tools
+import ia.tools.producao_tool
 # import ia.tools.vendas_tools
 # import ia.tools.descartes_tools
