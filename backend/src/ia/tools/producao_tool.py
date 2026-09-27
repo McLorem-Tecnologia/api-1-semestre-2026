@@ -1,187 +1,78 @@
 # Funções para estimativa de produção.
 # Função para TOOLS do DSPY relacionadas a produção.
-import math
-import sys
-import traceback
-import pandas as pd
-from ia.procedures import procedures
-from ia.tools.utils import dspy_tool, classificar_dia
 from pathlib import Path
-
-if __package__ in (None, ""):
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-
-def media_vendas_produtos(vendas, setor=None):
-    """
-    Calcula a média de vendas de cada produto e arredonda o resultado
-    para cima.
-
-    Args:
-        vendas (list): Lista de vendas no formato de registros
-            de um DataFrame do pandas.
-        setor (str, opcional): Setor utilizado para filtrar os produtos.
-            Se não for informado, calcula a média de todos os produtos.
-
-    Returns:
-        list: Lista contendo o nome de cada produto e sua média
-            de vendas arredondada para cima.
-
-            Exemplo:
-            ['Brigadeiro: 4', 'Temaki: 7', 'Pão Francês: 4']
-    """
-
-    dados = pd.DataFrame(vendas)
-
-    if setor is not None:
-        produtos_setor = procedures.produtos.buscar_por_setor(setor)
-
-        nomes_produtos = [
-            produto["Produto"]
-            for produto in produtos_setor
-        ]
-
-        dados = dados[
-            dados["Produto"].isin(nomes_produtos)
-        ]
-
-    medias = dados.groupby("Produto")["Qtd"].mean()
-
-    resultado = []
-
-    for produto, media in medias.items():
-        media_arredondada = math.ceil(media)
-
-        resultado.append(
-            f"{produto}: {media_arredondada}"
-        )
-
-    return resultado
-
+from ia.tools.utils import dspy_tool, converter_data_relativa, normalizar_setor, classificar_dia
+from ia.procedures import procedures
 
 @dspy_tool
-def producao_dia_pelo_setor(data: str, setor: str) -> str:
-    """Calcula a produção total de um setor em uma data específica.
-    A produção é a soma das vendas com o descarte.
-    REGRA ABSOLUTA: Retorne a lista EXATAMENTE no formato que esta ferramenta gerar. Se ocorrer um erro, mostre o erro técnico exato ao usuário.
+def tool_previsao_vendas_por_data(data: str = "hoje", setor: str = "", tipo_pergunta: str = "quanto") -> str:
+    # US-01 e US-02
+    # US-01: Eu, como líder, quero saber QUAIS produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto.
+    # US-02: Eu, como líder, quero saber QUANTOS produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto.
+    """Use esta ferramenta EXCLUSIVAMENTE para PREVISÃO DE PRODUÇÃO (foco em ação atual ou futura).
+    Acione-a para responder perguntas como: "O que precisamos produzir?", "Quanto devemos produzir amanhã?", "O que produzir daqui a 3 dias?".
+    
+    Lógica interna: A ferramenta analisa se a data solicitada é dia de pico ou comum, cruzando e calculando a média ideal de produção baseada no histórico.
+    
+    Parâmetros:
+    - data (opcional): data exata ('30/09/2026'), palavras relativas ('hoje', 'amanhã') ou tempo relativo ('daqui a 3 dias', 'em 5 dias'). SE NÃO ESPECIFICADO, DEIXE VAZIO (o sistema assumirá 'hoje').
+    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
+    - tipo_pergunta (OBRIGATÓRIO AVALIAR): Você deve classificar a intenção da frase do usuário. Se ele usar palavras como "Qual", "Quais", ou perguntar "O que", preencha EXATAMENTE com a string "quais". Se ele perguntar "Quanto", "Quantos", ou pedir números, preencha com "quanto".
+        
+    REGRA ABSOLUTA: Entregue os dados com foco em AÇÃO. Repasse EXATAMENTE os números retornados.
     """
     try:
-        print(f"[DEBUG] Iniciando producao_dia -> Data: {data} | Setor: {setor}")
+        if not data: data = "hoje"
+        if not tipo_pergunta: tipo_pergunta = "quanto"
+        if setor: setor = normalizar_setor(setor)
         
-        # 1. Buscar produtos do setor
-        produtos_setor = procedures.produtos.buscar_por_setor(setor)
-        if not produtos_setor:
-            return f"Nenhum produto encontrado para o setor '{setor}'."
-        
-        nomes_produtos = [p["Produto"] for p in produtos_setor]
-        
-        # 2. Busca os dados brutos das procedures
-        dados_vendas = procedures.vendas.buscar_por_data(data)
-        dados_descarte = procedures.descarte.buscar_por_data(data)
-        
-        # PROTEÇÃO 1: Se o retorno for um DataFrame do Pandas, converte para lista de dicionários
-        if isinstance(dados_vendas, pd.DataFrame):
-            dados_vendas = dados_vendas.to_dict('records')
-        if isinstance(dados_descarte, pd.DataFrame):
-            dados_descarte = dados_descarte.to_dict('records')
-            
-        resumo = {nome: {"vendas": 0, "descarte": 0} for nome in nomes_produtos}
-        
-        # Função interna para garantir que os valores lidos da planilha não quebram a soma
-        def limpar_numero(valor):
-            try:
-                # Converte textos, trata possíveis vírgulas, e garante que sai como número inteiro
-                return int(float(str(valor).replace(',', '.').strip()))
-            except (ValueError, TypeError):
-                return 0
+        data_real = converter_data_relativa(data)
 
-        # 3. Soma as vendas de forma segura
-        for item in dados_vendas:
-            if isinstance(item, dict) and item.get("Produto") in nomes_produtos:
-                qtd = item.get("Qtd", item.get("Quantidade", 0))
-                resumo[item["Produto"]]["vendas"] += limpar_numero(qtd)
-                
-        # 4. Soma os descartes de forma segura
-        for item in dados_descarte:
-            if isinstance(item, dict) and item.get("Produto") in nomes_produtos:
-                qtd = item.get("Qtd", item.get("Quantidade", item.get("Descarte", 0)))
-                resumo[item["Produto"]]["descarte"] += limpar_numero(qtd)
+        termo = data.strip().lower()
+        if termo in ['hoje', 'hj', 'amanhã', 'amanha']:
+            texto_data_amigavel = f"{termo} ({data_real})"
+        else:
+            texto_data_amigavel = f"no dia {data_real}"
 
-        # 5. Monta o resultado final no formato exigido
-        resultado = ""
-        teve_movimento = False
+        filtro_correto = classificar_dia(data_real)
+        df_historico_limpo = procedures.vendas.dataframe_vendas_similares(data_real, filtro_correto)
         
-        for produto in sorted(resumo.keys()):
-            vendas = resumo[produto]["vendas"]
-            descarte = resumo[produto]["descarte"]
-            producao = vendas + descarte
+        if df_historico_limpo.empty:
+            return f"Não encontrei dados históricos compatíveis para projetar a produção do dia {texto_data_amigavel}."
             
-            if producao > 0:
-                teve_movimento = True
-                resultado += f"{produto}, produção: {producao}, vendas: {vendas}, descarte: {descarte}\n"
-                
-        if not teve_movimento:
-            return f"Não houve registros de produção para '{setor}' na data {data}."
+        resultado = procedures.vendas.media_vendas_produtos(df_historico_limpo, setor)
+        
+        if not resultado:
+            texto_setor = f" no setor '{setor}'" if setor else ""
+            return f"Não há histórico suficiente para projetar a produção{texto_setor} do dia {texto_data_amigavel}."
             
-        print("[DEBUG] Sucesso! Ferramenta gerou os dados corretamente.")
-        return resultado
+        aviso_setor = f" (Setor: {setor})" if setor else ""
+        
+        # Resposta com foco em AÇÃO / FUTURO
+        texto_resposta = f"PREVISÃO DE PRODUÇÃO: O que DEVE ser produzido para o dia {texto_data_amigavel}{aviso_setor}:\n"
+        texto_resposta += "(Baseado no perfil de demanda projetado para esta data)\n\n"
+        
+        for item in resultado:
+            if tipo_pergunta.lower() in ['qual', 'quais', 'o que']:
+                nome_produto = item.split(":")[0]
+                texto_resposta += f"- {nome_produto}\n"
+            else:
+                texto_resposta += f"- {item} unidades\n"
+            
+        return texto_resposta
 
     except Exception as e:
-        # Imprime o rasto completo do erro no terminal do VS Code
-        print("\n--- DETALHE TÉCNICO DO ERRO ---")
-        print(traceback.format_exc())
-        print("-------------------------------\n")
-        
-        # Força o bot a apresentar a causa raiz diretamente no chat
-        return f"POR FAVOR, AVISE O DESENVOLVEDOR EXATAMENTE ISTO: Erro técnico no Python -> {type(e).__name__}: {str(e)}"
-      
-def dataframe_vendas_similares(data: str, filtro_dia: int) -> pd.DataFrame:
-    vendas = procedures.vendas.todas_as_vendas()
-    if classificar_dia(data) != filtro_dia:
-        return pd.DataFrame(columns=vendas.columns)
-    filtro = vendas["Data"].apply(classificar_dia) == filtro_dia
-    return vendas[filtro]
+        print(f"[ERRO - tool_previsao_vendas_por_data] Falha: {e}")
+        return "Ocorreu um erro técnico inesperado ao cruzar os dados para a previsão. Informe ao usuário de forma amigável que não foi possível projetar a produção neste momento."
 
-def estimativa_producao_passado(data: str, setor: str) -> str:
-    """Estima quanto deveria ser produzido em um dia passado para um setor.
 
-    Use esta ferramenta quando o gerente informar uma data específica no
-    passado e quiser saber a produção recomendada de cada produto de um setor.
-    O parâmetro ``data`` deve estar no formato ``DD/MM/AAAA`` e ``setor`` deve
-    conter o nome do setor, como "Padaria" ou "Confeitaria".
 
-    Use: python -c "from ia.tools.producao_tool import estimativa_producao_passado; print(estimativa_producao_passado('DD/MM/AAAA', 'SETOR'))"
 
-    Args:
-        data: Data do dia que será estimado, no formato ``DD/MM/AAAA``.
-        setor: Setor dos produtos que devem ser incluídos na estimativa.
 
-    Returns:
-        Uma string com a estimativa de produção de cada produto, ou uma
-        mensagem informando que não há vendas anteriores para a consulta.
     """
     try:
-        data_alvo = pd.to_datetime(data, format="%d/%m/%Y")
-    except (TypeError, ValueError) as erro:
-        raise ValueError(
-            "A data deve estar no formato DD/MM/AAAA."
-        ) from erro
 
-    vendas = procedures.vendas.todas_as_vendas().copy()
-    vendas["Data"] = pd.to_datetime(
-        vendas["Data"],
-        format="%d/%m/%Y",
-    )
-    vendas_anteriores = vendas[vendas["Data"] < data_alvo]
 
-    if vendas_anteriores.empty:
-        return "Não há vendas anteriores à data informada para calcular a estimativa."
 
-    vendas_anteriores = vendas_anteriores.assign(
-        Data=vendas_anteriores["Data"].dt.strftime("%d/%m/%Y")
-    )
-    estimativas = media_vendas_produtos(vendas_anteriores.to_dict("records"), setor)
 
-    if not estimativas:
-        return f"Não há vendas anteriores para o setor '{setor}'."
 
-    return "\n".join(estimativas)
