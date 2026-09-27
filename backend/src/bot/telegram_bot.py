@@ -1,5 +1,4 @@
 import telebot
-from telebot.apihelper import ApiTelegramException
 from ia.message import processar_mensagem
 
 def iniciar_bot(bot_key):
@@ -18,7 +17,7 @@ def iniciar_bot(bot_key):
             "Pode conversar comigo do seu jeito, de forma natural, como se estivesse batendo um papo com alguém da equipe! 🧠💬\n\n"
             "Para testar, que tal me perguntar coisas como:\n\n"
             "🍞 _\"MIA, quais produtos precisamos produzir hoje?\"_\n"
-            "📈 _\"Quantas unidades do produto X devemos fazer com base nas vendas do último mês?\"_\n\n"
+            "📈 _\"Quantas unidades devo produzir amanhã?\"_\n\n"
             "Como eu posso facilitar o seu planejamento hoje? 🥰"
         )   
         
@@ -32,10 +31,11 @@ def iniciar_bot(bot_key):
         msg_temp = bot.reply_to(message, "⏳ <b><i>Processando sua solicitação...</i></b>", parse_mode='HTML')
         bot.send_chat_action(message.chat.id, 'typing')
 
-        resposta_bruta = str(processar_mensagem(message.text))
-        resposta = resposta_bruta.replace('```html', '').replace('```', '').replace('[[ ## completed ]]', '').strip()
+        resposta_bruta = str(processar_mensagem(message.text.lower()))
+        resposta = resposta_bruta.replace('[[ ## completed ]]', '').strip()
 
         print(f"[DEBUG] Resposta processada: {resposta}")
+        
         bot.edit_message_text(
             chat_id=message.chat.id,
             message_id=msg_temp.message_id,
@@ -50,4 +50,4 @@ def iniciar_bot(bot_key):
         )
 
     print("MIA está online e ouvindo...")
-    bot.infinity_polling(timeout=20, long_polling_timeout=20)
+    bot.infinity_polling(timeout=60, long_polling_timeout=60)
