@@ -1,4 +1,4 @@
-# 🧠 Arquitetura — MIA
+# 🧠 Arquitetura — MIA — Assistente de Análise de Dados
 
 ## Sumário
 - [Visão geral das camadas](#visao-geral)

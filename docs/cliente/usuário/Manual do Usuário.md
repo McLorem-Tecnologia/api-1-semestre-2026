@@ -1,4 +1,4 @@
-# 📘 Manual do Usuário - MIA (Assistente de Análise de Dados)
+# 📘 Manual do Usuário - MIA — Assistente de Análise de Dados
 
 Bem-vindo ao manual de utilização da **MIA**! Este documento destina-se aos usuários finais (Líderes e Gerentes de Produção) e explica como interagir com a nossa assistente inteligente integrada diretamente no Telegram.
 
@@ -16,14 +16,14 @@ Esqueça os menus numéricos e as barras de comandos. Trate a MIA como uma coleg
 As recomendações de produção são estimativas baseadas no histórico de dias parecidos (dias de pagamento, fins de semana e feriados), com margem de segurança.
 As planilhas de ingredientes e de regras (clima, vésperas) já estão no sistema, mas ainda não são usadas nas respostas.
 
-## 5. Como fazer boas perguntas
+## 4. Como fazer boas perguntas
 * **Setores reconhecidos:** Açougue, Padaria, Cozinha/Rotisseria (também "cozinha" ou "rotisseria"), Peixaria (também "peixe") e Confeitaria (também "doce"). Pequenos erros de digitação são corrigidos (ex.: "acugue").
 * **Datas:** "hoje", "hj", "amanhã", "ontem", "anteontem", "há 3 dias", "3 dias atrás", "daqui a 2 dias", "em 5 dias" ou uma data no formato DD/MM/AAAA. Dias da semana ("segunda passada") ainda não são garantidos.
 * **Período dos dados:** de 01/08/2026 a 30/09/2026 (descartes só de setembro).
 * **Somente texto:** áudio, foto, vídeo, documento, figurinha e localização recebem um aviso de formato não suportado.
 * **Fora do escopo:** perguntas que não são sobre a produção do supermercado recebem "Desculpe, meu sistema é restrito à análise e produção do supermercado."
 
-## 6. Mensagens de erro
+## 5. Mensagens de erro
 | Mensagem | O que fazer |
 | --- | --- |
 | "⚠️ Ops! Minha inteligência artificial teve um branco..." | Reformule a pergunta de forma mais direta. |

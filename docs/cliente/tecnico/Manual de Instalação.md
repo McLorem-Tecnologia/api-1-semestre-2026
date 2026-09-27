@@ -1,4 +1,4 @@
-# 📕 Manual do Instalação - MIA (Assistente de Análise de Dados)
+# 📕 Manual do Instalação - MIA — Assistente de Análise de Dados
 
 ## Descrição
 

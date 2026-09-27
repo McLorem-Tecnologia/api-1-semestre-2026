@@ -140,9 +140,9 @@ Este documento registra a execução manual dos testes da MIA na Sprint 1: cada 
 
 Respostas longas do bot (que não cabem na tabela) ficam guardadas aqui, uma por caso de teste, dentro de um bloco recolhível.
 
-<a id="evidencia-11"></a>
 <details>
 <summary><b>1.1</b> — "Quais produtos devo produzir hoje?"</summary>
+<a id="evidencia-11"></a>
 
 ```
 Aqui estão os produtos que você pode produzir hoje:
@@ -175,9 +175,9 @@ Aqui estão os produtos que você pode produzir hoje:
 
 </details>
 
-<a id="evidencia-12"></a>
 <details>
 <summary><b>1.2</b> — "Quais produtos preciso produzir amanhã?"</summary>
+<a id="evidencia-12"></a>
 
 Aqui estão os produtos que devem ser produzidos para o dia amanhã (27/09/2026):
 
@@ -185,9 +185,9 @@ Aqui estão os produtos que devem ser produzidos para o dia amanhã (27/09/2026)
 
 </details>
 
-<a id="evidencia-13"></a>
 <details>
 <summary><b>1.3</b> — "Quais produtos devo produzir hoje na padaria?"</summary>
+<a id="evidencia-13"></a>
 
 ```
 Aqui estão os produtos disponíveis para produção hoje na padaria:
@@ -200,9 +200,9 @@ Aqui estão os produtos disponíveis para produção hoje na padaria:
 
 </details>
 
-<a id="evidencia-14"></a>
 <details>
 <summary><b>1.4</b> — "Quais produtos devo produzir no dia 20/09/2026?"</summary>
+<a id="evidencia-14"></a>
 
 ```
 Aqui estão os produtos que você deve produzir:
@@ -237,9 +237,9 @@ Aqui estão os produtos que você deve produzir:
 
 ---
 
-<a id="evidencia-21"></a>
 <details>
 <summary><b>2.1</b> — "Quantas unidades devo produzir hoje?"</summary>
+<a id="evidencia-21"></a>
 
 ```
 Aqui estão as previsões de produção para hoje (26/09/2026):
@@ -272,9 +272,9 @@ Aqui estão as previsões de produção para hoje (26/09/2026):
 
 </details>
 
-<a id="evidencia-22"></a>
 <details>
 <summary><b>2.2</b> — "Quanto de coxinha devo fazer amanhã"</summary>
+<a id="evidencia-22"></a>
 
 ```
 Aqui estão as quantidades de produção solicitadas:
@@ -283,9 +283,9 @@ Aqui estão as quantidades de produção solicitadas:
 
 </details>
 
-<a id="evidencia-23"></a>
 <details>
 <summary><b>2.3</b> — "Quantos produtos da padaria devo produzir hoje?"</summary>
+<a id="evidencia-23"></a>
 
 ```
 Aqui estão as quantidades de produtos da padaria que você deve produzir hoje:
@@ -300,9 +300,9 @@ Aqui estão as quantidades de produtos da padaria que você deve produzir hoje:
 
 ---
 
-<a id="evidencia-31"></a>
 <details>
 <summary><b>3.1</b> — "O que foi produzido ontem na padaria?"</summary>
+<a id="evidencia-31"></a>
 
 ```
 Aqui está o relatório de produção da padaria de ontem (25/09/2026):
@@ -318,9 +318,9 @@ No total, foram produzidas 150 unidades.
 
 </details>
 
-<a id="evidencia-32"></a>
 <details>
 <summary><b>3.2</b> — "O que foi produzido ontem no açougue, na padaria e na cozinha?"</summary>
+<a id="evidencia-32"></a>
 
 ```
 Aqui estão os detalhes da produção realizada ontem (25/09/2026) no açougue, na padaria e na cozinha:
@@ -349,9 +349,9 @@ Aqui estão os detalhes da produção realizada ontem (25/09/2026) no açougue, 
 
 </details>
 
-<a id="evidencia-33"></a>
 <details>
 <summary><b>3.3</b> — "O que foi produzido ontem?"</summary>
+<a id="evidencia-33"></a>
 
 ```
 Aqui estão os detalhes do que foi produzido ontem (24/09/2026):
@@ -387,9 +387,9 @@ No total foram produzidas 750 unidades.
 
 </details>
 
-<a id="evidencia-34"></a>
 <details>
 <summary><b>3.4</b> — "O que foi produzido ontem? Separe a lista por setores"</summary>
+<a id="evidencia-34"></a>
 
 ```
 Aqui estão os itens produzidos ontem, separados por setor:
@@ -433,9 +433,9 @@ Total Geral de Unidades Produzidas: 750 unidades
 
 </details>
 
-<a id="evidencia-35"></a>
 <details>
 <summary><b>3.5</b> — "O que foi produzido no acugue ontem? (erro de digitação proposital)"</summary>
+<a id="evidencia-35"></a>
 
 ```
 Aqui está o relatório de produção do açougue realizado ontem (25/09/2026):
@@ -451,9 +451,9 @@ No total, foram produzidas 150 unidades.
 
 ---
 
-<a id="evidencia-41"></a>
 <details>
 <summary><b>4.1</b> — "O que deveria ter sido produzido ontem na padaria?"</summary>
+<a id="evidencia-41"></a>
 
 ```
 Aqui estão os produtos que deveriam ter sido produzidos ontem na padaria:
@@ -466,9 +466,9 @@ Aqui estão os produtos que deveriam ter sido produzidos ontem na padaria:
 
 </details>
 
-<a id="evidencia-42"></a>
 <details>
 <summary><b>4.2</b> — "Qual era a meta de produção de hoje para o açougue?"</summary>
+<a id="evidencia-42"></a>
 
 ```
 Aqui estão as metas de produção que deveriam ter sido atingidas no dia 26/09/2026 para o setor de Açougue:
@@ -481,9 +481,9 @@ Aqui estão as metas de produção que deveriam ter sido atingidas no dia 26/09/
 
 </details>
 
-<a id="evidencia-43"></a>
 <details>
 <summary><b>4.3</b> — "Quanto deveria ter sido produzido ontem na padaria?"</summary>
+<a id="evidencia-43"></a>
 
 ```
 Aqui estão os produtos que deveriam ter sido produzidos ontem na padaria:
@@ -498,9 +498,9 @@ Aqui estão os produtos que deveriam ter sido produzidos ontem na padaria:
 
 ---
 
-<a id="evidencia-51"></a>
 <details>
 <summary><b>5.1</b> — "Quais produtos vocês têm?"</summary>
+<a id="evidencia-51"></a>
 
 ```
 Aqui estão os produtos disponíveis:
@@ -533,9 +533,9 @@ Aqui estão os produtos disponíveis:
 
 </details>
 
-<a id="evidencia-52"></a>
 <details>
 <summary><b>5.2</b> — "Me dá os detalhes de todos os produtos"</summary>
+<a id="evidencia-52"></a>
 
 ```
 Aqui estão os detalhes de todos os produtos e seus tempos de preparo:
@@ -569,9 +569,9 @@ Aqui estão os detalhes de todos os produtos e seus tempos de preparo:
 
 </details>
 
-<a id="evidencia-53"></a>
 <details>
 <summary><b>5.3</b> — "Quais são as informações da coxinha?"</summary>
+<a id="evidencia-53"></a>
 
 ```
 Aqui estão as informações da coxinha:
@@ -582,9 +582,9 @@ Aqui estão as informações da coxinha:
 
 </details>
 
-<a id="evidencia-54"></a>
 <details>
 <summary><b>5.4</b> — "Quais produtos são da cozinha?"</summary>
+<a id="evidencia-54"></a>
 
 ```
 Aqui estão os produtos da cozinha:

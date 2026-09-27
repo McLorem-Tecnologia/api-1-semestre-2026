@@ -1,6 +1,6 @@
 # Guia de Testes — Sprint 1
 
-Este documento é um **guia para você testar a MIA na prática**, e não um relatório do que já foi testado. A ideia é: você envia cada mensagem sugerida no Telegram, compara com o resultado esperado, anota o que realmente aconteceu e marca o status na tabela do final. Os resultados da execução ficam no [Relatório de Testes - Sprint 1](./Relatorio%20de%20Testes%20-%20Sprint%201.md).
+Este documento é um **guia para você testar a MIA na prática**, e não um relatório do que já foi testado. A ideia é: você envia cada mensagem sugerida no Telegram, compara com o resultado esperado, anota o que realmente aconteceu e marca o status na tabela do final. Os resultados da execução ficam no [Relatório de Testes - Sprint 1](./Relatório%20de%20Testes%20-%20Sprint%201.md).
 
 ## Pré-requisitos antes de começar
 
