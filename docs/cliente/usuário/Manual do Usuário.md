@@ -1,4 +1,4 @@
-# 📘 Manual do Usuário - MIA — Assistente de Análise de Dados
+# 📘 Manual do Usuário — MIA - Assistente de Análise de Dados
 
 Bem-vindo ao manual de utilização da **MIA**! Este documento destina-se aos usuários finais (Líderes e Gerentes de Produção) e explica como interagir com a nossa assistente inteligente integrada diretamente no Telegram.
 

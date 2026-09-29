@@ -32,9 +32,8 @@
 > **Relatório de Testes:** [Link](docs/processo/sprints/sprint-1/testes/Relatório%20de%20Testes%20-%20Sprint%201.md)
 > 
 > **Documentação:** [Pasta Principal](docs/cliente) • [Arquitetura](docs/cliente/tecnico/Arquitetura.md) • [Manual do Usuário](docs/cliente/usuário/Manual%20do%20Usuário.md) • [Estratégia de Branch](docs/processo/Estratégia%20de%20Branch.md) • [Padrão de Commits](docs/processo/Padrões%20de%20Commits.md)
-<!--
-> **Vídeo do Projeto:** [Youtube](https://youtu.be/)
--->
+>
+> **Vídeo do Projeto:** [Youtube](https://youtu.be/AuBWGa-bZS8)
 
 ## 🎯 Desafio <a id="desafio"></a>
 
@@ -170,7 +169,7 @@ python -m venv venv
 # Se você usa Linux/Mac:
 source venv/bin/activate 
 # Se você usa Windows:
-.\venv\Scripts\activate 	 
+.\venv\Scripts\activate
 ```
 
 **3º Instale as dependências do projeto:**
@@ -284,7 +283,7 @@ Com o Bot online, abra o Telegram, inicie a conversa com a MIA e converse em lin
         </a><br>
         <sub><b>Matheus Correia</b></sub><br>
         <sub>Dev Team</sub><br>
-        <a href="https://github.com/MATHEUSORTEGA"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+        <a href="https://github.com/MATHEUSORTEGA"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/matheus-ortega-74049943b"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
       </td>
     </tr>
   </table>
