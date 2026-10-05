@@ -35,7 +35,7 @@ def somar_desperdicio_por_produto():
     )
 
     return resultado
-#soma o desperdicio de cada produto 
+#soma o desperdicio de cada produto
 
 def somar_desperdicio_por_produto_dia():
     dados = carregar_dados()
@@ -74,7 +74,7 @@ def calcular_desperdicio_total():
     dados = carregar_dados()
 
     return dados["Descarte"].sum()
-#soma todo o disperdicio da planilha
+#soma todo o desperdício da planilha
 
 
 def produto_com_maior_desperdicio():
@@ -111,7 +111,7 @@ def data_com_menor_desperdicio():
     )
 
     return resultado.head(1)
-#descobrir o dia com menor desperdicio 
+#descobrir o dia com menor desperdicio
 
 def top_5_produtos_desperdicio():
     dados = carregar_dados()
@@ -169,3 +169,19 @@ def produtos_acima_do_limite(limite):
 
     return resultado.sort_values(ascending=False)
 #verificar se a quantidade limite de desperdicio foi ultrapassada pelos produtos, por mes
+
+def buscar_por_intervalo(data_inicio, data_fim):
+    dados = carregar_dados()
+    dados["Data"] = pd.to_datetime(
+    dados["Data"],
+    format="%d/%m/%Y"
+    )
+    inicio = pd.to_datetime(data_inicio, format="%d/%m/%Y")
+    fim = pd.to_datetime(data_fim, format="%d/%m/%Y")
+
+    resultado = dados[
+        (dados["Data"] >= inicio) &
+        (dados["Data"] <= fim)
+    ]
+    return resultado
+#busca em um intervalo de datas os dados
