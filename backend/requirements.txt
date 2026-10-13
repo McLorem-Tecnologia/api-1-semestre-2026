@@ -23,7 +23,6 @@ fsspec==2026.9.0
 gepa==0.1.4
 h11==0.16.0
 hf-xet==1.6.0
-holidays==0.105
 httpcore==1.0.9
 httpx==0.28.1
 huggingface_hub==1.32.0

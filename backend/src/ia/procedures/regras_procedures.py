@@ -1,15 +1,13 @@
-from pathlib import Path
+from paths import REGRAS_DIR
 import pandas as pd
- 
-path1 = Path(__file__).resolve().parents[3] / "dados" / "regras_agosto_2026.csv"
-path2 = Path(__file__).resolve().parents[3] / "dados" / "regras_setembro_2026.csv"
- 
- 
-def carregar_arquivo(caminho: Path) -> pd.DataFrame:
-    df = pd.read_csv(caminho, sep=";", encoding="utf-8")
+
+arquivos = sorted(REGRAS_DIR.glob("regras_*.csv"))
+
+def preparar_dados(df: pd.DataFrame) -> pd.DataFrame:
+    """Converte as colunas do CSV nas colunas usadas pelo sistema (antes era feito arquivo por arquivo)."""
     data = pd.to_datetime(df["Dia"], format="%d/%m/%Y")
- 
-    return pd.DataFrame(
+
+    resultado = pd.DataFrame(
         {
             "data": data,
             "ano": data.dt.year,
@@ -23,36 +21,38 @@ def carregar_arquivo(caminho: Path) -> pd.DataFrame:
             "fim_de_semana": df["Fim de Semana"].str.casefold().eq("sim"),
         }
     )
- 
- 
-def carregar_dados(caminhos=(path1, path2)) -> pd.DataFrame:
-    df = pd.concat((carregar_arquivo(c) for c in caminhos), ignore_index=True)
-    df["dia_util"] = ~df["fim_de_semana"] & ~df["feriado"]
-    return df.sort_values("data").reset_index(drop=True)
- 
- 
+    resultado["dia_util"] = ~resultado["fim_de_semana"] & ~resultado["feriado"]
+    return resultado.sort_values("data").reset_index(drop=True)
+
+if arquivos:
+    bruto = pd.concat([pd.read_csv(a, sep=";", encoding="utf-8-sig") for a in arquivos], ignore_index=True)
+    tabela = preparar_dados(bruto)
+else:
+    tabela = pd.DataFrame()
+
+def carregar_dados() -> pd.DataFrame:
+    """Devolve a tabela já pronta (não lê os arquivos de novo a cada chamada)."""
+    return tabela
+
 def obter_dia(data, dados: pd.DataFrame | None = None) -> pd.Series | None:
     df = dados if dados is not None else carregar_dados()
     alvo = pd.to_datetime(data, format="%d/%m/%Y") if isinstance(data, str) else pd.to_datetime(data)
     linhas = df[df["data"] == alvo]
     return linhas.iloc[0] if not linhas.empty else None
- 
- 
+
 def obter_ano(ano: int, dados: pd.DataFrame | None = None) -> pd.DataFrame:
     df = dados if dados is not None else carregar_dados()
     return df[df["ano"] == ano]
- 
- 
+
+
 def obter_mes(ano: int, mes: int, dados: pd.DataFrame | None = None) -> pd.DataFrame:
     df = dados if dados is not None else carregar_dados()
     return df[(df["ano"] == ano) & (df["mes"] == mes)]
- 
- 
+
 def obter_semana(ano: int, semana: int, dados: pd.DataFrame | None = None) -> pd.DataFrame:
     df = dados if dados is not None else carregar_dados()
     return df[(df["ano"] == ano) & (df["semana"] == semana)]
- 
- 
+
 def filtrar(
     dados: pd.DataFrame | None = None,
     *,
@@ -85,8 +85,7 @@ def filtrar(
     if clima is not None:
         df = df[df["clima"].str.casefold() == clima.casefold()]
     return df
- 
- 
+
 if __name__ == "__main__":
     dados = carregar_dados()
     print(dados.head())

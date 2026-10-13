@@ -1,3 +1,4 @@
+import time
 import telebot
 from ia.message import processar_mensagem
 
@@ -28,19 +29,19 @@ def iniciar_bot(bot_key):
     def receber_texto(message):
         print(f"[DEBUG] Mensagem recebida: {message.text}")
 
+        t0 = time.perf_counter()
         msg_temp = bot.reply_to(message, "⏳ <b><i>Processando sua solicitação...</i></b>", parse_mode='HTML')
-        bot.send_chat_action(message.chat.id, 'typing')
-
-        resposta_bruta = str(processar_mensagem(message.text.lower()))
-        resposta = resposta_bruta.replace('[[ ## completed ]]', '').strip()
-
-        print(f"[DEBUG] Resposta processada: {resposta}")
+        
+        resposta = str(processar_mensagem(message.text.lower()))
         
         bot.edit_message_text(
             chat_id=message.chat.id,
             message_id=msg_temp.message_id,
-            text=resposta
+            text=resposta,
+            parse_mode='HTML'
         )
+                        
+        print(f"[TEMPO TEXTO] Processamento completo: {time.perf_counter()-t0:.2f}s")
     
     @bot.message_handler(content_types=tipos_nao_suportados)
     def receber_formatos_invalidos(message):
@@ -49,5 +50,5 @@ def iniciar_bot(bot_key):
             "Desculpe, no momento eu não suporto esse formato enviado. Por favor, me envie apenas mensagens de texto!"
         )
 
-    print("MIA está online e ouvindo...")
-    bot.infinity_polling(timeout=60, long_polling_timeout=60)
+    print("[MIA] Bot no ar! Aguardando mensagens no Telegram...")
+    bot.infinity_polling(skip_pending=True)
