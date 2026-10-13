@@ -1,0 +1,106 @@
+﻿SKU;Ingrediente;Qtd;Unidade;Preço Custo
+1001;Farinha de Trigo;0.65;Kg;4.5
+1001;Água;0.35;L;0.1
+1001;Sal;0.02;Kg;2.0
+1001;Fermento;0.01;Kg;15.0
+1002;Polvilho;0.5;Kg;8.0
+1002;Queijo Mussarela;0.3;Kg;35.0
+1002;Leite;0.1;L;4.5
+1002;Óleo de Soja;0.05;L;6.0
+1003;Farinha de Trigo;0.5;Kg;4.5
+1003;Manteiga;0.4;Kg;40.0
+1003;Água;0.1;L;0.1
+1003;Açúcar;0.05;Kg;4.0
+1004;Farinha de Trigo;0.032;Kg;4.5
+1004;Frango Desfiado;0.024;Kg;22.0
+1004;Batata;0.016;Kg;6.0
+1004;Óleo de Soja;0.008;L;6.0
+1005;Farinha de Trigo;0.04;Kg;4.5
+1005;Presunto;0.012;Kg;25.0
+1005;Queijo Mussarela;0.012;Kg;35.0
+1006;Farinha de Trigo;0.3;Kg;4.5
+1006;Açúcar;0.3;Kg;4.0
+1006;Cacau em Pó;0.1;Kg;30.0
+1006;Leite;0.15;L;4.5
+1007;Leite Condensado;0.4;Kg;18.0
+1007;Biscoito Maizena;0.2;Kg;12.0
+1007;Limão;0.2;Kg;5.0
+1007;Creme de Leite;0.1;Kg;16.0
+1008;Leite Condensado;0.4;Kg;18.0
+1008;Leite;0.4;L;4.5
+1008;Ovos;0.15;Kg;10.0
+1008;Açúcar;0.05;Kg;4.0
+1009;Leite Condensado;0.8;Kg;18.0
+1009;Cacau em Pó;0.1;Kg;30.0
+1009;Manteiga;0.1;Kg;40.0
+1010;Leite Condensado;0.8;Kg;18.0
+1010;Coco Ralado;0.15;Kg;40.0
+1010;Manteiga;0.05;Kg;40.0
+2001;Frango Inteiro;1.0;Un;15.0
+2001;Tempero Pronto;0.05;Kg;12.0
+2002;Arroz Branco;0.15;Kg;6.0
+2002;Feijão Carioca;0.1;Kg;8.0
+2002;Carne Bovina;0.15;Kg;35.0
+2002;Batata;0.1;Kg;6.0
+2003;Massa de Lasanha;0.3;Kg;15.0
+2003;Carne Bovina Moída;0.3;Kg;30.0
+2003;Queijo;0.2;Kg;35.0
+2003;Molho Tomate;0.2;Kg;8.0
+2004;Macarrão;0.5;Kg;7.0
+2004;Carne Bovina Moída;0.2;Kg;30.0
+2004;Molho Tomate;0.3;Kg;8.0
+2005;Batata;0.8;Kg;6.0
+2005;Leite;0.1;L;4.5
+2005;Manteiga;0.1;Kg;40.0
+2006;Farinha de Trigo;0.5;Kg;4.5
+2006;Frango Desfiado;0.2;Kg;22.0
+2006;Carne;0.2;Kg;35.0
+2006;Óleo de Soja;0.1;L;6.0
+3001;Arroz Japonês;0.1;Kg;12.0
+3001;Salmão;0.05;Kg;70.0
+3001;Cream Cheese;0.02;Kg;35.0
+3001;Óleo de Soja;0.05;L;6.0
+3002;Arroz Japonês;0.2;Kg;12.0
+3002;Salmão;0.15;Kg;70.0
+3002;Atum;0.1;Kg;60.0
+3002;Alga Nori;0.02;Kg;150.0
+3003;Salmão;0.3;Kg;70.0
+3004;Arroz Japonês;0.1;Kg;12.0
+3004;Salmão;0.05;Kg;70.0
+3004;Alga Nori;0.01;Kg;150.0
+3005;Arroz Japonês;0.08;Kg;12.0
+3005;Salmão;0.08;Kg;70.0
+3005;Alga Nori;0.01;Kg;150.0
+3005;Cream Cheese;0.02;Kg;35.0
+3006;Peixe Branco;0.2;Kg;40.0
+3006;Limão;0.05;Kg;5.0
+3006;Cebola Roxa;0.05;Kg;8.0
+4001;Carne Bovina Moída;0.9;Kg;30.0
+4001;Tempero Pronto;0.1;Kg;12.0
+4002;Carne Bovina;0.9;Kg;35.0
+4002;Cebola;0.05;Kg;5.0
+4002;Tempero Pronto;0.05;Kg;12.0
+4003;Frango Inteiro;0.95;Kg;15.0
+4003;Tempero Pronto;0.05;Kg;12.0
+4004;Carne Suína;0.8;Kg;20.0
+4004;Gordura Suína;0.15;Kg;10.0
+4004;Tempero;0.05;Kg;12.0
+4005;Carne Bovina Moída;0.9;Kg;30.0
+4005;Cebola;0.05;Kg;5.0
+4005;Hortelã;0.05;Kg;15.0
+4006;Feijão Preto;0.4;Kg;8.0
+4006;Carne Suína Salgada;0.6;Kg;25.0
+5001;Laranja;2.0;Kg;4.0
+5002;Mamão;0.3;Kg;6.0
+5002;Banana;0.3;Kg;5.0
+5002;Maçã;0.3;Kg;8.0
+5002;Laranja;0.1;Kg;4.0
+5003;Batata;0.4;Kg;6.0
+5003;Mandioca;0.4;Kg;5.0
+5003;Carne Bovina;0.2;Kg;35.0
+5004;Cenoura;0.4;Kg;5.0
+5004;Batata;0.4;Kg;6.0
+5004;Chuchu;0.2;Kg;3.0
+5005;Alface;0.5;Kg;6.0
+5005;Rúcula;0.3;Kg;8.0
+5005;Tomate;0.2;Kg;7.0

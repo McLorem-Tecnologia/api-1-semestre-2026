@@ -1,0 +1,70 @@
+﻿Setor;Ingrediente;Unidade;Preço Custo;Estoque Atual
+Padaria;Farinha de Trigo;Kg;4.5;649.47
+Padaria;Água;L;0.1;165.85
+Padaria;Sal;Kg;2.0;12.3
+Padaria;Fermento;Kg;15.0;5.84
+Padaria;Polvilho;Kg;8.0;65.4
+Padaria;Queijo Mussarela;Kg;35.0;47.25
+Padaria;Leite;L;4.5;155.68
+Padaria;Óleo de Soja;L;6.0;8.5
+Padaria;Manteiga;Kg;40.0;22.27
+Padaria;Açúcar;Kg;4.0;18.72
+Padaria;Frango Desfiado;Kg;22.0;16.74
+Padaria;Batata;Kg;6.0;14.46
+Padaria;Presunto;Kg;25.0;5.22
+Padaria;Cacau em Pó;Kg;30.0;5.69
+Padaria;Leite Condensado;Kg;18.0;170.23
+Padaria;Biscoito Maizena;Kg;12.0;6.22
+Padaria;Limão;Kg;5.0;4.66
+Padaria;Creme de Leite;Kg;16.0;3.21
+Padaria;Ovos;Kg;10.0;46.78
+Padaria;Coco Ralado;Kg;40.0;2.27
+Cozinha;Frango Inteiro;Un;15.0;280.05
+Cozinha;Tempero Pronto;Kg;12.0;13.03
+Cozinha;Arroz Branco;Kg;6.0;71.96
+Cozinha;Feijão Carioca;Kg;8.0;39.84
+Cozinha;Carne Bovina;Kg;35.0;112.68
+Cozinha;Batata;Kg;6.0;103.44
+Cozinha;Massa de Lasanha;Kg;15.0;18.2
+Cozinha;Carne Bovina Moída;Kg;30.0;27.77
+Cozinha;Queijo;Kg;35.0;23.0
+Cozinha;Molho Tomate;Kg;8.0;42.24
+Cozinha;Macarrão;Kg;7.0;43.6
+Cozinha;Leite;L;4.5;9.47
+Cozinha;Manteiga;Kg;40.0;8.23
+Cozinha;Farinha de Trigo;Kg;4.5;48.25
+Cozinha;Frango Desfiado;Kg;22.0;12.64
+Cozinha;Carne;Kg;35.0;14.58
+Cozinha;Óleo de Soja;L;6.0;8.84
+Peixaria;Arroz Japonês;Kg;12.0;63.72
+Peixaria;Salmão;Kg;70.0;71.17
+Peixaria;Cream Cheese;Kg;35.0;6.37
+Peixaria;Óleo de Soja;L;6.0;9.31
+Peixaria;Atum;Kg;60.0;7.0
+Peixaria;Alga Nori;Kg;150.0;3.52
+Peixaria;Peixe Branco;Kg;40.0;9.98
+Peixaria;Limão;Kg;5.0;1.99
+Peixaria;Cebola Roxa;Kg;8.0;2.36
+Açougue;Carne Bovina Moída;Kg;30.0;104.16
+Açougue;Tempero Pronto;Kg;12.0;22.62
+Açougue;Carne Bovina;Kg;35.0;199.54
+Açougue;Cebola;Kg;5.0;12.04
+Açougue;Frango Inteiro;Kg;15.0;127.7
+Açougue;Carne Suína;Kg;20.0;85.97
+Açougue;Gordura Suína;Kg;10.0;17.09
+Açougue;Tempero;Kg;12.0;9.45
+Açougue;Hortelã;Kg;15.0;3.91
+Açougue;Feijão Preto;Kg;8.0;32.62
+Açougue;Carne Suína Salgada;Kg;25.0;33.16
+Processados;Laranja;Kg;4.0;844.88
+Processados;Mamão;Kg;6.0;30.69
+Processados;Banana;Kg;5.0;37.95
+Processados;Maçã;Kg;8.0;58.45
+Processados;Batata;Kg;6.0;104.53
+Processados;Mandioca;Kg;5.0;46.0
+Processados;Carne Bovina;Kg;35.0;25.25
+Processados;Cenoura;Kg;5.0;63.71
+Processados;Chuchu;Kg;3.0;30.52
+Processados;Alface;Kg;6.0;35.25
+Processados;Rúcula;Kg;8.0;16.89
+Processados;Tomate;Kg;7.0;15.34

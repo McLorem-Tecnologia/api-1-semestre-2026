@@ -1,0 +1,34 @@
+﻿SKU;Produto;Setor;Preço;Tempo de preparo
+1001;Pão Francês (Kg);Padaria;18.0;3 min
+1002;Pão de queijo (Kg);Padaria;35.0;4 min
+1003;Croissant (Kg);Padaria;40.0;5 min
+1004;Coxinha (Un);Padaria;6.5;5 min
+1005;Enroladinho (Un);Padaria;6.5;5 min
+1006;Bolo de chocolate (Kg);Padaria;65.0;5 min
+1007;Torta de limão (Kg);Padaria;45.0;5 min
+1008;Pudim (Un);Padaria;12.0;5 min
+1009;Brigadeiro (Kg);Padaria;80.0;3 min
+1010;Beijinho (Kg);Padaria;80.0;3 min
+2001;Frango assado (Un);Cozinha;35.0;5 min
+2002;Marmita (Un);Cozinha;22.0;5 min
+2003;Lasanha (Kg);Cozinha;40.0;5 min
+2004;Macarrão (Kg);Cozinha;28.0;5 min
+2005;Purê de batata (Kg);Cozinha;22.0;4 min
+2006;Salgadinhos (Kg);Cozinha;60.0;5 min
+3001;Hot Roll (Porção);Peixaria;25.0;5 min
+3002;Combo Sushi (Porção);Peixaria;55.0;3 min
+3003;Sashimi (Porção);Peixaria;85.0;2 min
+3004;Maki (Porção);Peixaria;25.0;3 min
+3005;Temaki (Un);Peixaria;22.0;4 min
+3006;Ceviche (Porção);Peixaria;30.0;5 min
+4001;Hambúrguer (Kg);Açougue;45.0;5 min
+4002;Espetinho (Kg);Açougue;50.0;4 min
+4003;Frango temp (Kg);Açougue;25.0;3 min
+4004;Linguiça (Kg);Açougue;38.0;5 min
+4005;Kafta (Kg);Açougue;40.0;5 min
+4006;Kit Feijoada (Kg);Açougue;35.0;5 min
+5001;Suco Laranja (L);Processados;15.0;5 min
+5002;Salada Frutas (Kg);Processados;38.0;5 min
+5003;Caldos/Sopas (Kg);Processados;20.0;5 min
+5004;Legumes (Kg);Processados;16.0;5 min
+5005;Salada Verde (Kg);Processados;28.0;5 min

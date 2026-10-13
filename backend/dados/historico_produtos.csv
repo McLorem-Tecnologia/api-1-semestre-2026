@@ -1,0 +1,727 @@
+﻿SKU;Produto;Data;Preço Venda
+1001;Pão Francês (Kg);01/01/2025;16.21
+1002;Pão de queijo (Kg);01/01/2025;31.52
+1003;Croissant (Kg);01/01/2025;36.02
+1004;Coxinha (Un);01/01/2025;5.85
+1005;Enroladinho (Un);01/01/2025;5.85
+1006;Bolo de chocolate (Kg);01/01/2025;58.54
+1007;Torta de limão (Kg);01/01/2025;40.53
+1008;Pudim (Un);01/01/2025;10.81
+1009;Brigadeiro (Kg);01/01/2025;72.04
+1010;Beijinho (Kg);01/01/2025;72.04
+2001;Frango assado (Un);01/01/2025;31.52
+2002;Marmita (Un);01/01/2025;19.81
+2003;Lasanha (Kg);01/01/2025;36.02
+2004;Macarrão (Kg);01/01/2025;25.22
+2005;Purê de batata (Kg);01/01/2025;19.81
+2006;Salgadinhos (Kg);01/01/2025;54.03
+3001;Hot Roll (Porção);01/01/2025;22.51
+3002;Combo Sushi (Porção);01/01/2025;49.53
+3003;Sashimi (Porção);01/01/2025;76.55
+3004;Maki (Porção);01/01/2025;22.51
+3005;Temaki (Un);01/01/2025;19.81
+3006;Ceviche (Porção);01/01/2025;27.02
+4001;Hambúrguer (Kg);01/01/2025;40.53
+4002;Espetinho (Kg);01/01/2025;45.03
+4003;Frango temp (Kg);01/01/2025;22.51
+4004;Linguiça (Kg);01/01/2025;34.22
+4005;Kafta (Kg);01/01/2025;36.02
+4006;Kit Feijoada (Kg);01/01/2025;31.52
+5001;Suco Laranja (L);01/01/2025;13.51
+5002;Salada Frutas (Kg);01/01/2025;34.22
+5003;Caldos/Sopas (Kg);01/01/2025;18.01
+5004;Legumes (Kg);01/01/2025;14.41
+5005;Salada Verde (Kg);01/01/2025;25.22
+1001;Pão Francês (Kg);01/02/2025;16.29
+1002;Pão de queijo (Kg);01/02/2025;31.68
+1003;Croissant (Kg);01/02/2025;36.2
+1004;Coxinha (Un);01/02/2025;5.88
+1005;Enroladinho (Un);01/02/2025;5.88
+1006;Bolo de chocolate (Kg);01/02/2025;58.83
+1007;Torta de limão (Kg);01/02/2025;40.73
+1008;Pudim (Un);01/02/2025;10.86
+1009;Brigadeiro (Kg);01/02/2025;72.41
+1010;Beijinho (Kg);01/02/2025;72.41
+2001;Frango assado (Un);01/02/2025;31.68
+2002;Marmita (Un);01/02/2025;19.91
+2003;Lasanha (Kg);01/02/2025;36.2
+2004;Macarrão (Kg);01/02/2025;25.34
+2005;Purê de batata (Kg);01/02/2025;19.91
+2006;Salgadinhos (Kg);01/02/2025;54.3
+3001;Hot Roll (Porção);01/02/2025;22.63
+3002;Combo Sushi (Porção);01/02/2025;49.78
+3003;Sashimi (Porção);01/02/2025;76.93
+3004;Maki (Porção);01/02/2025;22.63
+3005;Temaki (Un);01/02/2025;19.91
+3006;Ceviche (Porção);01/02/2025;27.15
+4001;Hambúrguer (Kg);01/02/2025;40.73
+4002;Espetinho (Kg);01/02/2025;45.25
+4003;Frango temp (Kg);01/02/2025;22.63
+4004;Linguiça (Kg);01/02/2025;34.39
+4005;Kafta (Kg);01/02/2025;36.2
+4006;Kit Feijoada (Kg);01/02/2025;31.68
+5001;Suco Laranja (L);01/02/2025;13.58
+5002;Salada Frutas (Kg);01/02/2025;34.39
+5003;Caldos/Sopas (Kg);01/02/2025;18.1
+5004;Legumes (Kg);01/02/2025;14.48
+5005;Salada Verde (Kg);01/02/2025;25.34
+1001;Pão Francês (Kg);01/03/2025;16.37
+1002;Pão de queijo (Kg);01/03/2025;31.84
+1003;Croissant (Kg);01/03/2025;36.38
+1004;Coxinha (Un);01/03/2025;5.91
+1005;Enroladinho (Un);01/03/2025;5.91
+1006;Bolo de chocolate (Kg);01/03/2025;59.12
+1007;Torta de limão (Kg);01/03/2025;40.93
+1008;Pudim (Un);01/03/2025;10.92
+1009;Brigadeiro (Kg);01/03/2025;72.77
+1010;Beijinho (Kg);01/03/2025;72.77
+2001;Frango assado (Un);01/03/2025;31.84
+2002;Marmita (Un);01/03/2025;20.01
+2003;Lasanha (Kg);01/03/2025;36.38
+2004;Macarrão (Kg);01/03/2025;25.47
+2005;Purê de batata (Kg);01/03/2025;20.01
+2006;Salgadinhos (Kg);01/03/2025;54.58
+3001;Hot Roll (Porção);01/03/2025;22.74
+3002;Combo Sushi (Porção);01/03/2025;50.03
+3003;Sashimi (Porção);01/03/2025;77.31
+3004;Maki (Porção);01/03/2025;22.74
+3005;Temaki (Un);01/03/2025;20.01
+3006;Ceviche (Porção);01/03/2025;27.29
+4001;Hambúrguer (Kg);01/03/2025;40.93
+4002;Espetinho (Kg);01/03/2025;45.48
+4003;Frango temp (Kg);01/03/2025;22.74
+4004;Linguiça (Kg);01/03/2025;34.56
+4005;Kafta (Kg);01/03/2025;36.38
+4006;Kit Feijoada (Kg);01/03/2025;31.84
+5001;Suco Laranja (L);01/03/2025;13.64
+5002;Salada Frutas (Kg);01/03/2025;34.56
+5003;Caldos/Sopas (Kg);01/03/2025;18.19
+5004;Legumes (Kg);01/03/2025;14.55
+5005;Salada Verde (Kg);01/03/2025;25.47
+1001;Pão Francês (Kg);01/04/2025;16.45
+1002;Pão de queijo (Kg);01/04/2025;31.99
+1003;Croissant (Kg);01/04/2025;36.57
+1004;Coxinha (Un);01/04/2025;5.94
+1005;Enroladinho (Un);01/04/2025;5.94
+1006;Bolo de chocolate (Kg);01/04/2025;59.42
+1007;Torta de limão (Kg);01/04/2025;41.14
+1008;Pudim (Un);01/04/2025;10.97
+1009;Brigadeiro (Kg);01/04/2025;73.13
+1010;Beijinho (Kg);01/04/2025;73.13
+2001;Frango assado (Un);01/04/2025;31.99
+2002;Marmita (Un);01/04/2025;20.11
+2003;Lasanha (Kg);01/04/2025;36.57
+2004;Macarrão (Kg);01/04/2025;25.6
+2005;Purê de batata (Kg);01/04/2025;20.11
+2006;Salgadinhos (Kg);01/04/2025;54.85
+3001;Hot Roll (Porção);01/04/2025;22.85
+3002;Combo Sushi (Porção);01/04/2025;50.28
+3003;Sashimi (Porção);01/04/2025;77.7
+3004;Maki (Porção);01/04/2025;22.85
+3005;Temaki (Un);01/04/2025;20.11
+3006;Ceviche (Porção);01/04/2025;27.42
+4001;Hambúrguer (Kg);01/04/2025;41.14
+4002;Espetinho (Kg);01/04/2025;45.71
+4003;Frango temp (Kg);01/04/2025;22.85
+4004;Linguiça (Kg);01/04/2025;34.74
+4005;Kafta (Kg);01/04/2025;36.57
+4006;Kit Feijoada (Kg);01/04/2025;31.99
+5001;Suco Laranja (L);01/04/2025;13.71
+5002;Salada Frutas (Kg);01/04/2025;34.74
+5003;Caldos/Sopas (Kg);01/04/2025;18.28
+5004;Legumes (Kg);01/04/2025;14.63
+5005;Salada Verde (Kg);01/04/2025;25.6
+1001;Pão Francês (Kg);01/05/2025;16.54
+1002;Pão de queijo (Kg);01/05/2025;32.15
+1003;Croissant (Kg);01/05/2025;36.75
+1004;Coxinha (Un);01/05/2025;5.97
+1005;Enroladinho (Un);01/05/2025;5.97
+1006;Bolo de chocolate (Kg);01/05/2025;59.72
+1007;Torta de limão (Kg);01/05/2025;41.34
+1008;Pudim (Un);01/05/2025;11.02
+1009;Brigadeiro (Kg);01/05/2025;73.5
+1010;Beijinho (Kg);01/05/2025;73.5
+2001;Frango assado (Un);01/05/2025;32.15
+2002;Marmita (Un);01/05/2025;20.21
+2003;Lasanha (Kg);01/05/2025;36.75
+2004;Macarrão (Kg);01/05/2025;25.72
+2005;Purê de batata (Kg);01/05/2025;20.21
+2006;Salgadinhos (Kg);01/05/2025;55.12
+3001;Hot Roll (Porção);01/05/2025;22.97
+3002;Combo Sushi (Porção);01/05/2025;50.53
+3003;Sashimi (Porção);01/05/2025;78.09
+3004;Maki (Porção);01/05/2025;22.97
+3005;Temaki (Un);01/05/2025;20.21
+3006;Ceviche (Porção);01/05/2025;27.56
+4001;Hambúrguer (Kg);01/05/2025;41.34
+4002;Espetinho (Kg);01/05/2025;45.94
+4003;Frango temp (Kg);01/05/2025;22.97
+4004;Linguiça (Kg);01/05/2025;34.91
+4005;Kafta (Kg);01/05/2025;36.75
+4006;Kit Feijoada (Kg);01/05/2025;32.15
+5001;Suco Laranja (L);01/05/2025;13.78
+5002;Salada Frutas (Kg);01/05/2025;34.91
+5003;Caldos/Sopas (Kg);01/05/2025;18.37
+5004;Legumes (Kg);01/05/2025;14.7
+5005;Salada Verde (Kg);01/05/2025;25.72
+1001;Pão Francês (Kg);01/06/2025;16.62
+1002;Pão de queijo (Kg);01/06/2025;32.32
+1003;Croissant (Kg);01/06/2025;36.93
+1004;Coxinha (Un);01/06/2025;6.0
+1005;Enroladinho (Un);01/06/2025;6.0
+1006;Bolo de chocolate (Kg);01/06/2025;60.01
+1007;Torta de limão (Kg);01/06/2025;41.55
+1008;Pudim (Un);01/06/2025;11.08
+1009;Brigadeiro (Kg);01/06/2025;73.86
+1010;Beijinho (Kg);01/06/2025;73.86
+2001;Frango assado (Un);01/06/2025;32.32
+2002;Marmita (Un);01/06/2025;20.31
+2003;Lasanha (Kg);01/06/2025;36.93
+2004;Macarrão (Kg);01/06/2025;25.85
+2005;Purê de batata (Kg);01/06/2025;20.31
+2006;Salgadinhos (Kg);01/06/2025;55.4
+3001;Hot Roll (Porção);01/06/2025;23.08
+3002;Combo Sushi (Porção);01/06/2025;50.78
+3003;Sashimi (Porção);01/06/2025;78.48
+3004;Maki (Porção);01/06/2025;23.08
+3005;Temaki (Un);01/06/2025;20.31
+3006;Ceviche (Porção);01/06/2025;27.7
+4001;Hambúrguer (Kg);01/06/2025;41.55
+4002;Espetinho (Kg);01/06/2025;46.17
+4003;Frango temp (Kg);01/06/2025;23.08
+4004;Linguiça (Kg);01/06/2025;35.09
+4005;Kafta (Kg);01/06/2025;36.93
+4006;Kit Feijoada (Kg);01/06/2025;32.32
+5001;Suco Laranja (L);01/06/2025;13.85
+5002;Salada Frutas (Kg);01/06/2025;35.09
+5003;Caldos/Sopas (Kg);01/06/2025;18.47
+5004;Legumes (Kg);01/06/2025;14.77
+5005;Salada Verde (Kg);01/06/2025;25.85
+1001;Pão Francês (Kg);01/07/2025;16.7
+1002;Pão de queijo (Kg);01/07/2025;32.48
+1003;Croissant (Kg);01/07/2025;37.12
+1004;Coxinha (Un);01/07/2025;6.03
+1005;Enroladinho (Un);01/07/2025;6.03
+1006;Bolo de chocolate (Kg);01/07/2025;60.31
+1007;Torta de limão (Kg);01/07/2025;41.76
+1008;Pudim (Un);01/07/2025;11.14
+1009;Brigadeiro (Kg);01/07/2025;74.23
+1010;Beijinho (Kg);01/07/2025;74.23
+2001;Frango assado (Un);01/07/2025;32.48
+2002;Marmita (Un);01/07/2025;20.41
+2003;Lasanha (Kg);01/07/2025;37.12
+2004;Macarrão (Kg);01/07/2025;25.98
+2005;Purê de batata (Kg);01/07/2025;20.41
+2006;Salgadinhos (Kg);01/07/2025;55.68
+3001;Hot Roll (Porção);01/07/2025;23.2
+3002;Combo Sushi (Porção);01/07/2025;51.04
+3003;Sashimi (Porção);01/07/2025;78.87
+3004;Maki (Porção);01/07/2025;23.2
+3005;Temaki (Un);01/07/2025;20.41
+3006;Ceviche (Porção);01/07/2025;27.84
+4001;Hambúrguer (Kg);01/07/2025;41.76
+4002;Espetinho (Kg);01/07/2025;46.4
+4003;Frango temp (Kg);01/07/2025;23.2
+4004;Linguiça (Kg);01/07/2025;35.26
+4005;Kafta (Kg);01/07/2025;37.12
+4006;Kit Feijoada (Kg);01/07/2025;32.48
+5001;Suco Laranja (L);01/07/2025;13.92
+5002;Salada Frutas (Kg);01/07/2025;35.26
+5003;Caldos/Sopas (Kg);01/07/2025;18.56
+5004;Legumes (Kg);01/07/2025;14.85
+5005;Salada Verde (Kg);01/07/2025;25.98
+1001;Pão Francês (Kg);01/08/2025;16.79
+1002;Pão de queijo (Kg);01/08/2025;32.64
+1003;Croissant (Kg);01/08/2025;37.3
+1004;Coxinha (Un);01/08/2025;6.06
+1005;Enroladinho (Un);01/08/2025;6.06
+1006;Bolo de chocolate (Kg);01/08/2025;60.62
+1007;Torta de limão (Kg);01/08/2025;41.97
+1008;Pudim (Un);01/08/2025;11.19
+1009;Brigadeiro (Kg);01/08/2025;74.6
+1010;Beijinho (Kg);01/08/2025;74.6
+2001;Frango assado (Un);01/08/2025;32.64
+2002;Marmita (Un);01/08/2025;20.52
+2003;Lasanha (Kg);01/08/2025;37.3
+2004;Macarrão (Kg);01/08/2025;26.11
+2005;Purê de batata (Kg);01/08/2025;20.52
+2006;Salgadinhos (Kg);01/08/2025;55.95
+3001;Hot Roll (Porção);01/08/2025;23.31
+3002;Combo Sushi (Porção);01/08/2025;51.29
+3003;Sashimi (Porção);01/08/2025;79.27
+3004;Maki (Porção);01/08/2025;23.31
+3005;Temaki (Un);01/08/2025;20.52
+3006;Ceviche (Porção);01/08/2025;27.98
+4001;Hambúrguer (Kg);01/08/2025;41.97
+4002;Espetinho (Kg);01/08/2025;46.63
+4003;Frango temp (Kg);01/08/2025;23.31
+4004;Linguiça (Kg);01/08/2025;35.44
+4005;Kafta (Kg);01/08/2025;37.3
+4006;Kit Feijoada (Kg);01/08/2025;32.64
+5001;Suco Laranja (L);01/08/2025;13.99
+5002;Salada Frutas (Kg);01/08/2025;35.44
+5003;Caldos/Sopas (Kg);01/08/2025;18.65
+5004;Legumes (Kg);01/08/2025;14.92
+5005;Salada Verde (Kg);01/08/2025;26.11
+1001;Pão Francês (Kg);01/09/2025;16.87
+1002;Pão de queijo (Kg);01/09/2025;32.8
+1003;Croissant (Kg);01/09/2025;37.49
+1004;Coxinha (Un);01/09/2025;6.09
+1005;Enroladinho (Un);01/09/2025;6.09
+1006;Bolo de chocolate (Kg);01/09/2025;60.92
+1007;Torta de limão (Kg);01/09/2025;42.17
+1008;Pudim (Un);01/09/2025;11.25
+1009;Brigadeiro (Kg);01/09/2025;74.98
+1010;Beijinho (Kg);01/09/2025;74.98
+2001;Frango assado (Un);01/09/2025;32.8
+2002;Marmita (Un);01/09/2025;20.62
+2003;Lasanha (Kg);01/09/2025;37.49
+2004;Macarrão (Kg);01/09/2025;26.24
+2005;Purê de batata (Kg);01/09/2025;20.62
+2006;Salgadinhos (Kg);01/09/2025;56.23
+3001;Hot Roll (Porção);01/09/2025;23.43
+3002;Combo Sushi (Porção);01/09/2025;51.55
+3003;Sashimi (Porção);01/09/2025;79.66
+3004;Maki (Porção);01/09/2025;23.43
+3005;Temaki (Un);01/09/2025;20.62
+3006;Ceviche (Porção);01/09/2025;28.12
+4001;Hambúrguer (Kg);01/09/2025;42.17
+4002;Espetinho (Kg);01/09/2025;46.86
+4003;Frango temp (Kg);01/09/2025;23.43
+4004;Linguiça (Kg);01/09/2025;35.61
+4005;Kafta (Kg);01/09/2025;37.49
+4006;Kit Feijoada (Kg);01/09/2025;32.8
+5001;Suco Laranja (L);01/09/2025;14.06
+5002;Salada Frutas (Kg);01/09/2025;35.61
+5003;Caldos/Sopas (Kg);01/09/2025;18.74
+5004;Legumes (Kg);01/09/2025;15.0
+5005;Salada Verde (Kg);01/09/2025;26.24
+1001;Pão Francês (Kg);01/10/2025;16.95
+1002;Pão de queijo (Kg);01/10/2025;32.97
+1003;Croissant (Kg);01/10/2025;37.68
+1004;Coxinha (Un);01/10/2025;6.12
+1005;Enroladinho (Un);01/10/2025;6.12
+1006;Bolo de chocolate (Kg);01/10/2025;61.22
+1007;Torta de limão (Kg);01/10/2025;42.39
+1008;Pudim (Un);01/10/2025;11.3
+1009;Brigadeiro (Kg);01/10/2025;75.35
+1010;Beijinho (Kg);01/10/2025;75.35
+2001;Frango assado (Un);01/10/2025;32.97
+2002;Marmita (Un);01/10/2025;20.72
+2003;Lasanha (Kg);01/10/2025;37.68
+2004;Macarrão (Kg);01/10/2025;26.37
+2005;Purê de batata (Kg);01/10/2025;20.72
+2006;Salgadinhos (Kg);01/10/2025;56.51
+3001;Hot Roll (Porção);01/10/2025;23.55
+3002;Combo Sushi (Porção);01/10/2025;51.8
+3003;Sashimi (Porção);01/10/2025;80.06
+3004;Maki (Porção);01/10/2025;23.55
+3005;Temaki (Un);01/10/2025;20.72
+3006;Ceviche (Porção);01/10/2025;28.26
+4001;Hambúrguer (Kg);01/10/2025;42.39
+4002;Espetinho (Kg);01/10/2025;47.1
+4003;Frango temp (Kg);01/10/2025;23.55
+4004;Linguiça (Kg);01/10/2025;35.79
+4005;Kafta (Kg);01/10/2025;37.68
+4006;Kit Feijoada (Kg);01/10/2025;32.97
+5001;Suco Laranja (L);01/10/2025;14.13
+5002;Salada Frutas (Kg);01/10/2025;35.79
+5003;Caldos/Sopas (Kg);01/10/2025;18.84
+5004;Legumes (Kg);01/10/2025;15.07
+5005;Salada Verde (Kg);01/10/2025;26.37
+1001;Pão Francês (Kg);01/11/2025;17.04
+1002;Pão de queijo (Kg);01/11/2025;33.13
+1003;Croissant (Kg);01/11/2025;37.86
+1004;Coxinha (Un);01/11/2025;6.15
+1005;Enroladinho (Un);01/11/2025;6.15
+1006;Bolo de chocolate (Kg);01/11/2025;61.53
+1007;Torta de limão (Kg);01/11/2025;42.6
+1008;Pudim (Un);01/11/2025;11.36
+1009;Brigadeiro (Kg);01/11/2025;75.73
+1010;Beijinho (Kg);01/11/2025;75.73
+2001;Frango assado (Un);01/11/2025;33.13
+2002;Marmita (Un);01/11/2025;20.83
+2003;Lasanha (Kg);01/11/2025;37.86
+2004;Macarrão (Kg);01/11/2025;26.51
+2005;Purê de batata (Kg);01/11/2025;20.83
+2006;Salgadinhos (Kg);01/11/2025;56.8
+3001;Hot Roll (Porção);01/11/2025;23.67
+3002;Combo Sushi (Porção);01/11/2025;52.06
+3003;Sashimi (Porção);01/11/2025;80.46
+3004;Maki (Porção);01/11/2025;23.67
+3005;Temaki (Un);01/11/2025;20.83
+3006;Ceviche (Porção);01/11/2025;28.4
+4001;Hambúrguer (Kg);01/11/2025;42.6
+4002;Espetinho (Kg);01/11/2025;47.33
+4003;Frango temp (Kg);01/11/2025;23.67
+4004;Linguiça (Kg);01/11/2025;35.97
+4005;Kafta (Kg);01/11/2025;37.86
+4006;Kit Feijoada (Kg);01/11/2025;33.13
+5001;Suco Laranja (L);01/11/2025;14.2
+5002;Salada Frutas (Kg);01/11/2025;35.97
+5003;Caldos/Sopas (Kg);01/11/2025;18.93
+5004;Legumes (Kg);01/11/2025;15.15
+5005;Salada Verde (Kg);01/11/2025;26.51
+1001;Pão Francês (Kg);01/12/2025;17.12
+1002;Pão de queijo (Kg);01/12/2025;33.3
+1003;Croissant (Kg);01/12/2025;38.05
+1004;Coxinha (Un);01/12/2025;6.18
+1005;Enroladinho (Un);01/12/2025;6.18
+1006;Bolo de chocolate (Kg);01/12/2025;61.84
+1007;Torta de limão (Kg);01/12/2025;42.81
+1008;Pudim (Un);01/12/2025;11.42
+1009;Brigadeiro (Kg);01/12/2025;76.11
+1010;Beijinho (Kg);01/12/2025;76.11
+2001;Frango assado (Un);01/12/2025;33.3
+2002;Marmita (Un);01/12/2025;20.93
+2003;Lasanha (Kg);01/12/2025;38.05
+2004;Macarrão (Kg);01/12/2025;26.64
+2005;Purê de batata (Kg);01/12/2025;20.93
+2006;Salgadinhos (Kg);01/12/2025;57.08
+3001;Hot Roll (Porção);01/12/2025;23.78
+3002;Combo Sushi (Porção);01/12/2025;52.32
+3003;Sashimi (Porção);01/12/2025;80.86
+3004;Maki (Porção);01/12/2025;23.78
+3005;Temaki (Un);01/12/2025;20.93
+3006;Ceviche (Porção);01/12/2025;28.54
+4001;Hambúrguer (Kg);01/12/2025;42.81
+4002;Espetinho (Kg);01/12/2025;47.57
+4003;Frango temp (Kg);01/12/2025;23.78
+4004;Linguiça (Kg);01/12/2025;36.15
+4005;Kafta (Kg);01/12/2025;38.05
+4006;Kit Feijoada (Kg);01/12/2025;33.3
+5001;Suco Laranja (L);01/12/2025;14.27
+5002;Salada Frutas (Kg);01/12/2025;36.15
+5003;Caldos/Sopas (Kg);01/12/2025;19.03
+5004;Legumes (Kg);01/12/2025;15.22
+5005;Salada Verde (Kg);01/12/2025;26.64
+1001;Pão Francês (Kg);01/01/2026;17.21
+1002;Pão de queijo (Kg);01/01/2026;33.46
+1003;Croissant (Kg);01/01/2026;38.24
+1004;Coxinha (Un);01/01/2026;6.21
+1005;Enroladinho (Un);01/01/2026;6.21
+1006;Bolo de chocolate (Kg);01/01/2026;62.15
+1007;Torta de limão (Kg);01/01/2026;43.02
+1008;Pudim (Un);01/01/2026;11.47
+1009;Brigadeiro (Kg);01/01/2026;76.49
+1010;Beijinho (Kg);01/01/2026;76.49
+2001;Frango assado (Un);01/01/2026;33.46
+2002;Marmita (Un);01/01/2026;21.03
+2003;Lasanha (Kg);01/01/2026;38.24
+2004;Macarrão (Kg);01/01/2026;26.77
+2005;Purê de batata (Kg);01/01/2026;21.03
+2006;Salgadinhos (Kg);01/01/2026;57.37
+3001;Hot Roll (Porção);01/01/2026;23.9
+3002;Combo Sushi (Porção);01/01/2026;52.59
+3003;Sashimi (Porção);01/01/2026;81.27
+3004;Maki (Porção);01/01/2026;23.9
+3005;Temaki (Un);01/01/2026;21.03
+3006;Ceviche (Porção);01/01/2026;28.68
+4001;Hambúrguer (Kg);01/01/2026;43.02
+4002;Espetinho (Kg);01/01/2026;47.81
+4003;Frango temp (Kg);01/01/2026;23.9
+4004;Linguiça (Kg);01/01/2026;36.33
+4005;Kafta (Kg);01/01/2026;38.24
+4006;Kit Feijoada (Kg);01/01/2026;33.46
+5001;Suco Laranja (L);01/01/2026;14.34
+5002;Salada Frutas (Kg);01/01/2026;36.33
+5003;Caldos/Sopas (Kg);01/01/2026;19.12
+5004;Legumes (Kg);01/01/2026;15.3
+5005;Salada Verde (Kg);01/01/2026;26.77
+1001;Pão Francês (Kg);01/02/2026;17.3
+1002;Pão de queijo (Kg);01/02/2026;33.63
+1003;Croissant (Kg);01/02/2026;38.44
+1004;Coxinha (Un);01/02/2026;6.25
+1005;Enroladinho (Un);01/02/2026;6.25
+1006;Bolo de chocolate (Kg);01/02/2026;62.46
+1007;Torta de limão (Kg);01/02/2026;43.24
+1008;Pudim (Un);01/02/2026;11.53
+1009;Brigadeiro (Kg);01/02/2026;76.87
+1010;Beijinho (Kg);01/02/2026;76.87
+2001;Frango assado (Un);01/02/2026;33.63
+2002;Marmita (Un);01/02/2026;21.14
+2003;Lasanha (Kg);01/02/2026;38.44
+2004;Macarrão (Kg);01/02/2026;26.9
+2005;Purê de batata (Kg);01/02/2026;21.14
+2006;Salgadinhos (Kg);01/02/2026;57.65
+3001;Hot Roll (Porção);01/02/2026;24.02
+3002;Combo Sushi (Porção);01/02/2026;52.85
+3003;Sashimi (Porção);01/02/2026;81.68
+3004;Maki (Porção);01/02/2026;24.02
+3005;Temaki (Un);01/02/2026;21.14
+3006;Ceviche (Porção);01/02/2026;28.83
+4001;Hambúrguer (Kg);01/02/2026;43.24
+4002;Espetinho (Kg);01/02/2026;48.04
+4003;Frango temp (Kg);01/02/2026;24.02
+4004;Linguiça (Kg);01/02/2026;36.51
+4005;Kafta (Kg);01/02/2026;38.44
+4006;Kit Feijoada (Kg);01/02/2026;33.63
+5001;Suco Laranja (L);01/02/2026;14.41
+5002;Salada Frutas (Kg);01/02/2026;36.51
+5003;Caldos/Sopas (Kg);01/02/2026;19.22
+5004;Legumes (Kg);01/02/2026;15.37
+5005;Salada Verde (Kg);01/02/2026;26.9
+1001;Pão Francês (Kg);01/03/2026;17.38
+1002;Pão de queijo (Kg);01/03/2026;33.8
+1003;Croissant (Kg);01/03/2026;38.63
+1004;Coxinha (Un);01/03/2026;6.28
+1005;Enroladinho (Un);01/03/2026;6.28
+1006;Bolo de chocolate (Kg);01/03/2026;62.77
+1007;Torta de limão (Kg);01/03/2026;43.46
+1008;Pudim (Un);01/03/2026;11.59
+1009;Brigadeiro (Kg);01/03/2026;77.26
+1010;Beijinho (Kg);01/03/2026;77.26
+2001;Frango assado (Un);01/03/2026;33.8
+2002;Marmita (Un);01/03/2026;21.25
+2003;Lasanha (Kg);01/03/2026;38.63
+2004;Macarrão (Kg);01/03/2026;27.04
+2005;Purê de batata (Kg);01/03/2026;21.25
+2006;Salgadinhos (Kg);01/03/2026;57.94
+3001;Hot Roll (Porção);01/03/2026;24.14
+3002;Combo Sushi (Porção);01/03/2026;53.11
+3003;Sashimi (Porção);01/03/2026;82.08
+3004;Maki (Porção);01/03/2026;24.14
+3005;Temaki (Un);01/03/2026;21.25
+3006;Ceviche (Porção);01/03/2026;28.97
+4001;Hambúrguer (Kg);01/03/2026;43.46
+4002;Espetinho (Kg);01/03/2026;48.28
+4003;Frango temp (Kg);01/03/2026;24.14
+4004;Linguiça (Kg);01/03/2026;36.7
+4005;Kafta (Kg);01/03/2026;38.63
+4006;Kit Feijoada (Kg);01/03/2026;33.8
+5001;Suco Laranja (L);01/03/2026;14.49
+5002;Salada Frutas (Kg);01/03/2026;36.7
+5003;Caldos/Sopas (Kg);01/03/2026;19.31
+5004;Legumes (Kg);01/03/2026;15.45
+5005;Salada Verde (Kg);01/03/2026;27.04
+1001;Pão Francês (Kg);01/04/2026;17.47
+1002;Pão de queijo (Kg);01/04/2026;33.97
+1003;Croissant (Kg);01/04/2026;38.82
+1004;Coxinha (Un);01/04/2026;6.31
+1005;Enroladinho (Un);01/04/2026;6.31
+1006;Bolo de chocolate (Kg);01/04/2026;63.08
+1007;Torta de limão (Kg);01/04/2026;43.67
+1008;Pudim (Un);01/04/2026;11.65
+1009;Brigadeiro (Kg);01/04/2026;77.64
+1010;Beijinho (Kg);01/04/2026;77.64
+2001;Frango assado (Un);01/04/2026;33.97
+2002;Marmita (Un);01/04/2026;21.35
+2003;Lasanha (Kg);01/04/2026;38.82
+2004;Macarrão (Kg);01/04/2026;27.17
+2005;Purê de batata (Kg);01/04/2026;21.35
+2006;Salgadinhos (Kg);01/04/2026;58.23
+3001;Hot Roll (Porção);01/04/2026;24.26
+3002;Combo Sushi (Porção);01/04/2026;53.38
+3003;Sashimi (Porção);01/04/2026;82.49
+3004;Maki (Porção);01/04/2026;24.26
+3005;Temaki (Un);01/04/2026;21.35
+3006;Ceviche (Porção);01/04/2026;29.12
+4001;Hambúrguer (Kg);01/04/2026;43.67
+4002;Espetinho (Kg);01/04/2026;48.53
+4003;Frango temp (Kg);01/04/2026;24.26
+4004;Linguiça (Kg);01/04/2026;36.88
+4005;Kafta (Kg);01/04/2026;38.82
+4006;Kit Feijoada (Kg);01/04/2026;33.97
+5001;Suco Laranja (L);01/04/2026;14.56
+5002;Salada Frutas (Kg);01/04/2026;36.88
+5003;Caldos/Sopas (Kg);01/04/2026;19.41
+5004;Legumes (Kg);01/04/2026;15.53
+5005;Salada Verde (Kg);01/04/2026;27.17
+1001;Pão Francês (Kg);01/05/2026;17.56
+1002;Pão de queijo (Kg);01/05/2026;34.14
+1003;Croissant (Kg);01/05/2026;39.01
+1004;Coxinha (Un);01/05/2026;6.34
+1005;Enroladinho (Un);01/05/2026;6.34
+1006;Bolo de chocolate (Kg);01/05/2026;63.4
+1007;Torta de limão (Kg);01/05/2026;43.89
+1008;Pudim (Un);01/05/2026;11.7
+1009;Brigadeiro (Kg);01/05/2026;78.03
+1010;Beijinho (Kg);01/05/2026;78.03
+2001;Frango assado (Un);01/05/2026;34.14
+2002;Marmita (Un);01/05/2026;21.46
+2003;Lasanha (Kg);01/05/2026;39.01
+2004;Macarrão (Kg);01/05/2026;27.31
+2005;Purê de batata (Kg);01/05/2026;21.46
+2006;Salgadinhos (Kg);01/05/2026;58.52
+3001;Hot Roll (Porção);01/05/2026;24.38
+3002;Combo Sushi (Porção);01/05/2026;53.65
+3003;Sashimi (Porção);01/05/2026;82.91
+3004;Maki (Porção);01/05/2026;24.38
+3005;Temaki (Un);01/05/2026;21.46
+3006;Ceviche (Porção);01/05/2026;29.26
+4001;Hambúrguer (Kg);01/05/2026;43.89
+4002;Espetinho (Kg);01/05/2026;48.77
+4003;Frango temp (Kg);01/05/2026;24.38
+4004;Linguiça (Kg);01/05/2026;37.06
+4005;Kafta (Kg);01/05/2026;39.01
+4006;Kit Feijoada (Kg);01/05/2026;34.14
+5001;Suco Laranja (L);01/05/2026;14.63
+5002;Salada Frutas (Kg);01/05/2026;37.06
+5003;Caldos/Sopas (Kg);01/05/2026;19.51
+5004;Legumes (Kg);01/05/2026;15.61
+5005;Salada Verde (Kg);01/05/2026;27.31
+1001;Pão Francês (Kg);01/06/2026;17.64
+1002;Pão de queijo (Kg);01/06/2026;34.31
+1003;Croissant (Kg);01/06/2026;39.21
+1004;Coxinha (Un);01/06/2026;6.37
+1005;Enroladinho (Un);01/06/2026;6.37
+1006;Bolo de chocolate (Kg);01/06/2026;63.72
+1007;Torta de limão (Kg);01/06/2026;44.11
+1008;Pudim (Un);01/06/2026;11.76
+1009;Brigadeiro (Kg);01/06/2026;78.42
+1010;Beijinho (Kg);01/06/2026;78.42
+2001;Frango assado (Un);01/06/2026;34.31
+2002;Marmita (Un);01/06/2026;21.57
+2003;Lasanha (Kg);01/06/2026;39.21
+2004;Macarrão (Kg);01/06/2026;27.45
+2005;Purê de batata (Kg);01/06/2026;21.57
+2006;Salgadinhos (Kg);01/06/2026;58.81
+3001;Hot Roll (Porção);01/06/2026;24.51
+3002;Combo Sushi (Porção);01/06/2026;53.91
+3003;Sashimi (Porção);01/06/2026;83.32
+3004;Maki (Porção);01/06/2026;24.51
+3005;Temaki (Un);01/06/2026;21.57
+3006;Ceviche (Porção);01/06/2026;29.41
+4001;Hambúrguer (Kg);01/06/2026;44.11
+4002;Espetinho (Kg);01/06/2026;49.01
+4003;Frango temp (Kg);01/06/2026;24.51
+4004;Linguiça (Kg);01/06/2026;37.25
+4005;Kafta (Kg);01/06/2026;39.21
+4006;Kit Feijoada (Kg);01/06/2026;34.31
+5001;Suco Laranja (L);01/06/2026;14.7
+5002;Salada Frutas (Kg);01/06/2026;37.25
+5003;Caldos/Sopas (Kg);01/06/2026;19.6
+5004;Legumes (Kg);01/06/2026;15.68
+5005;Salada Verde (Kg);01/06/2026;27.45
+1001;Pão Francês (Kg);01/07/2026;17.73
+1002;Pão de queijo (Kg);01/07/2026;34.48
+1003;Croissant (Kg);01/07/2026;39.41
+1004;Coxinha (Un);01/07/2026;6.4
+1005;Enroladinho (Un);01/07/2026;6.4
+1006;Bolo de chocolate (Kg);01/07/2026;64.03
+1007;Torta de limão (Kg);01/07/2026;44.33
+1008;Pudim (Un);01/07/2026;11.82
+1009;Brigadeiro (Kg);01/07/2026;78.81
+1010;Beijinho (Kg);01/07/2026;78.81
+2001;Frango assado (Un);01/07/2026;34.48
+2002;Marmita (Un);01/07/2026;21.67
+2003;Lasanha (Kg);01/07/2026;39.41
+2004;Macarrão (Kg);01/07/2026;27.58
+2005;Purê de batata (Kg);01/07/2026;21.67
+2006;Salgadinhos (Kg);01/07/2026;59.11
+3001;Hot Roll (Porção);01/07/2026;24.63
+3002;Combo Sushi (Porção);01/07/2026;54.18
+3003;Sashimi (Porção);01/07/2026;83.74
+3004;Maki (Porção);01/07/2026;24.63
+3005;Temaki (Un);01/07/2026;21.67
+3006;Ceviche (Porção);01/07/2026;29.55
+4001;Hambúrguer (Kg);01/07/2026;44.33
+4002;Espetinho (Kg);01/07/2026;49.26
+4003;Frango temp (Kg);01/07/2026;24.63
+4004;Linguiça (Kg);01/07/2026;37.44
+4005;Kafta (Kg);01/07/2026;39.41
+4006;Kit Feijoada (Kg);01/07/2026;34.48
+5001;Suco Laranja (L);01/07/2026;14.78
+5002;Salada Frutas (Kg);01/07/2026;37.44
+5003;Caldos/Sopas (Kg);01/07/2026;19.7
+5004;Legumes (Kg);01/07/2026;15.76
+5005;Salada Verde (Kg);01/07/2026;27.58
+1001;Pão Francês (Kg);01/08/2026;17.82
+1002;Pão de queijo (Kg);01/08/2026;34.65
+1003;Croissant (Kg);01/08/2026;39.6
+1004;Coxinha (Un);01/08/2026;6.44
+1005;Enroladinho (Un);01/08/2026;6.44
+1006;Bolo de chocolate (Kg);01/08/2026;64.35
+1007;Torta de limão (Kg);01/08/2026;44.55
+1008;Pudim (Un);01/08/2026;11.88
+1009;Brigadeiro (Kg);01/08/2026;79.21
+1010;Beijinho (Kg);01/08/2026;79.21
+2001;Frango assado (Un);01/08/2026;34.65
+2002;Marmita (Un);01/08/2026;21.78
+2003;Lasanha (Kg);01/08/2026;39.6
+2004;Macarrão (Kg);01/08/2026;27.72
+2005;Purê de batata (Kg);01/08/2026;21.78
+2006;Salgadinhos (Kg);01/08/2026;59.4
+3001;Hot Roll (Porção);01/08/2026;24.75
+3002;Combo Sushi (Porção);01/08/2026;54.45
+3003;Sashimi (Porção);01/08/2026;84.16
+3004;Maki (Porção);01/08/2026;24.75
+3005;Temaki (Un);01/08/2026;21.78
+3006;Ceviche (Porção);01/08/2026;29.7
+4001;Hambúrguer (Kg);01/08/2026;44.55
+4002;Espetinho (Kg);01/08/2026;49.5
+4003;Frango temp (Kg);01/08/2026;24.75
+4004;Linguiça (Kg);01/08/2026;37.62
+4005;Kafta (Kg);01/08/2026;39.6
+4006;Kit Feijoada (Kg);01/08/2026;34.65
+5001;Suco Laranja (L);01/08/2026;14.85
+5002;Salada Frutas (Kg);01/08/2026;37.62
+5003;Caldos/Sopas (Kg);01/08/2026;19.8
+5004;Legumes (Kg);01/08/2026;15.84
+5005;Salada Verde (Kg);01/08/2026;27.72
+1001;Pão Francês (Kg);01/09/2026;17.91
+1002;Pão de queijo (Kg);01/09/2026;34.83
+1003;Croissant (Kg);01/09/2026;39.8
+1004;Coxinha (Un);01/09/2026;6.47
+1005;Enroladinho (Un);01/09/2026;6.47
+1006;Bolo de chocolate (Kg);01/09/2026;64.68
+1007;Torta de limão (Kg);01/09/2026;44.78
+1008;Pudim (Un);01/09/2026;11.94
+1009;Brigadeiro (Kg);01/09/2026;79.6
+1010;Beijinho (Kg);01/09/2026;79.6
+2001;Frango assado (Un);01/09/2026;34.83
+2002;Marmita (Un);01/09/2026;21.89
+2003;Lasanha (Kg);01/09/2026;39.8
+2004;Macarrão (Kg);01/09/2026;27.86
+2005;Purê de batata (Kg);01/09/2026;21.89
+2006;Salgadinhos (Kg);01/09/2026;59.7
+3001;Hot Roll (Porção);01/09/2026;24.88
+3002;Combo Sushi (Porção);01/09/2026;54.73
+3003;Sashimi (Porção);01/09/2026;84.58
+3004;Maki (Porção);01/09/2026;24.88
+3005;Temaki (Un);01/09/2026;21.89
+3006;Ceviche (Porção);01/09/2026;29.85
+4001;Hambúrguer (Kg);01/09/2026;44.78
+4002;Espetinho (Kg);01/09/2026;49.75
+4003;Frango temp (Kg);01/09/2026;24.88
+4004;Linguiça (Kg);01/09/2026;37.81
+4005;Kafta (Kg);01/09/2026;39.8
+4006;Kit Feijoada (Kg);01/09/2026;34.83
+5001;Suco Laranja (L);01/09/2026;14.93
+5002;Salada Frutas (Kg);01/09/2026;37.81
+5003;Caldos/Sopas (Kg);01/09/2026;19.9
+5004;Legumes (Kg);01/09/2026;15.92
+5005;Salada Verde (Kg);01/09/2026;27.86
+1001;Pão Francês (Kg);01/10/2026;18.0
+1002;Pão de queijo (Kg);01/10/2026;35.0
+1003;Croissant (Kg);01/10/2026;40.0
+1004;Coxinha (Un);01/10/2026;6.5
+1005;Enroladinho (Un);01/10/2026;6.5
+1006;Bolo de chocolate (Kg);01/10/2026;65.0
+1007;Torta de limão (Kg);01/10/2026;45.0
+1008;Pudim (Un);01/10/2026;12.0
+1009;Brigadeiro (Kg);01/10/2026;80.0
+1010;Beijinho (Kg);01/10/2026;80.0
+2001;Frango assado (Un);01/10/2026;35.0
+2002;Marmita (Un);01/10/2026;22.0
+2003;Lasanha (Kg);01/10/2026;40.0
+2004;Macarrão (Kg);01/10/2026;28.0
+2005;Purê de batata (Kg);01/10/2026;22.0
+2006;Salgadinhos (Kg);01/10/2026;60.0
+3001;Hot Roll (Porção);01/10/2026;25.0
+3002;Combo Sushi (Porção);01/10/2026;55.0
+3003;Sashimi (Porção);01/10/2026;85.0
+3004;Maki (Porção);01/10/2026;25.0
+3005;Temaki (Un);01/10/2026;22.0
+3006;Ceviche (Porção);01/10/2026;30.0
+4001;Hambúrguer (Kg);01/10/2026;45.0
+4002;Espetinho (Kg);01/10/2026;50.0
+4003;Frango temp (Kg);01/10/2026;25.0
+4004;Linguiça (Kg);01/10/2026;38.0
+4005;Kafta (Kg);01/10/2026;40.0
+4006;Kit Feijoada (Kg);01/10/2026;35.0
+5001;Suco Laranja (L);01/10/2026;15.0
+5002;Salada Frutas (Kg);01/10/2026;38.0
+5003;Caldos/Sopas (Kg);01/10/2026;20.0
+5004;Legumes (Kg);01/10/2026;16.0
+5005;Salada Verde (Kg);01/10/2026;28.0
