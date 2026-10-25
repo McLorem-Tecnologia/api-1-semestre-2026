@@ -44,3 +44,16 @@ def buscar_por_setor(setor: str):
 def buscar_por_tempo(tempo: str):
     resultado = prod_tb[prod_tb['Tempo de preparo'].str.contains(tempo, case=False, na=False)]
     return resultado.to_dict(orient='records')
+
+def nome_para_skus(nome: str) -> str:
+    """Retorna o SKU para um nome de produto (se o nome não existir, devolve o próprio SKU = 0000)."""
+    sku = next((k for k, v in obter_dicionario_sku_nome().items() if v == nome), None)
+    return sku if sku is not None else '0000'
+
+def setor_do_sku(sku: int) -> str:
+    """Setor do produto para um SKU (se o SKU não existir, devolve 'SKU 9999' em vez de dar erro)."""
+    resultado = prod_tb[prod_tb['SKU'] == sku]
+    if not resultado.empty:
+        return resultado.iloc[0]['Setor']
+    else:
+        return f"SKU {sku}"
