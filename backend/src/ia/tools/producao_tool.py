@@ -1,6 +1,7 @@
 from ia.tools import dspy_tool
 from ia import utils
 from ia import services
+from ia import procedures
 
 def _tratar_parametros_iniciais(data: str, setor: str):
     """Trata a data, normaliza o setor e cria aquele texto bonito para a resposta."""
@@ -162,3 +163,56 @@ def tool_producao_por_data(data: str, setor: str = "") -> str:
     except Exception as e:
         print(f"[ERRO - tool_producao_por_data] Falha ao calcular: {e}")
         return "Ocorreu um erro técnico inesperado ao tentar acessar os dados reais de produção."
+
+@dspy_tool('PRODUCAO')
+def tool_previsao_quantidade_mp (data = "hoje", setor = "" ):
+    """
+    Parâmetros:US-10: Quantidade de Matéria-Prima para deixar preparada para a produção de um dia específico.
+
+Permite consultar e calcular a quantidade total de cada matéria-prima necessária
+para atender ao planejamento de produção de uma determinada data, consolidando
+os insumos utilizados por todos os produtos programados. O objetivo é auxiliar
+na separação e preparação antecipada dos materiais necessários para a operação.
+
+    - data (opcional): data exata ('20/09/2026'), palavras relativas ('ontem', 'hoje'). SE NÃO ESPECIFICADO, assumirá 'hoje'.
+    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
+    """
+    data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
+
+    df_historico_limpo = services.producao.dataframe_vendas_similares(data_real)
+    
+    if df_historico_limpo.empty:
+        return f"Não encontrei histórico compatível para auditar a meta do dia {texto_data}."
+        
+    resultado = services.producao.media_vendas_produtos(df_historico_limpo, setor)
+    print(resultado)
+    print('US10')
+    texto = ""
+    lista = []
+    for item in resultado:
+        nome = item.split(":")[0]
+        nome = procedures.produtos.nome_para_skus(nome)
+        lista.append(nome)
+        print(lista)
+
+    produtos_disponiveis = procedures.ingredientes.formatacao_pre_calculo(lista)
+
+    for item in resultado:
+        nome_produto = item.split(":")[0]
+        quantidade_produto = float(item.split(":")[1])
+        sku_produto = procedures.produtos.nome_para_skus(nome_produto)
+        for obj in produtos_disponiveis:
+            if obj['SKU'] == sku_produto:
+              ingredientes = obj['Ingrediente']
+              quantidade_produto *= obj['Quantidade na Receita']
+              sobra = obj['Quantidade em Estoque'] - quantidade_produto
+              if sobra > 0 :
+                  texto += f"- {nome_produto}: {ingredientes} - {quantidade_produto:.2f} unidades (Sobra: {sobra:.2f} unidades)\n"
+              else:
+                  texto += f"- {nome_produto}: quantidade insuficiente em estoque (Necessário: {quantidade_produto:.2f} unidades, Estoque: {obj['Quantidade em Estoque']:.2f} unidades)\n"
+
+    return f"""
+Matéria-prima necessária para {texto_data}:
+
+{texto}
+"""
