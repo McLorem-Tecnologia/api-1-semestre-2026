@@ -1,4 +1,4 @@
-from ia import procedures 
+from ia import procedures
 from paths import DADOS_DIR
 import pandas as pd
 estoque = DADOS_DIR / "ingredientes.csv"
@@ -12,6 +12,11 @@ def buscar_receita_por_sku(sku: int):
     """Retorna a receita de um produto (SKU) como uma lista de dicionários."""
     resultado = receita_tb[receita_tb['SKU'] == sku]
     return resultado.to_dict(orient='records')
+
+def buscar_ingredientes(sku):
+    dados = pd.read_csv(receita, sep=";", encoding="utf-8-sig")
+    resultado = dados[dados["SKU"] == int(sku)]
+    return resultado
 
 def consultar_estoque_por_ingrediente(ingrediente: str, setor: str = None):
     """Retorna a quantidade em estoque de um ingrediente específico, em determinado setor."""
@@ -39,3 +44,13 @@ def formatacao_pre_calculo (sku : list = [] ):
                 'Quantidade em Estoque': quantidade_estoque
             })
     return resultado
+
+
+import pandas as pd
+from paths import DADOS_DIR
+
+CAMINHO_ARQUIVO = DADOS_DIR / "ingredientes.csv"
+
+
+def carregar_dados():
+    return pd.read_csv(CAMINHO_ARQUIVO, sep=";", encoding="utf-8-sig")
