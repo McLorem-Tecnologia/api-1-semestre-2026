@@ -13,8 +13,8 @@ def buscar_por_periodo(periodo):
     return tabela[tabela["Período"].str.contains(periodo, case=False, na=False)]
 
 def buscar_por_data(data):
-    print(f"[DEBUG - vendas_procedures] Resultado: {tabela[tabela["Data"] == data]}")
-    return tabela[tabela["Data"] == data]
+    print(f"[DEBUG - vendas_procedures] Resultado: {tabela[tabela['Data'] == data]}")
+    return tabela[tabela['Data'] == data]
 
 def produtos_mais_vendidos(limite):
     if limite <= 0:
