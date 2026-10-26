@@ -4,7 +4,6 @@ import pandas as pd
 estoque = DADOS_DIR / "ingredientes.csv"
 receita = DADOS_DIR / "receitas.csv"
 
-
 estoque_tb = pd.read_csv(estoque, sep=';', encoding='utf-8-sig')
 receita_tb = pd.read_csv(receita, sep=';', encoding='utf-8-sig')
 
@@ -44,13 +43,3 @@ def formatacao_pre_calculo (sku : list = [] ):
                 'Quantidade em Estoque': quantidade_estoque
             })
     return resultado
-
-
-import pandas as pd
-from paths import DADOS_DIR
-
-CAMINHO_ARQUIVO = DADOS_DIR / "ingredientes.csv"
-
-
-def carregar_dados():
-    return pd.read_csv(CAMINHO_ARQUIVO, sep=";", encoding="utf-8-sig")

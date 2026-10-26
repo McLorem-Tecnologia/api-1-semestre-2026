@@ -1,19 +1,24 @@
 import dspy
+from typing import Literal
 from ia.tools import obter_ferramentas_por_categoria
 
+
 class RotearIntencao(dspy.Signature):
-    """Você é um roteador lógico do sistema da MIA, a assistente virtual amigavel da produçao do supermercado.
+    """Você é um roteador lógico do sistema da MIA, a assistente virtual amigável da produção do supermercado.
     Sua ÚNICA função é categorizar a mensagem do usuário em rotas específicas.
     
     ROTAS VÁLIDAS:
     - SAUDACAO: Mensagens de oi, olá, tchau, bom dia, agradecimentos (obrigado, valeu), qual seu nome.
-    - PRODUCAO: Assuntos sobre quantidade a produzir, metas, descartes e fabricação.
-    - PRODUTOS: Assuntos sobre ingredientes, estoque de produtos, receitas ou categorias dos produtos.
-    - VENDAS: Assuntos sobre lucros, preços, histórico de vendas e faturamento.
-    - INVALIDO: Qualquer outro assunto que não se encaixe nas acima.
+    - PRODUCAO: Assuntos sobre quantidade a produzir, quantidade a separar, metas de produção e fabricação. Assuntos para separar ou produzir matéria-prima, ingredientes ou produtos.
+    - PRODUTOS: Assuntos sobre ingredientes, estoque de produtos, receitas, fichas técnicas ou categorias dos produtos.
+    - VENDAS: Assuntos sobre lucros, preços de venda, histórico de vendas e faturamento.
+    - DESPERDICIO: Assuntos sobre desperdício, descartes, perdas, produtos estragados/jogados fora e custo ou prejuízo gerado por descartes.
+    - INVALIDO: Qualquer outro assunto que não se encaixe nas rotas acima.
     """
-    pergunta = dspy.InputField(desc="Mensagem do usuário.")
-    categoria = dspy.OutputField(desc="Responda ESTRITAMENTE com 'SAUDACAO', 'PRODUCAO', 'PRODUTOS', 'VENDAS' ou 'INVALIDO'.")
+    pergunta: str = dspy.InputField(desc="Mensagem do usuário.")
+    categoria: Literal["SAUDACAO", "PRODUCAO", "PRODUTOS", "VENDAS", "DESPERDICIO", "INVALIDO"] = dspy.OutputField(
+        desc="Responda ESTRITAMENTE com 'SAUDACAO', 'PRODUCAO', 'PRODUTOS', 'VENDAS', 'DESPERDICIO' ou 'INVALIDO'."
+    )
 
 class ResponderSaudacao(dspy.Signature):
     """Você é a MIA, a assistente virtual amigável da produçao do supermercado.

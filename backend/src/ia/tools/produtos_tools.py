@@ -45,7 +45,7 @@ def produto_por_tempo_preparo(tempo: str) -> str:
     print(f'[DEBUG] Entrou na função produto_por_tempo_preparo buscando: {tempo}')
     return procedures.produtos.buscar_por_tempo(tempo)
 
-@dspy_tool('PRODUTOS')
+@dspy_tool('VENDAS')
 def produtos_do_setor(setor: str = "") -> str:
     """Retorna todos os produtos ligados a um setor específico.
     Use esta ferramenta quando o usuário perguntar quais produtos pertencem a um setor
@@ -67,7 +67,7 @@ def produtos_do_setor(setor: str = "") -> str:
         return f"Produtos do setor '{setor}':\n" + "\n".join(linhas)
     return "\n".join(linhas)
 
-@dspy_tool('PRODUTOS')
+@dspy_tool('VENDAS')
 def valores_dos_produtos(produtos: str) -> str:
     """Recebe uma lista de produtos e retorna o valor (Preço) de cada um.
     Use esta ferramenta quando o usuário quiser saber o preço de uma lista de produtos.

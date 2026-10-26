@@ -1,7 +1,5 @@
 from ia.tools import dspy_tool
-from ia import utils
-from ia import services
-from ia import procedures
+from ia import procedures; from ia import services; from ia import utils
 
 def _tratar_parametros_iniciais(data: str, setor: str):
     """Trata a data, normaliza o setor e cria aquele texto bonito para a resposta."""
@@ -23,13 +21,15 @@ def _formatar_lista_produtos(resultado: list, tipo_pergunta: str) -> str:
     """Monta os bullet points dependendo se o usuário quer 'quais' ou 'quantos'."""
     tipo_pergunta = tipo_pergunta if tipo_pergunta else "quanto"
     texto = ""
+    i = 1
     
     for item in resultado:
         if tipo_pergunta.lower() in ['qual', 'quais', 'o que']:
             nome_produto = item.split(":")[0]
-            texto += f"- {nome_produto}\n"
+            texto += f"{i} {nome_produto}\n"
         else:
-            texto += f"- {item} unidades\n"
+            texto += f"{i} {item} unidades\n"
+        i += 1
             
     return texto
 
@@ -44,7 +44,11 @@ def tool_previsao_vendas_por_data(data: str = "hoje", setor: str = "", tipo_perg
     Lógica interna: A ferramenta analisa se a data solicitada é dia de pico ou comum, cruzando e calculando a média ideal de produção baseada no histórico.
     
     Parâmetros:
-    - data (opcional): data exata ('30/09/2026'), palavras relativas ('hoje', 'amanhã') ou tempo relativo ('daqui a 3 dias', 'em 5 dias'). SE NÃO ESPECIFICADO, DEIXE VAZIO (o sistema assumirá 'hoje').
+    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem
+      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
+      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
+      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
+      Se não especificado, assume 'hoje'.
     - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
     - tipo_pergunta (OBRIGATÓRIO AVALIAR): Você deve classificar a intenção da frase do usuário. Se ele usar palavras como "Qual", "Quais", ou perguntar "O que", preencha com "quais". Se pedir números, preencha com "quanto".
         
@@ -85,7 +89,11 @@ def tool_meta_producao_passada(data: str = "hoje", setor: str = "", tipo_pergunt
     Lógica interna: Ela cruza o perfil histórico do dia para dizer a média ideal que a equipe DEVERIA ter alcançado.
     
     Parâmetros:
-    - data (opcional): data exata ('20/09/2026'), palavras relativas ('ontem', 'hoje'). SE NÃO ESPECIFICADO, assumirá 'hoje'.
+    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem
+      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
+      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
+      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
+      Se não especificado, assume 'hoje'.
     - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
     - tipo_pergunta (OBRIGATÓRIO AVALIAR): Se usar "Qual", "Quais", ou "O que", preencha com "quais". Se pedir números, preencha com "quanto".
     """
@@ -124,7 +132,11 @@ def tool_producao_por_data(data: str, setor: str = "") -> str:
     Lógica interna: Soma automaticamente os registros reais de Vendas + Descartes do dia para entregar o total produzido.
     
     Parâmetros:
-    - data (obrigatório): data exata ('15/08/2026'), palavras relativas ('ontem', 'hoje') ou tempo relativo.
+    - data (obrigatório): data ou referência de tempo exatamente como o usuário disse, sem
+      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
+      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
+      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
+      Se não especificado, assume 'hoje'.
     - setor (opcional): nome do setor (ex: 'Padaria'). Se o usuário perguntar o geral, deixe vazio.
     
     REGRA ABSOLUTA PARA A RESPOSTA FINAL: 
@@ -167,14 +179,18 @@ def tool_producao_por_data(data: str, setor: str = "") -> str:
 @dspy_tool('PRODUCAO')
 def tool_previsao_quantidade_mp (data = "hoje", setor = "" ):
     """
-    Parâmetros:US-10: Quantidade de Matéria-Prima para deixar preparada para a produção de um dia específico.
+    Parâmetros:US-10: Quantidade de Matéria-Prima ou Ingredientes para deixar preparada ou separada para a produção de um dia específico.
 
 Permite consultar e calcular a quantidade total de cada matéria-prima necessária
 para atender ao planejamento de produção de uma determinada data, consolidando
 os insumos utilizados por todos os produtos programados. O objetivo é auxiliar
 na separação e preparação antecipada dos materiais necessários para a operação.
 
-    - data (opcional): data exata ('20/09/2026'), palavras relativas ('ontem', 'hoje'). SE NÃO ESPECIFICADO, assumirá 'hoje'.
+    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem
+      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
+      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
+      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
+      Se não especificado, assume 'hoje'.
     - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
     """
     data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
@@ -185,15 +201,12 @@ na separação e preparação antecipada dos materiais necessários para a opera
         return f"Não encontrei histórico compatível para auditar a meta do dia {texto_data}."
         
     resultado = services.producao.media_vendas_produtos(df_historico_limpo, setor)
-    print(resultado)
-    print('US10')
     texto = ""
     lista = []
     for item in resultado:
         nome = item.split(":")[0]
         nome = procedures.produtos.nome_para_skus(nome)
         lista.append(nome)
-        print(lista)
 
     produtos_disponiveis = procedures.ingredientes.formatacao_pre_calculo(lista)
 
@@ -216,3 +229,79 @@ Matéria-prima necessária para {texto_data}:
 
 {texto}
 """
+
+@dspy_tool('PRODUCAO')
+def tool_previsao_vendas_por_periodo(periodo: str, data: str = "hoje", setor: str = "") -> str:
+    """Consulta a previsão de vendas/produção separada por PERÍODO DO DIA (manhã, tarde, noite).
+
+    USE esta ferramenta SOMENTE quando o usuário mencionar um período do dia ou pedir a
+    divisão por período. Exemplos:
+    - "quanto de pão francês amanhã de manhã?"  -> periodo="manhã"
+    - "previsão de hoje à tarde e à noite"      -> periodo="tarde e noite"
+    - "previsão do dia todo, por período"       -> periodo="dia todo"
+    - "quanto produzir em cada período hoje?"   -> periodo="cada período"
+
+    NÃO USE esta ferramenta se o usuário informar apenas data ou setor, sem nenhuma
+    referência a período do dia. Nesse caso, use a ferramenta de previsão sem período.
+
+    Parâmetros:
+    - periodo (OBRIGATÓRIO): o período exatamente como o usuário disse. Aceita 'manhã', 'tarde',
+      'noite', combinações ('manhã e tarde') ou 'dia todo' / 'todos os períodos' / 'cada período'.
+      Não converta nem calcule nada, apenas repasse o termo dito.
+    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem calcular.
+      Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
+      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
+      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
+      Se não especificado, assume 'hoje'.
+    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for citado.
+
+    Retorno: lista de produtos já formatada.
+    - Se foi pedido UM período: lista simples "- produto: quantidade".
+    - Se foi pedido o dia todo ou mais de um período: cada produto com a quantidade de
+      cada período (manhã, tarde, noite).
+    Apresente ao usuário exatamente no formato retornado, sem somar os períodos entre si.
+    """
+    # corpo igual ao da versão anterior
+    try:
+        data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
+        periodos = utils.converter_periodo(periodo)
+        dividir_por_periodo = len(periodos) > 1
+
+        por_produto = {}
+        for p in periodos:
+            df_periodo = services.producao.dataframe_vendas_por_periodo(data_real, p)
+            if df_periodo.empty:
+                continue
+
+            resultado = services.producao.media_vendas_produtos(df_periodo, setor)
+            for item in resultado or []:
+                nome, _, qtd = item.partition(":")   # item no formato "pao frances: 10"
+                por_produto.setdefault(nome.strip(), {})[p] = qtd.strip()
+
+        label_periodo = "o dia todo (dividido por período)" if len(periodos) == 3 \
+            else " e ".join(p.lower() for p in periodos)
+        aviso_setor = f" (Setor: {setor})" if setor else ""
+
+        if not por_produto:
+            return (f"Não encontrei dados históricos suficientes para projetar a produção "
+                    f"{texto_data}, {label_periodo}{aviso_setor}.")
+
+        linhas = [
+            f"PREVISÃO DE PRODUÇÃO - {texto_data}, {label_periodo}{aviso_setor}",
+            "(Baseado no perfil de demanda projetado para esta data. Quantidades em unidades.)",
+            "",
+        ]
+
+        for nome, valores in por_produto.items():
+            if dividir_por_periodo:
+                linhas.append(f"* {nome}")
+                for p in periodos:
+                    linhas.append(f"   - {p.lower()}: {valores.get(p, '0')}")
+            else:
+                linhas.append(f"- {nome}: {valores.get(periodos[0], '0')}")
+
+        return "\n".join(linhas)
+
+    except Exception as e:
+        print(f"[ERRO - tool_previsao_vendas_por_periodo] Falha: {e!r}")
+        return "Ocorreu um erro técnico ao cruzar os dados. Informe ao usuário que não foi possível projetar a produção neste momento."

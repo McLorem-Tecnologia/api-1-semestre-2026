@@ -1,28 +1,44 @@
 from ia.tools import dspy_tool
+from ia.tools.producao_tool import _tratar_parametros_iniciais
 from ia import procedures
 import pandas as pd
 from paths import DADOS_DIR
 
 @dspy_tool("DESPERDICIO")
-def tool_buscar_por_intervalo(data_inicio: str, data_fim: str, setor: str | None = None) -> str:
+def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", setor: str = "") -> str:
     """
     Consulta o custo total do desperdício de produtos em um período.
 
     Use esta ferramenta quando o usuário perguntar sobre custo,
-    valor ou prejuízo do desperdício/descarte entre duas datas.
+    valor ou prejuízo do desperdício/descarte em uma data ou entre duas datas.
 
     Parâmetros:
-    - data_inicio: data inicial no formato DD/MM/AAAA.
-    - data_fim: data final no formato DD/MM/AAAA.
-    - setor: setor opcional, como Padaria, Cozinha, Peixaria,
-      Açougue ou Processados.
+    - data_inicio (opcional): data ou referência de tempo exatamente como o usuário disse, sem
+      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
+      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
+      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
+      Se não especificado, assume 'hoje'.
+    - data_fim (opcional): mesmo formato de data_inicio. Informe somente quando o usuário
+      pedir um período (ex.: 'de 1 a 15 de setembro'). Se não especificado, a consulta
+      vale apenas para a data_inicio.
+    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
 
     Se o usuário especificar um setor, informe-o no parâmetro setor.
-    Caso contrário, deixe setor como None.
+    Caso contrário, deixe setor vazio.
 
     Retorna o custo calculado a partir dos registros de descarte
     e dos custos dos ingredientes. Nunca estime o valor por conta própria.
     """
+    
+    data_inicio, setor, texto_data = _tratar_parametros_iniciais(data_inicio, setor)
+    if data_fim and str(data_fim).strip().lower() not in ['none', 'null']:
+        data_fim, _, _ = _tratar_parametros_iniciais(data_fim, setor)
+    else:
+        data_fim = data_inicio 
+
+    if data_inicio != data_fim:
+        texto_data = f"no período de {data_inicio} a {data_fim}"
+
     resultado = procedures.descarte.buscar_por_intervalo(
         data_inicio,
         data_fim
@@ -97,7 +113,6 @@ def tool_buscar_por_intervalo(data_inicio: str, data_fim: str, setor: str | None
         custo_total_descarte += custo_descarte
 
 
-    if setor:
-        return f"Custo total do desperdício no setor {setor}: R$ {custo_total_descarte:.2f}"
+    aviso_setor = f" (Setor: {setor})" if setor else ""
 
-    return f"Custo total do desperdício no período: R$ {custo_total_descarte:.2f}"
+    return f"Custo total do desperdício {texto_data}{aviso_setor}: R$ {custo_total_descarte:.2f}"

@@ -14,9 +14,16 @@ def dataframe_vendas_similares(data: str) -> pd.DataFrame:
     
     return vendas[filtro]
 
+def dataframe_vendas_por_periodo(data: str, periodo: str) -> pd.DataFrame:
+    """Vendas históricas de dias com o mesmo perfil da data alvo, filtradas por UM período."""
+    vendas = dataframe_vendas_similares(data)
+    if not isinstance(vendas, pd.DataFrame) or vendas.empty:
+        return pd.DataFrame()
+    return vendas[vendas["Período"].str.lower() == periodo.lower()].copy()
+
 def media_vendas_produtos(vendas_similares: pd.DataFrame, setor: str = None) -> list:
     """
-    Calcula a média de saída e aplica a MARGEM DE PRODUÇÃO (+30%).
+    Calcula a média de saída e aplica a MARGEM DE PRODUÇÃO (+5%).
     Retorna uma lista de strings pronta para a IA exibir.
     """
     dados = pd.DataFrame(vendas_similares)
@@ -30,7 +37,7 @@ def media_vendas_produtos(vendas_similares: pd.DataFrame, setor: str = None) -> 
 
     nomes = procedures.produtos.obter_dicionario_sku_nome()
     
-    return [f"{nomes.get(sku, sku)}: {math.ceil(media * 1.3)}" for sku, media in medias.items()]
+    return [f"{nomes.get(sku, sku)}: {math.ceil(media * 1.05)}" for sku, media in medias.items()]
 
 def calcular_producao_data(data: str, setor: str = None) -> dict:
     """Cruza Vendas e Descartes usando o SKU para calcular a Produção real."""
