@@ -29,11 +29,11 @@
 > [!IMPORTANT]
 > **Status do Projeto:** Em desenvolvimento 🛠️
 > 
-> **Relatório de Testes:** [Link](docs/processo/sprints/sprint-1/testes/Relatório%20de%20Testes%20-%20Sprint%201.md)
+> **Relatório de Testes:** [Link](docs/processo/teste/Relatorio%20de%20Teste.md)
 > 
 > **Documentação:** [Pasta Principal](docs/cliente) • [Arquitetura](docs/cliente/tecnico/Arquitetura.md) • [Manual do Usuário](docs/cliente/usuário/Manual%20do%20Usuário.md) • [Estratégia de Branch](docs/processo/Estratégia%20de%20Branch.md) • [Padrão de Commits](docs/processo/Padrões%20de%20Commits.md)
 >
-> **Vídeo do Projeto:** [Youtube](https://youtu.be/AuBWGa-bZS8)
+> **Vídeo do Projeto:** [Youtube](https://youtu.be/fICg24h3Boo)
 
 ## 🎯 Desafio <a id="desafio"></a>
 
@@ -61,53 +61,53 @@ O diferencial da solução é a fricção zero com o usuário. A plataforma atua
 ---
 
 ## 📋 Backlog do Produto <a id="backlog"></a>
-| Rank | Prioridade | User Story | Story Points | Sprint | Status |
-| :--: | :--------: | :--- | :----------: | :----: | :----: |
-|   **1**  |    **Alta**    | Eu, como líder, quero saber quais produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto. |      13       |    1   |    ✅   |
-|   **2**  |    **Alta**    | Eu, como líder, quero saber quantos produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto. |      8       |    1   |    ✅   |
-|   **3**  |    **Média**   | Eu, como gerente, quero saber o que foi produzido no dia X pelo setor Y, a fim de verificar a produtividade do setor Y. |      13       |    1   |    ✅   |
-|   **4**  |    **Média**   | Eu, como gerente, quero saber o que deveria ter sido produzido no dia X pelo setor Y, a fim de consultar a meta ideal de produção estipulada para a data. |      21       |    1   |    ✅   |
-|   **5**  |    **Média**   | Eu, como líder, quero saber quais produtos me trazem mais lucro, a fim de otimizar o tempo dos colaboradores. |      *A estimar*       |    2   |    ⏳   |
-|   **6**  |    **Média**   | Eu, como líder, quero saber quantos reais foram descartados, a fim de monitorar o impacto financeiro das perdas do meu setor. |      *A estimar*       |    2   |    ⏳   |
-|   **7**  |    **Média**   | Eu, como gerente, quero saber quantos reais foram descartados, a fim de avaliar o custo global de desperdício da empresa. |      *A estimar*       |    2  |    ⏳   |
-|   **8**  |    **Baixa**   | Eu, como gerente, quero saber quais produtos me trazem mais lucro, a fim de orientar estrategicamente os setores. |      *A estimar*       |    2   |    ⏳   |
-|  **9**  |    **Baixa**   | Eu, como gestor, quero interagir com o assistente de análise de dados enviando perguntas por áudio, a fim de obter insights das planilhas de forma fluida e sem contato manual (semelhante a uma Alexa). |      *A estimar*       |    3   |    ⏳   |
-|   **10**  |    **Baixa**   | Eu, como líder, quero saber quanta matéria-prima eu preciso deixar preparada para o dia seguinte, a fim de otimizar o tempo e reduzir o desperdício de matéria-prima. |      *A estimar*       |    3   |    ⏳   |
-|  **11**  |    **Baixa**   | Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias. |      *A estimar*       |    3   |    ⏳   |
-|  **12**  |    **Baixa**   | Eu, como gerente, quero saber por que o produto X está sendo transferido de setor, a fim de identificar falhas no planejamento original da produção. |      *A estimar*       |    3   |    ⏳   |
+|  Rank  | Prioridade | User Story                                                                                                                                                                                               | Story Points | Sprint | Status |
+| :----: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :----: |
+| **1**  |  **Alta**  | Eu, como líder, quero saber quais produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto.                                                                                   |      13      |   1    |   ✅    |
+| **2**  |  **Alta**  | Eu, como líder, quero saber quantos produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto.                                                                                 |      8       |   1    |   ✅    |
+| **3**  | **Média**  | Eu, como gerente, quero saber o que foi produzido no dia X pelo setor Y, a fim de verificar a produtividade do setor Y.                                                                                  |      13      |   1    |   ✅    |
+| **4**  | **Média**  | Eu, como gerente, quero saber o que deveria ter sido produzido no dia X pelo setor Y, a fim de consultar a meta ideal de produção estipulada para a data.                                                |      21      |   1    |   ✅    |
+| **5**  | **Média**  | Eu, como líder, quero saber quais produtos devo produzir em cada período do dia, a fim de otimizar o tempo dos colaboradores.                                                                            |      13      |   2    |   ✅    |
+| **6**  | **Média**  | Eu, como gerente, quero saber quantos reais foram descartados em cada setor, a fim de monitorar o impacto financeiro das perdas dos setores.                                                             |      8       |   2    |   ✅    |
+| **7**  | **Média**  | Eu, como gerente, quero saber quantos reais foram descartados, a fim de avaliar o custo global de desperdício da empresa.                                                                                |      5       |   2    |   ✅    |
+| **8**  | **Baixa**  | Eu, como gerente, quero saber quais produtos me trazem mais lucro, a fim de orientar estrategicamente os setores.                                                                                        |      13      |   2    |   ✅    |
+| **9**  | **Baixa**  | Eu, como gestor, quero interagir com o assistente de análise de dados enviando perguntas por áudio, a fim de obter insights das planilhas de forma fluida e sem contato manual (semelhante a uma Alexa). |      10      |   2    |   ✅    |
+| **10** | **Baixa**  | Eu, como líder, quero saber quanta matéria-prima eu preciso deixar preparada para o dia seguinte, a fim de otimizar o tempo e reduzir o desperdício de matéria-prima.                                    |      15      |   2    |   ✅    |
+| **11** | **Baixa**  | Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias.                            |      13      |   3    |   ⏳    |
+| **12** | **Baixa**  | Eu, como gerente, quero saber por que o produto X está sendo transferido de setor, a fim de identificar falhas no planejamento original da produção.                                                     |      8       |   3    |   ⏳    |
 
 ---
 
 ## 🏅 DoR - Definition of Ready <a id="dor"></a>
 
-| Critério | Descrição |
-| :--- | :--- |
-| **Clareza na Descrição** | A User Story está escrita no formato: "Eu, como [papel], quero [ação], a fim de [objetivo/valor]". |
-| **Critérios de Aceitação** | A história possui critérios claros e pelo menos um cenário de teste básico (BDD) mapeado (Dado que... Quando... Então...). |
-| **Independente** | A história pode ser desenvolvida sem depender de tarefas bloqueantes dentro da mesma Sprint. |
-| **Compreensão Compartilhada** | A equipe entende o propósito e estimou o esforço da tarefa (Story Points definidos). |
-| **Mapeamento de Intenções** | Estão documentados exemplos reais de frases em linguagem natural que o usuário pode enviar (ex: "o que eu devo fazer hoje?", "tem produto pra agora?"). |
-| **Critérios Técnicos** | Está definido o que o modelo via **DSPy** precisará extrair da frase (parâmetros) e qual arquivo/coluna estática o **Pandas** deverá ler. |
+| Critério                      | Descrição                                                                                                                                               |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Clareza na Descrição**      | A User Story está escrita no formato: "Eu, como [papel], quero [ação], a fim de [objetivo/valor]".                                                      |
+| **Critérios de Aceitação**    | A história possui critérios claros e pelo menos um cenário de teste básico (BDD) mapeado (Dado que... Quando... Então...).                              |
+| **Independente**              | A história pode ser desenvolvida sem depender de tarefas bloqueantes dentro da mesma Sprint.                                                            |
+| **Compreensão Compartilhada** | A equipe entende o propósito e estimou o esforço da tarefa (Story Points definidos).                                                                    |
+| **Mapeamento de Intenções**   | Estão documentados exemplos reais de frases em linguagem natural que o usuário pode enviar (ex: "o que eu devo fazer hoje?", "tem produto pra agora?"). |
+| **Critérios Técnicos**        | Está definido o que o modelo via **DSPy** precisará extrair da frase (parâmetros) e qual arquivo/coluna estática o **Pandas** deverá ler.               |
 
 ## 🏅 DoD - Definition of Done <a id="dod"></a>
 
-| Critério | Descrição |
-| :--- | :--- |
-| **Critérios Atendidos** | Todos os critérios de aceitação e cenários de teste da User Story foram cumpridos e validados com sucesso. |
-| **Interpretação Validada (NLP)** | A IA interpretou corretamente diferentes variações da mesma pergunta em texto livre, acionando a filtragem correta no Pandas. |
-| **Código Revisado** | O código passou por Code Review (Pull Request revisado e aprovado por pelo menos um outro membro da equipe). |
-| **Documentação Atualizada** | As novas capacidades de interpretação do bot, a estrutura dos módulos DSPy e os mapeamentos dos CSVs estáticos foram atualizados no README.md. |
-| **Integração Validada** | A nova capacidade de resposta não confunde a IA em relação a outras perguntas já suportadas e o bot lida bem com frases fora de contexto. |
-| **Validação do PO** | O Product Owner conversou de forma natural com o bot no Telegram e confirmou que o retorno atende à regra de negócio. |
-| **Pronto para Deploy** | O código está limpo, mergeado na branch principal e pronto para ser executado. |
+| Critério                         | Descrição                                                                                                                                      |
+| :------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Critérios Atendidos**          | Todos os critérios de aceitação e cenários de teste da User Story foram cumpridos e validados com sucesso.                                     |
+| **Interpretação Validada (NLP)** | A IA interpretou corretamente diferentes variações da mesma pergunta em texto livre, acionando a filtragem correta no Pandas.                  |
+| **Código Revisado**              | O código passou por Code Review (Pull Request revisado e aprovado por pelo menos um outro membro da equipe).                                   |
+| **Documentação Atualizada**      | As novas capacidades de interpretação do bot, a estrutura dos módulos DSPy e os mapeamentos dos CSVs estáticos foram atualizados no README.md. |
+| **Integração Validada**          | A nova capacidade de resposta não confunde a IA em relação a outras perguntas já suportadas e o bot lida bem com frases fora de contexto.      |
+| **Validação do PO**              | O Product Owner conversou de forma natural com o bot no Telegram e confirmou que o retorno atende à regra de negócio.                          |
+| **Pronto para Deploy**           | O código está limpo, mergeado na branch principal e pronto para ser executado.                                                                 |
 ---
 
 ## 📅 Cronograma de Sprints <a id="sprint"></a>
 
 <div align="center">
 
-| Sprint | Período | Documentação |
-| :---: | :---: | :---: |
+|     Sprint     |    Período    |                        Documentação                         |
+| :------------: | :-----------: | :---------------------------------------------------------: |
 | 🔖 **SPRINT 1** | 07/09 - 27/09 | [Sprint 1 Docs](./docs/processo/sprints/sprint-1/README.md) |
 | 🔖 **SPRINT 2** | 05/10 - 25/10 | [Sprint 2 Docs](./docs/processo/sprints/sprint-2/README.md) |
 | 🔖 **SPRINT 3** | 02/11 - 27/11 | [Sprint 3 Docs](./docs/processo/sprints/sprint-3/README.md) |
@@ -251,9 +251,9 @@ Com o Bot online, abra o Telegram, inicie a conversa com a MIA e converse em lin
       </td>
       <td align="center">
         <a href="https://github.com/mvlsouza">
-          <img src="https://github.com/mvlsouza.png" width="100px;" alt="Foto de Marcus Vinicius"/>
+          <img src="https://github.com/mvlsouza.png" width="100px;" alt="Foto de Marcus Vinícius"/>
         </a><br>
-        <sub><b>Marcus Vinicius</b></sub><br>
+        <sub><b>Marcus Vinícius</b></sub><br>
         <sub>Dev Team</sub><br>
         <a href="https://github.com/mvlsouza"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/mvlsouza/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
       </td>

@@ -32,17 +32,13 @@ A ser decidido!
 
 ## 📋 User Stories <a id="us"></a>
 
-| $\textsf{\textbf{Capacidade estimada da Equipe por Sprint:}}$ | $\textsf{A definir}$ |
-|---|---|
-| $\color{#2e8b57}{\textsf{\textbf{Meta da Sprint:}}}$ | $\textsf{A definir}$ |
+| $\textsf{\textbf{Capacidade estimada da Equipe por Sprint:}}$                         | $\textsf{A definir}$ |
+| ------------------------------------------------------------------------------------- | -------------------- |
+| $\color{#2e8b57}{\textsf{\textbf{Meta da Sprint:}}}$                                  | $\textsf{A definir}$ |
 | $\textsf{\textbf{Previsão da Sprint} (\textit{extras, sem compromisso de entrega}):}$ | $\textsf{A definir}$ |
 
-|  Rank  | Prioridade | User Story | Story Points | Sprint | Status |
-| :----: | :--------: | ---------- | :----------: | :----: | :----: |
-|  **9** |  **Baixa** | Eu, como gestor, quero interagir com o assistente de análise de dados enviando perguntas por áudio, a fim de obter insights das planilhas de forma fluida e sem contato manual (semelhante a uma Alexa). | *A estimar* | 3 | ⏳ |
-| **10** |  **Baixa** | Eu, como líder, quero saber quanta matéria-prima eu preciso deixar preparada para o dia seguinte, a fim de otimizar o tempo e reduzir o desperdício de matéria-prima. | *A estimar* | 3 | ⏳ |
-| **11** |  **Baixa** | Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias. | *A estimar* | 3 | ⏳ |
-| **12** |  **Baixa** | Eu, como gerente, quero saber por que o produto X está sendo transferido de setor, a fim de identificar falhas no planejamento original da produção. | *A estimar* | 3 | ⏳ |
+| Rank  | Prioridade | User Story | Story Points | Sprint | Status |
+| :---: | :--------: | ---------- | :----------: | :----: | :----: |
 
 ---
 
@@ -111,9 +107,9 @@ To Be Defined! 🔜
       </td>
       <td align="center">
         <a href="https://github.com/mvlsouza">
-          <img src="https://github.com/mvlsouza.png" width="100px;" alt="Foto de Marcus Vinicius"/>
+          <img src="https://github.com/mvlsouza.png" width="100px;" alt="Foto de Marcus Vinícius"/>
         </a><br>
-        <sub><b>Marcus Vinicius</b></sub><br>
+        <sub><b>Marcus Vinícius</b></sub><br>
         <sub>Dev Team</sub><br>
         <a href="https://github.com/mvlsouza"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/mvlsouza/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
       </td>

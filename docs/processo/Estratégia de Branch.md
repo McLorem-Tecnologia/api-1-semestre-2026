@@ -37,11 +37,11 @@ flowchart LR
 
 ## Papéis e responsabilidades
 
-| Papel | Responsável | O que faz |
-| :--- | :--- | :--- |
-| **Merge / aprovação final do PR** | Felipe Morais (Scrum Master) | Único membro com permissão de push/merge na `main` oficial da organização |
-| **Revisão de código** | Henrique de Castro (Product Owner) e Marcus Vinicius (Dev Team) | Revisam o PR antes de ele ser aprovado — qualidade técnica e aderência à regra de negócio |
-| **Autoria das alterações** | Todos os membros da Dev Team | Trabalham em seus próprios forks pessoais e abrem os PRs |
+| Papel                             | Responsável                                                     | O que faz                                                                                 |
+| :-------------------------------- | :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| **Merge / aprovação final do PR** | Felipe Morais (Scrum Master)                                    | Único membro com permissão de push/merge na `main` oficial da organização                 |
+| **Revisão de código**             | Henrique de Castro (Product Owner) e Marcus Vinícius (Dev Team) | Revisam o PR antes de ele ser aprovado — qualidade técnica e aderência à regra de negócio |
+| **Autoria das alterações**        | Todos os membros da Dev Team                                    | Trabalham em seus próprios forks pessoais e abrem os PRs                                  |
 
 ## Boas práticas para manter esse modelo funcionando
 

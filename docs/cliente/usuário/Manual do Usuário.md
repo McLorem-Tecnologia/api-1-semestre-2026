@@ -24,8 +24,8 @@ As planilhas de ingredientes e de regras (clima, vésperas) já estão no sistem
 * **Fora do escopo:** perguntas que não são sobre a produção do supermercado recebem "Desculpe, meu sistema é restrito à análise e produção do supermercado."
 
 ## 5. Mensagens de erro
-| Mensagem | O que fazer |
-| --- | --- |
-| "⚠️ Ops! Minha inteligência artificial teve um branco..." | Reformule a pergunta de forma mais direta. |
-| "⚠️ Ocorreu um erro inesperado de conexão com a IA." | O motor de IA está fora do ar. Avise o administrador do sistema. |
-| Nenhuma resposta | O bot está desligado. Avise o administrador do sistema. |
+| Mensagem                                                 | O que fazer                                                      |
+| -------------------------------------------------------- | ---------------------------------------------------------------- |
+| "⚠️ Ops! Minha inteligência artificial teve um branco..." | Reformule a pergunta de forma mais direta.                       |
+| "⚠️ Ocorreu um erro inesperado de conexão com a IA."      | O motor de IA está fora do ar. Avise o administrador do sistema. |
+| Nenhuma resposta                                         | O bot está desligado. Avise o administrador do sistema.          |

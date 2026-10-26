@@ -4,18 +4,18 @@ Este documento registra a execução manual dos testes da MIA na Sprint 1: cada 
 
 ## Identificação da execução
 
-| Item | Valor |
-| --- | --- |
+| Item              | Valor                                                        |
+| ----------------- | ------------------------------------------------------------ |
 | Datas de execução | 25/09/2026 (casos 3.3, 3.4, 4.1 e 4.3) e 26/09/2026 (demais) |
-| Executado por | Marcus Vinicius |
-| Modelo | ollama/gemma4:e2b |
-| Python | Python 3.13.6 |
+| Executado por     | Marcus Vinícius                                              |
+| Modelo            | ollama/gemma4:e2b                                            |
+| Python            | Python 3.13.6                                                |
 
 ## Resumo
 
 | Total | ✅ Aprovados | ⚠️ Com ressalva | ❌ Reprovados |
-| :-: | :-: | :-: | :-: |
-| 26 | 26 | 0 | 0 |
+| :---: | :---------: | :------------: | :----------: |
+|  26   |     26      |       0        |      0       |
 
 ---
 
@@ -28,117 +28,216 @@ Este documento registra a execução manual dos testes da MIA na Sprint 1: cada 
 
 ---
 
-## US01 — Quais produtos devem ser produzidos
-
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 1.1 | "O que devo produzir hoje?" | Lista só com **nomes** de produtos (sem quantidade), baseada na média de vendas de dias com o mesmo perfil (bom/ruim) de hoje |
-| 1.2 | "O que preciso produzir amanhã?" | `converter_data_relativa` deve resolver "amanhã" para a data correta antes de calcular |
-| 1.3 | "Quais produtos devo produzir hoje na padaria?" | Lista filtrada só com produtos do setor Padaria |
-| 1.4 | "Quais produtos devo produzir no dia 20/09/2026?" | Aceita data explícita no formato `DD/MM/AAAA` (devolvida sem alteração por `converter_data_relativa`) |
-
----
-
-## US02 — Quantos produtos produzir
-
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 2.1 | "Quantas unidades devo produzir hoje?" | Lista com nome do produto **e** quantidade recomendada (média arredondada pra cima) |
-| 2.2 | "Quanto de coxinha devo fazer amanhã?" | A tool devolve todos os produtos e o Formatador mostra só a Coxinha. |
-| 2.3 | "Quantos produtos da padaria devo produzir hoje?" | Filtra por setor mantendo as quantidades |
-
----
-
-## US03 — O que foi produzido
-
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 3.1 | "O que foi produzido ontem na padaria?" | Lista por produto: Total Produzido, Vendas e Descarte, só da Padaria |
-| 3.2 | "O que foi produzido ontem no açougue, na padaria e na cozinha?" | Deve conseguir consultar os três setores (o `ReAct` aciona a tool uma vez por setor) e apresentar tudo organizado |
-| 3.3 | "O que foi produzido ontem?" | Deve retornar a produção de todos os setores |
-| 3.4 | "O que foi produzido ontem? Separe a lista por setores" | Deve retornar a produção de todos os setores, agrupada por setor |
-| 3.5 | "O que foi produzido no acugue ontem?" (erro de digitação proposital) | `normalizar_setor` deve corrigir para "Açougue" mesmo com o erro |
-
----
-
-## US04 — O que deveria ter sido produzido
-
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 4.1 | "O que deveria ter sido produzido ontem na padaria?" | Mostra a meta de produção por produto da Padaria, em tom de relatório/cobrança |
-| 4.2 | "Qual era a meta de produção de hoje para o açougue?" | Mesmo cálculo, fraseado diferente — verifica se o Classificador de Intenção entende variações de pergunta |
-| 4.3 | "Quanto deveria ter sido produzido ontem na padaria?" | Mostra a meta de produção **com quantidade** por produto da Padaria — mesmo comportamento do 4.1, mas fraseado com "Quanto" de forma explícita |
-
----
-
 ## Catálogo de produtos
 
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 5.1 | "Quais produtos vocês têm?" | Lista completa de produtos (`listar_todos_produtos`) |
-| 5.2 | "Me dá os detalhes de todos os produtos" | Lista com Nome, Setor e Tempo de preparo |
-| 5.3 | "Quais são as informações da coxinha?" | Detalhes de um produto específico |
-| 5.4 | "Quais produtos são da cozinha?" | Lista filtrada por setor |
+| ID    | Mensagem para enviar                     | Resultado esperado                                   |
+| ----- | ---------------------------------------- | ---------------------------------------------------- |
+| 0.1.1 | "Quais produtos vocês têm?"              | Lista completa de produtos (`listar_todos_produtos`) |
+| 0.1.2 | "Me dá os detalhes de todos os produtos" | Lista com Nome, Setor e Tempo de preparo             |
+| 0.1.3 | "Quais são as informações da coxinha?"   | Detalhes de um produto específico                    |
+| 0.1.4 | "Quais produtos são da cozinha?"         | Lista filtrada por setor                             |
 
 ---
 
 ## Roteamento e comportamento social (`agentes.py`)
 
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 6.1 | "Oi" / "Bom dia" | Classificador identifica `SAUDACAO`; resposta curta e simpática, sem acionar nenhuma tool |
-| 6.2 | "Tchau" / "Obrigado!" | Mesma rota `SAUDACAO` |
-| 6.3 | "Qual é a capital da França?" (fora do escopo) | Classificador identifica `INVALIDO`; resposta explicando que só responde sobre produção/vendas, sem tentar adivinhar |
-| 6.4 | Enviar um áudio ou uma foto | O bot responde com a mensagem fixa de formato não suportado, sem acionar a IA. |
+| ID    | Mensagem para enviar                           | Resultado esperado                                                                                                   |
+| ----- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 0.2.1 | "Oi" / "Bom dia"                               | Classificador identifica `SAUDACAO`; resposta curta e simpática, sem acionar nenhuma tool                            |
+| 0.2.2 | "Tchau" / "Obrigado!"                          | Mesma rota `SAUDACAO`                                                                                                |
+| 0.2.3 | "Qual é a capital da França?" (fora do escopo) | Classificador identifica `INVALIDO`; resposta explicando que só responde sobre produção/vendas, sem tentar adivinhar |
+| 0.2.4 | Enviar um áudio ou uma foto                    | O bot responde com a mensagem fixa de formato não suportado, sem acionar a IA.                                       |
 
 ---
 
 ## Formatação da resposta
 
-| ID | O que verificar | Resultado esperado |
-|---|---|---|
-| 7.1 | Listas na resposta | Sempre usam `•`, nunca `*` |
-| 7.2 | Início da resposta | Nunca começa repetindo saudação ("Olá! Aqui está...") |
-| 7.3 | Pergunta com múltiplos setores | Cada setor aparece claramente separado (ver seção "separar por mensagem", se já implementado) |
+| ID    | O que verificar                | Resultado esperado                                                                            |
+| ----- | ------------------------------ | --------------------------------------------------------------------------------------------- |
+| 0.3.1 | Listas na resposta             | Sempre usam `•`, nunca `*`                                                                    |
+| 0.3.2 | Início da resposta             | Nunca começa repetindo saudação ("Olá! Aqui está...")                                         |
+| 0.3.3 | Pergunta com múltiplos setores | Cada setor aparece claramente separado (ver seção "separar por mensagem", se já implementado) |
+
+---
+
+## US01 — Quais produtos devem ser produzidos
+
+| ID  | Mensagem para enviar                              | Resultado esperado                                                                                                            |
+| --- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| 1.1 | "O que devo produzir hoje?"                       | Lista só com **nomes** de produtos (sem quantidade), baseada na média de vendas de dias com o mesmo perfil (bom/ruim) de hoje |
+| 1.2 | "O que preciso produzir amanhã?"                  | `converter_data_relativa` deve resolver "amanhã" para a data correta antes de calcular                                        |
+| 1.3 | "Quais produtos devo produzir hoje na padaria?"   | Lista filtrada só com produtos do setor Padaria                                                                               |
+| 1.4 | "Quais produtos devo produzir no dia 20/09/2026?" | Aceita data explícita no formato `DD/MM/AAAA` (devolvida sem alteração por `converter_data_relativa`)                         |
+
+---
+
+## US02 — Quantos produtos produzir
+
+| ID  | Mensagem para enviar                              | Resultado esperado                                                                  |
+| --- | ------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 2.1 | "Quantas unidades devo produzir hoje?"            | Lista com nome do produto **e** quantidade recomendada (média arredondada pra cima) |
+| 2.2 | "Quanto de coxinha devo fazer amanhã?"            | A tool devolve todos os produtos e o Formatador mostra só a Coxinha.                |
+| 2.3 | "Quantos produtos da padaria devo produzir hoje?" | Filtra por setor mantendo as quantidades                                            |
+
+---
+
+## US03 — O que foi produzido
+
+| ID  | Mensagem para enviar                                                  | Resultado esperado                                                                                                |
+| --- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 3.1 | "O que foi produzido ontem na padaria?"                               | Lista por produto: Total Produzido, Vendas e Descarte, só da Padaria                                              |
+| 3.2 | "O que foi produzido ontem no açougue, na padaria e na cozinha?"      | Deve conseguir consultar os três setores (o `ReAct` aciona a tool uma vez por setor) e apresentar tudo organizado |
+| 3.3 | "O que foi produzido ontem?"                                          | Deve retornar a produção de todos os setores                                                                      |
+| 3.4 | "O que foi produzido ontem? Separe a lista por setores"               | Deve retornar a produção de todos os setores, agrupada por setor                                                  |
+| 3.5 | "O que foi produzido no acugue ontem?" (erro de digitação proposital) | `normalizar_setor` deve corrigir para "Açougue" mesmo com o erro                                                  |
+
+---
+
+## US04 — O que deveria ter sido produzido
+
+| ID  | Mensagem para enviar                                  | Resultado esperado                                                                                                                             |
+| --- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4.1 | "O que deveria ter sido produzido ontem na padaria?"  | Mostra a meta de produção por produto da Padaria, em tom de relatório/cobrança                                                                 |
+| 4.2 | "Qual era a meta de produção de hoje para o açougue?" | Mesmo cálculo, fraseado diferente — verifica se o Classificador de Intenção entende variações de pergunta                                      |
+| 4.3 | "Quanto deveria ter sido produzido ontem na padaria?" | Mostra a meta de produção **com quantidade** por produto da Padaria — mesmo comportamento do 4.1, mas fraseado com "Quanto" de forma explícita |
 
 ---
 
 ## Tabela de Registro dos Testes
 
-| Caso | Mensagem enviada | Resultado obtido | Status | Observações |
-| --- | --- | --- | :-: | --- |
-| 1.1 | Quais produtos devo produzir hoje? | Lista os 25 produtos que devem ser produzidos hoje. Ver [evidência completa](#evidencia-11) | ✅ | Não listou a quantidade ✓ |
-| 1.2 | Quais produtos preciso produzir amanhã? | Lista os 25 produtos e resolve "amanhã" para a data correta (27/09/2026). Ver [evidência completa](#evidencia-12) | ✅ | Não listou a quantidade ✓ |
-| 1.3 | Quais produtos devo produzir hoje na padaria? | Lista os 5 produtos da padaria apenas. Ver [evidência completa](#evidencia-13) | ✅ | Não listou a quantidade ✓ |
-| 1.4 | Quais produtos devo produzir no dia 20/09/2026? | Lista os 25 produtos com a média do que foi produzido em dias parecidos mais 30%. Ver [evidência completa](#evidencia-14) | ✅ | Não listou a quantidade ✓ |
-| 2.1 | Quantas unidades devo produzir hoje? | Lista os 25 produtos que devem ser produzidos hoje com a quantidade. Ver [evidência completa](#evidencia-21) | ✅ | Listou a quantidade ✓ |
-| 2.2 | Quanto de coxinha devo fazer amanhã? | Retornou apenas a 'Coxinha' e a quantidade. Ver [evidência completa](#evidencia-22) | ✅ | Entendeu e converteu 'Amanhã' para '27/09/2026' |
-| 2.3 | Quantos produtos da padaria devo produzir hoje? | Lista os 5 produtos da padaria apenas com a quantidade. Ver [evidência completa](#evidencia-23) | ✅ | Listou a quantidade ✓ |
-| 3.1 | O que foi produzido ontem na padaria? | Listou os 5 produtos da padaria com o Total Produzido e a explicação de quantos realmente foram vendidos e quantos foram descartados. Ver [evidência completa](#evidencia-31) | ✅ |  |
-| 3.2 | O que foi produzido ontem no açougue, na padaria e na cozinha? | Lista os produtos de cada setor de forma separada trazendo as mesmas informações do caso 3.1. Ver [evidência completa](#evidencia-32) | ✅ | Agrupou os itens em seus devidos setores corretamente |
-| 3.3 | O que foi produzido ontem? | Lista os 25 produtos (750 un. no total). Ver [evidência completa](#evidencia-33) | ✅ | Não agrupa por setor — correto, isso é escopo da 3.4 |
-| 3.4 | O que foi produzido ontem? Separe a lista por setores | Lista os 25 produtos separando eles por setores (750 un. no total). Ver [evidência completa](#evidencia-34) | ✅ | Agrupou corretamente por setores |
-| 3.5 | O que foi produzido no acugue ontem? | `normalizar_setor` corrigiu corretamente para "Açougue" mesmo com o erro. Ver [evidência completa](#evidencia-35) | ✅ |  |
-| 4.1 | O que deveria ter sido produzido ontem na padaria? | Lista os 5 produtos da padaria, sem quantidades. Ver [evidência](#evidencia-41) | ✅ | "O que" é tratado como "quais" e a meta sai sem quantidade. |
-| 4.2 | Qual era a meta de produção de hoje para o açougue? | Lista os 5 produtos que deveria ter sido produzido pelo açougue no dia de hoje. Ver [evidência completa](#evidencia-42) | ✅ | Por chamar 'Qual era a meta' ele decidiu tratar a pergunta como 'Quanto' e passando as quantidades |
-| 4.3 | Quanto deveria ter sido produzido ontem na padaria? | Lista os 5 produtos da padaria com a meta de produção e a quantidade. Ver [evidência completa](#evidencia-43) | ✅ | Listou a quantidade corretamente ✓ |
-| 5.1 | Quais produtos vocês têm? | Lista os 25 produtos catalogados em `produtos_mercado.csv`. Ver [evidência completa](#evidencia-51) | ✅ |  |
-| 5.2 | Me dá os detalhes de todos os produtos | Listou os 25 produtos assim como no caso 5.1 com o adicional das informações: Produto, Setor e Tempo de preparo de cada produto. Ver [evidência completa](#evidencia-52) | ✅ |  |
-| 5.3 | Quais são as informações da coxinha? | Retornou as informações: Produto, Setor e Tempo de preparo. Ver [evidência completa](#evidencia-53) | ✅ |  |
-| 5.4 | Quais produtos são da cozinha? | Lista os 5 produtos do setor específico no caso cozinha. Ver [evidência completa](#evidencia-54) | ✅ |  |
-| 6.1 | "Oi" / "Bom dia" | Retorna: 'Oi! Como posso ajudar na produção do supermercado hoje?' / 'Bom dia! Como posso ajudar na produção do supermercado hoje?' | ✅ |  |
-| 6.2 | "Tchau" / "Obrigado!" | Retorna: 'Tchau! Tenha um ótimo dia.' / 'De nada! Estou aqui para ajudar no que precisar.' | ✅ |  |
-| 6.3 | Qual é a capital da França? | Retorna: 'Desculpe, meu sistema é restrito à análise e produção do supermercado.' | ✅ |  |
-| 6.4 | Enviar um áudio ou uma foto | Retorna: `Desculpe, no momento eu não suporto esse formato enviado. Por favor, me envie apenas mensagens de texto!` | ✅ |  |
-| 7.1 | Listas na resposta | Como podemos ver nos casos de listas, está corrigindo os '*' para '•' corretamente | ✅ |  |
-| 7.2 | Início da resposta | Como podemos ver em todos os teste, ela não está dizendo olá para cada mensagem (não está repetindo saudações) | ✅ |  |
-| 7.3 | Pergunta com múltiplos setores | Como podemos ver no caso [3.4](#evidencia-34) e [3.2](#evidencia-32) está respondendo corretamente | ✅ | Ver casos 3.2 e 3.4 |
+| Caso  | Mensagem enviada                                               | Resultado obtido                                                                                                                                                              | Status | Observações                                                                                        |
+| ----- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----: | -------------------------------------------------------------------------------------------------- |
+| 0.1.1 | Quais produtos vocês têm?                                      | Lista os 25 produtos catalogados em `produtos_mercado.csv`. Ver [evidência completa](#evidencia-011)                                                                          |   ✅    |                                                                                                    |
+| 0.1.2 | Me dá os detalhes de todos os produtos                         | Listou os 25 produtos assim como no caso 0.1.1 com o adicional das informações: Produto, Setor e Tempo de preparo de cada produto. Ver [evidência completa](#evidencia-012)   |   ✅    |                                                                                                    |
+| 0.1.3 | Quais são as informações da coxinha?                           | Retornou as informações: Produto, Setor e Tempo de preparo. Ver [evidência completa](#evidencia-013)                                                                          |   ✅    |                                                                                                    |
+| 0.1.4 | Quais produtos são da cozinha?                                 | Lista os 5 produtos do setor específico no caso cozinha. Ver [evidência completa](#evidencia-014)                                                                             |   ✅    |                                                                                                    |
+| 0.2.1 | "Oi" / "Bom dia"                                               | Retorna: 'Oi! Como posso ajudar na produção do supermercado hoje?' / 'Bom dia! Como posso ajudar na produção do supermercado hoje?'                                           |   ✅    |                                                                                                    |
+| 0.2.2 | "Tchau" / "Obrigado!"                                          | Retorna: 'Tchau! Tenha um ótimo dia.' / 'De nada! Estou aqui para ajudar no que precisar.'                                                                                    |   ✅    |                                                                                                    |
+| 0.2.3 | Qual é a capital da França?                                    | Retorna: 'Desculpe, meu sistema é restrito à análise e produção do supermercado.'                                                                                             |   ✅    |                                                                                                    |
+| 0.2.4 | Enviar um áudio ou uma foto                                    | Retorna: `Desculpe, no momento eu não suporto esse formato enviado. Por favor, me envie apenas mensagens de texto!`                                                           |   ✅    |                                                                                                    |
+| 0.3.1 | Listas na resposta                                             | Como podemos ver nos casos de listas, está corrigindo os '*' para '•' corretamente                                                                                            |   ✅    |                                                                                                    |
+| 0.3.2 | Início da resposta                                             | Como podemos ver em todos os teste, ela não está dizendo olá para cada mensagem (não está repetindo saudações)                                                                |   ✅    |                                                                                                    |
+| 0.3.3 | Pergunta com múltiplos setores                                 | Como podemos ver no caso [3.4](#evidencia-34) e [3.2](#evidencia-32) está respondendo corretamente                                                                            |   ✅    | Ver casos 3.2 e 3.4                                                                                |
+| 1.1   | Quais produtos devo produzir hoje?                             | Lista os 25 produtos que devem ser produzidos hoje. Ver [evidência completa](#evidencia-11)                                                                                   |   ✅    | Não listou a quantidade ✓                                                                          |
+| 1.2   | Quais produtos preciso produzir amanhã?                        | Lista os 25 produtos e resolve "amanhã" para a data correta (27/09/2026). Ver [evidência completa](#evidencia-12)                                                             |   ✅    | Não listou a quantidade ✓                                                                          |
+| 1.3   | Quais produtos devo produzir hoje na padaria?                  | Lista os 5 produtos da padaria apenas. Ver [evidência completa](#evidencia-13)                                                                                                |   ✅    | Não listou a quantidade ✓                                                                          |
+| 1.4   | Quais produtos devo produzir no dia 20/09/2026?                | Lista os 25 produtos com a média do que foi produzido em dias parecidos mais 30%. Ver [evidência completa](#evidencia-14)                                                     |   ✅    | Não listou a quantidade ✓                                                                          |
+| 2.1   | Quantas unidades devo produzir hoje?                           | Lista os 25 produtos que devem ser produzidos hoje com a quantidade. Ver [evidência completa](#evidencia-21)                                                                  |   ✅    | Listou a quantidade ✓                                                                              |
+| 2.2   | Quanto de coxinha devo fazer amanhã?                           | Retornou apenas a 'Coxinha' e a quantidade. Ver [evidência completa](#evidencia-22)                                                                                           |   ✅    | Entendeu e converteu 'Amanhã' para '27/09/2026'                                                    |
+| 2.3   | Quantos produtos da padaria devo produzir hoje?                | Lista os 5 produtos da padaria apenas com a quantidade. Ver [evidência completa](#evidencia-23)                                                                               |   ✅    | Listou a quantidade ✓                                                                              |
+| 3.1   | O que foi produzido ontem na padaria?                          | Listou os 5 produtos da padaria com o Total Produzido e a explicação de quantos realmente foram vendidos e quantos foram descartados. Ver [evidência completa](#evidencia-31) |   ✅    |                                                                                                    |
+| 3.2   | O que foi produzido ontem no açougue, na padaria e na cozinha? | Lista os produtos de cada setor de forma separada trazendo as mesmas informações do caso 3.1. Ver [evidência completa](#evidencia-32)                                         |   ✅    | Agrupou os itens em seus devidos setores corretamente                                              |
+| 3.3   | O que foi produzido ontem?                                     | Lista os 25 produtos (750 un. no total). Ver [evidência completa](#evidencia-33)                                                                                              |   ✅    | Não agrupa por setor — correto, isso é escopo da 3.4                                               |
+| 3.4   | O que foi produzido ontem? Separe a lista por setores          | Lista os 25 produtos separando eles por setores (750 un. no total). Ver [evidência completa](#evidencia-34)                                                                   |   ✅    | Agrupou corretamente por setores                                                                   |
+| 3.5   | O que foi produzido no acugue ontem?                           | `normalizar_setor` corrigiu corretamente para "Açougue" mesmo com o erro. Ver [evidência completa](#evidencia-35)                                                             |   ✅    |                                                                                                    |
+| 4.1   | O que deveria ter sido produzido ontem na padaria?             | Lista os 5 produtos da padaria, sem quantidades. Ver [evidência](#evidencia-41)                                                                                               |   ✅    | "O que" é tratado como "quais" e a meta sai sem quantidade.                                        |
+| 4.2   | Qual era a meta de produção de hoje para o açougue?            | Lista os 5 produtos que deveria ter sido produzido pelo açougue no dia de hoje. Ver [evidência completa](#evidencia-42)                                                       |   ✅    | Por chamar 'Qual era a meta' ele decidiu tratar a pergunta como 'Quanto' e passando as quantidades |
+| 4.3   | Quanto deveria ter sido produzido ontem na padaria?            | Lista os 5 produtos da padaria com a meta de produção e a quantidade. Ver [evidência completa](#evidencia-43)                                                                 |   ✅    | Listou a quantidade corretamente ✓                                                                 |
 
 ---
 
 ## Evidências Completas
 
 Respostas longas do bot (que não cabem na tabela) ficam guardadas aqui, uma por caso de teste, dentro de um bloco recolhível.
+
+<details>
+<summary><b>0.1.1</b> — "Quais produtos vocês têm?"</summary>
+<a id="evidencia-011"></a>
+
+```
+Aqui estão os produtos disponíveis:
+• Hambúrguer artesanal
+• Espetinho de carne
+• Frango temperado
+• Linguiça artesanal
+• Kafta
+• Pão francês
+• Pão de queijo
+• Croissant
+• Coxinha
+• Enroladinho de presunto e queijo
+• Marmita de arroz e feijão
+• Frango assado
+• Lasanha
+• Macarrão à bolonhesa
+• Purê de batata
+• Sushi
+• Sashimi
+• Maki
+• Temaki
+• Ceviche
+• Bolo de chocolate
+• Pudim
+• Torta de limão
+• Brigadeiro
+• Beijinho
+```
+
+</details>
+
+<details>
+<summary><b>0.1.2</b> — "Me dá os detalhes de todos os produtos"</summary>
+<a id="evidencia-012"></a>
+
+```
+Aqui estão os detalhes de todos os produtos e seus tempos de preparo:
+
+• Hambúrguer artesanal: Tempo de preparo de 5 min (Setor: Açougue)
+• Espetinho de carne: Tempo de preparo de 4 min (Setor: Açougue)
+• Frango temperado: Tempo de preparo de 3 min (Setor: Açougue)
+• Linguiça artesanal: Tempo de preparo de 5 min (Setor: Açougue)
+• Kafta: Tempo de preparo de 5 min (Setor: Açougue)
+• Pão francês: Tempo de preparo de 3 min (Setor: Padaria)
+• Pão de queijo: Tempo de preparo de 4 min (Setor: Padaria)
+• Croissant: Tempo de preparo de 5 min (Setor: Padaria)
+• Coxinha: Tempo de preparo de 5 min (Setor: Padaria)
+• Enroladinho de presunto e queijo: Tempo de preparo de 5 min (Setor: Padaria)
+• Marmita de arroz e feijão: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
+• Frango assado: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
+• Lasanha: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
+• Macarrão à bolonhesa: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
+• Purê de batata: Tempo de preparo de 4 min (Setor: Cozinha/Rotisseria)
+• Sushi: Tempo de preparo de 3 min (Setor: Peixaria)
+• Sashimi: Tempo de preparo de 2 min (Setor: Peixaria)
+• Maki: Tempo de preparo de 3 min (Setor: Peixaria)
+• Temaki: Tempo de preparo de 4 min (Setor: Peixaria)
+• Ceviche: Tempo de preparo de 5 min (Setor: Peixaria)
+• Bolo de chocolate: Tempo de preparo de 5 min (Setor: Confeitaria)
+• Pudim: Tempo de preparo de 5 min (Setor: Confeitaria)
+• Torta de limão: Tempo de preparo de 5 min (Setor: Confeitaria)
+• Brigadeiro: Tempo de preparo de 3 min (Setor: Confeitaria)
+• Beijinho: Tempo de preparo de 3 min (Setor: Confeitaria)
+```
+
+</details>
+
+<details>
+<summary><b>0.1.3</b> — "Quais são as informações da coxinha?"</summary>
+<a id="evidencia-013"></a>
+
+```
+Aqui estão as informações da coxinha:
+• Produto: Coxinha
+• Setor: Padaria
+• Tempo de preparo: 5 min
+```
+
+</details>
+
+<details>
+<summary><b>0.1.4</b> — "Quais produtos são da cozinha?"</summary>
+<a id="evidencia-014"></a>
+
+```
+Aqui estão os produtos da cozinha:
+• Marmita de arroz e feijão
+• Frango assado
+• Lasanha
+• Macarrão à bolonhesa
+• Purê de batata
+```
+
+</details>
 
 <details>
 <summary><b>1.1</b> — "Quais produtos devo produzir hoje?"</summary>
@@ -235,8 +334,6 @@ Aqui estão os produtos que você deve produzir:
 
 </details>
 
----
-
 <details>
 <summary><b>2.1</b> — "Quantas unidades devo produzir hoje?"</summary>
 <a id="evidencia-21"></a>
@@ -297,8 +394,6 @@ Aqui estão as quantidades de produtos da padaria que você deve produzir hoje:
 ```
 
 </details>
-
----
 
 <details>
 <summary><b>3.1</b> — "O que foi produzido ontem na padaria?"</summary>
@@ -449,8 +544,6 @@ No total, foram produzidas 150 unidades.
 
 </details>
 
----
-
 <details>
 <summary><b>4.1</b> — "O que deveria ter sido produzido ontem na padaria?"</summary>
 <a id="evidencia-41"></a>
@@ -492,107 +585,6 @@ Aqui estão os produtos que deveriam ter sido produzidos ontem na padaria:
 • Enroladinho de presunto e queijo: 5 unidades
 • Pão de queijo: 5 unidades
 • Pão francês: 4 unidades
-```
-
-</details>
-
----
-
-<details>
-<summary><b>5.1</b> — "Quais produtos vocês têm?"</summary>
-<a id="evidencia-51"></a>
-
-```
-Aqui estão os produtos disponíveis:
-• Hambúrguer artesanal
-• Espetinho de carne
-• Frango temperado
-• Linguiça artesanal
-• Kafta
-• Pão francês
-• Pão de queijo
-• Croissant
-• Coxinha
-• Enroladinho de presunto e queijo
-• Marmita de arroz e feijão
-• Frango assado
-• Lasanha
-• Macarrão à bolonhesa
-• Purê de batata
-• Sushi
-• Sashimi
-• Maki
-• Temaki
-• Ceviche
-• Bolo de chocolate
-• Pudim
-• Torta de limão
-• Brigadeiro
-• Beijinho
-```
-
-</details>
-
-<details>
-<summary><b>5.2</b> — "Me dá os detalhes de todos os produtos"</summary>
-<a id="evidencia-52"></a>
-
-```
-Aqui estão os detalhes de todos os produtos e seus tempos de preparo:
-
-• Hambúrguer artesanal: Tempo de preparo de 5 min (Setor: Açougue)
-• Espetinho de carne: Tempo de preparo de 4 min (Setor: Açougue)
-• Frango temperado: Tempo de preparo de 3 min (Setor: Açougue)
-• Linguiça artesanal: Tempo de preparo de 5 min (Setor: Açougue)
-• Kafta: Tempo de preparo de 5 min (Setor: Açougue)
-• Pão francês: Tempo de preparo de 3 min (Setor: Padaria)
-• Pão de queijo: Tempo de preparo de 4 min (Setor: Padaria)
-• Croissant: Tempo de preparo de 5 min (Setor: Padaria)
-• Coxinha: Tempo de preparo de 5 min (Setor: Padaria)
-• Enroladinho de presunto e queijo: Tempo de preparo de 5 min (Setor: Padaria)
-• Marmita de arroz e feijão: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
-• Frango assado: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
-• Lasanha: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
-• Macarrão à bolonhesa: Tempo de preparo de 5 min (Setor: Cozinha/Rotisseria)
-• Purê de batata: Tempo de preparo de 4 min (Setor: Cozinha/Rotisseria)
-• Sushi: Tempo de preparo de 3 min (Setor: Peixaria)
-• Sashimi: Tempo de preparo de 2 min (Setor: Peixaria)
-• Maki: Tempo de preparo de 3 min (Setor: Peixaria)
-• Temaki: Tempo de preparo de 4 min (Setor: Peixaria)
-• Ceviche: Tempo de preparo de 5 min (Setor: Peixaria)
-• Bolo de chocolate: Tempo de preparo de 5 min (Setor: Confeitaria)
-• Pudim: Tempo de preparo de 5 min (Setor: Confeitaria)
-• Torta de limão: Tempo de preparo de 5 min (Setor: Confeitaria)
-• Brigadeiro: Tempo de preparo de 3 min (Setor: Confeitaria)
-• Beijinho: Tempo de preparo de 3 min (Setor: Confeitaria)
-```
-
-</details>
-
-<details>
-<summary><b>5.3</b> — "Quais são as informações da coxinha?"</summary>
-<a id="evidencia-53"></a>
-
-```
-Aqui estão as informações da coxinha:
-• Produto: Coxinha
-• Setor: Padaria
-• Tempo de preparo: 5 min
-```
-
-</details>
-
-<details>
-<summary><b>5.4</b> — "Quais produtos são da cozinha?"</summary>
-<a id="evidencia-54"></a>
-
-```
-Aqui estão os produtos da cozinha:
-• Marmita de arroz e feijão
-• Frango assado
-• Lasanha
-• Macarrão à bolonhesa
-• Purê de batata
 ```
 
 </details>

@@ -11,6 +11,38 @@ Este documento é um **guia para você testar a MIA na prática**, e não um rel
 
 ---
 
+## Catálogo de produtos (fora das 4 US, mas testável)
+
+| ID | Mensagem para enviar | Resultado esperado |
+|---|---|---|
+| 0.1.1 | "Quais produtos vocês têm?" | Lista completa de produtos (`listar_todos_produtos`) |
+| 0.1.2 | "Me dá os detalhes de todos os produtos" | Lista com Nome, Setor e Tempo de preparo |
+| 0.1.3 | "Quais são as informações da coxinha?" | Detalhes de um produto específico |
+| 0.1.4 | "Quais produtos são da cozinha?" | Lista filtrada por setor |
+
+---
+
+## Roteamento e comportamento social (`agentes.py`)
+
+| ID | Mensagem para enviar | Resultado esperado |
+|---|---|---|
+| 0.2.1 | "Oi" / "Bom dia" | Classificador identifica `SAUDACAO`; resposta curta e simpática, sem acionar nenhuma tool |
+| 0.2.2 | "Tchau" / "Obrigado!" | Mesma rota `SAUDACAO` |
+| 0.2.3 | "Qual é a capital da França?" (fora do escopo) | Classificador identifica `INVALIDO`; resposta explicando que só responde sobre produção/vendas, sem tentar adivinhar |
+| 0.2.4 | Enviar um áudio ou uma foto | O bot responde com a mensagem fixa de formato não suportado, sem acionar a IA. |
+
+---
+
+## Formatação da resposta
+
+| ID | O que verificar | Resultado esperado |
+|---|---|---|
+| 0.3.1 | Listas na resposta | Sempre usam `•`, nunca `*` |
+| 0.3.2 | Início da resposta | Nunca começa repetindo saudação ("Olá! Aqui está...") |
+| 0.3.3 | Pergunta com múltiplos setores | Cada setor aparece claramente separado (ver seção "separar por mensagem", se já implementado) |
+
+---
+
 ## US01 — Quais produtos devem ser produzidos
 
 | ID | Mensagem para enviar | Resultado esperado |
@@ -54,42 +86,21 @@ Este documento é um **guia para você testar a MIA na prática**, e não um rel
 
 ---
 
-## Catálogo de produtos (fora das 4 US, mas testável)
-
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 5.1 | "Quais produtos vocês têm?" | Lista completa de produtos (`listar_todos_produtos`) |
-| 5.2 | "Me dá os detalhes de todos os produtos" | Lista com Nome, Setor e Tempo de preparo |
-| 5.3 | "Quais são as informações da coxinha?" | Detalhes de um produto específico |
-| 5.4 | "Quais produtos são da cozinha?" | Lista filtrada por setor |
-
----
-
-## Roteamento e comportamento social (`agentes.py`)
-
-| ID | Mensagem para enviar | Resultado esperado |
-|---|---|---|
-| 6.1 | "Oi" / "Bom dia" | Classificador identifica `SAUDACAO`; resposta curta e simpática, sem acionar nenhuma tool |
-| 6.2 | "Tchau" / "Obrigado!" | Mesma rota `SAUDACAO` |
-| 6.3 | "Qual é a capital da França?" (fora do escopo) | Classificador identifica `INVALIDO`; resposta explicando que só responde sobre produção/vendas, sem tentar adivinhar |
-| 6.4 | Enviar um áudio ou uma foto | O bot responde com a mensagem fixa de formato não suportado, sem acionar a IA. |
-
----
-
-## Formatação da resposta
-
-| ID | O que verificar | Resultado esperado |
-|---|---|---|
-| 7.1 | Listas na resposta | Sempre usam `•`, nunca `*` |
-| 7.2 | Início da resposta | Nunca começa repetindo saudação ("Olá! Aqui está...") |
-| 7.3 | Pergunta com múltiplos setores | Cada setor aparece claramente separado (ver seção "separar por mensagem", se já implementado) |
-
----
-
 ## Tabela de registro (preencha ao testar)
 
 | Caso | Mensagem enviada | Resultado obtido | Status | Observações |
 |---|---|---|---|---|
+| 0.1.1 | Quais produtos vocês têm? |  |  |  |
+| 0.1.2 | Me dá os detalhes de todos os produtos |  |  |  |
+| 0.1.3 | Quais são as informações da coxinha? |  |  |  |
+| 0.1.4 | Quais produtos são da cozinha? |  |  |  |
+| 0.2.1 | "Oi" / "Bom dia" |  |  |  |
+| 0.2.2 | "Tchau" / "Obrigado!" |  |  |  |
+| 0.2.3 | Qual é a capital da França? |  |  |  |
+| 0.2.4 | Enviar um áudio ou uma foto |  |  |  |
+| 0.3.1 | Listas na resposta |  |  |  |
+| 0.3.2 | Início da resposta |  |  |  |
+| 0.3.3 | Pergunta com múltiplos setores |  |  |  |
 | 1.1 | Quais produtos devo produzir hoje? |  |  |  |
 | 1.2 | Quais produtos preciso produzir amanhã? |  |  |  |
 | 1.3 | Quais produtos devo produzir hoje na padaria? |  |  |  |
@@ -104,15 +115,4 @@ Este documento é um **guia para você testar a MIA na prática**, e não um rel
 | 3.5 | O que foi produzido no acugue ontem? |  |  |  |
 | 4.1 | O que deveria ter sido produzido ontem na padaria? |  |  |  |
 | 4.2 | Qual era a meta de produção de hoje para o açougue? |  |  |  |
-| 4.3 | Quanto deveria ter sido produzido ontem na padaria? |  |  |  |
-| 5.1 | Quais produtos vocês têm? |  |  |  |
-| 5.2 | Me dá os detalhes de todos os produtos |  |  |  |
-| 5.3 | Quais são as informações da coxinha? |  |  |  |
-| 5.4 | Quais produtos são da cozinha? |  |  |  |
-| 6.1 | "Oi" / "Bom dia" |  |  |  |
-| 6.2 | "Tchau" / "Obrigado!" |  |  |  |
-| 6.3 | Qual é a capital da França? |  |  |  |
-| 6.4 | Enviar um áudio ou uma foto |  |  |  |
-| 7.1 | Listas na resposta |  |  |  |
-| 7.2 | Início da resposta |  |  |  |
-| 7.3 | Pergunta com múltiplos setores |  |  |  |
+| 4.3 | Quanto deveria ter sido produzido ontem na padaria? |  |  |  |
