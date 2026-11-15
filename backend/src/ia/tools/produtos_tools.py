@@ -242,3 +242,9 @@ def setores_dos_produtos_mais_lucrativos(limite: int = 5, data_inicio: str = "",
 def cinco_produtos_mais_lucrativos(data_inicio: str = "", data_fim: str = "") -> str:
     """Retorna até cinco produtos mais lucrativos. Recebe datas DD/MM/AAAA opcionais."""
     return _responder_lucro("produtos", 5, data_inicio=data_inicio, data_fim=data_fim)
+
+
+@dspy_tool('VENDAS')
+def conferir_lucro_produto(produto: str, data_inicio: str = "", data_fim: str = "") -> str:
+    """Retorna cálculo diário e total para conferência. Recebe nome/SKU e datas opcionais."""
+    return _responder_lucro("conferencia", produto=produto, data_inicio=data_inicio, data_fim=data_fim)
