@@ -180,3 +180,43 @@ def _calcular_lucros_us08(data_inicio="", data_fim="", setor=""):
 def _reais_lucro(valor):
     """Formata um valor em reais."""
     return "R$ " + f"{valor:.2f}".replace(".", ",")
+
+
+def _responder_lucro(tipo, limite=0, produto="", data_inicio="", data_fim="", setor=""):
+    """Prepara a resposta da US08 e transforma erros em mensagens para o usuário."""
+    try:
+        if isinstance(limite, bool) or not isinstance(limite, int) or limite < 0:
+            raise ValueError("O limite deve ser inteiro e não negativo; 0 significa todos.")
+        ranking, detalhes, periodo, excluidos = _calcular_lucros_us08(data_inicio, data_fim, setor)
+        aviso = "\nAviso: ranking parcial. SKUs excluídos por unidades incompatíveis: " + ", ".join(sorted(excluidos)) if excluidos else ""
+        if ranking.empty:
+            return "Não há vendas válidas para calcular o lucro." + aviso
+        linhas = [f"Lucro bruto estimado de {periodo}; receita por unidade vendida, sem descarte/despesas." + aviso]
+        if tipo == "conferencia":
+            if not isinstance(produto, str) or not produto.strip():
+                raise ValueError("Informe o nome ou SKU do produto.")
+            busca = produto.strip().casefold()
+            encontrados = ranking[(ranking["SKU"] == busca) | (ranking["Produto"].str.casefold() == busca)]
+            if encontrados.empty:
+                encontrados = ranking[ranking["Produto"].str.casefold().str.contains(busca, regex=False)]
+            if len(encontrados) != 1:
+                return "Informe um nome único ou SKU de produto com vendas e custo válido." + aviso
+            item = encontrados.iloc[0]
+            linhas.append(f"{item['Produto']} | Setor: {item['Setor']}")
+            linhas.append("Fontes: vendas/*.csv, receitas.csv, historico_produtos.csv e historico_ingredientes.csv.")
+            linhas.append("Custo unitário = soma de quantidade de ingrediente × preço histórico.")
+            for _, dia in detalhes[detalhes["SKU"] == item["SKU"]].iterrows():
+                linhas.append(f"• {dia['Data']:%d/%m/%Y}: ({dia['Preço Venda']:.6f} − {dia['Custo unitário']:.6f}) × {dia['Qtd']:g} = {_reais_lucro(dia['Lucro'])}")
+            linhas.append(f"Total sem arredondamentos intermediários: receita {_reais_lucro(item['Receita'])} − custo {_reais_lucro(item['Custo'])} = lucro {_reais_lucro(item['Lucro'])}.")
+        elif tipo == "setores":
+            selecionados = ranking.head(limite) if limite else ranking
+            linhas.append("Setores dos produtos selecionados; a soma considera apenas esses produtos.")
+            for nome, grupo in selecionados.groupby("Setor"):
+                linhas.append(f"• {nome}: {_reais_lucro(grupo['Lucro'].sum())} — " + ", ".join(grupo["Produto"]))
+        else:
+            selecionados = ranking.head(limite) if limite else ranking
+            for _, item in selecionados.iterrows():
+                linhas.append(f"• {item['Produto']} | Setor: {item['Setor']} | Lucro: {_reais_lucro(item['Lucro'])} | Receita: {_reais_lucro(item['Receita'])} | Custo: {_reais_lucro(item['Custo'])} | Quantidade: {item['Qtd']:g}")
+        return "\n".join(linhas)
+    except (OSError, UnicodeError, KeyError, ValueError, TypeError, pd.errors.EmptyDataError, pd.errors.ParserError) as erro:
+        return f"Erro ao calcular lucro: {erro}"
