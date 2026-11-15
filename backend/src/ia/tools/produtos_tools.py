@@ -175,3 +175,8 @@ def _calcular_lucros_us08(data_inicio="", data_fim="", setor=""):
     ranking = detalhes.groupby("SKU", as_index=False)[["Qtd", "Receita", "Custo", "Lucro"]].sum()
     ranking = ranking.merge(produtos, on="SKU").sort_values(["Lucro", "Produto"], ascending=[False, True])
     return ranking, detalhes, periodo, excluidos
+
+
+def _reais_lucro(valor):
+    """Formata um valor em reais."""
+    return "R$ " + f"{valor:.2f}".replace(".", ",")
