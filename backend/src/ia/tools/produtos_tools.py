@@ -1,5 +1,7 @@
 from ia import procedures
 from ia.tools import dspy_tool
+import pandas as pd
+from paths import DADOS_DIR
 
 @dspy_tool('PRODUTOS')
 def listar_todos_produtos() -> str:
@@ -93,3 +95,17 @@ def valores_dos_produtos(produtos: str) -> str:
             linhas.append(f"- {v['Produto']}: preço não encontrado")
     
     return "Valor de cada produto:\n" + "\n".join(linhas)
+
+def _ler_csv_lucro(nome, colunas, numeros=(), tem_data=False):
+    """Lê e valida um CSV; devolve a tabela ou informa o dado inválido."""
+    tabela = pd.read_csv(DADOS_DIR / nome, sep=";", encoding="utf-8-sig", dtype=str)
+    tabela = tabela[list(colunas)].copy()
+    if tabela.empty or tabela.isna().any().any():
+        raise ValueError(f"{nome}: arquivo sem dados ou com células obrigatórias vazias.")
+    for coluna in numeros:
+        tabela[coluna] = pd.to_numeric(tabela[coluna], errors="raise")
+        if (tabela[coluna] < 0).any() or tabela[coluna].isin([float("inf"), -float("inf")]).any():
+            raise ValueError(f"{nome}: {coluna} deve conter números finitos e não negativos.")
+    if tem_data:
+        tabela["Data"] = pd.to_datetime(tabela["Data"], format="%d/%m/%Y", errors="raise")
+    return tabela
