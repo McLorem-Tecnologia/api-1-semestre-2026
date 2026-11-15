@@ -220,3 +220,11 @@ def _responder_lucro(tipo, limite=0, produto="", data_inicio="", data_fim="", se
         return "\n".join(linhas)
     except (OSError, UnicodeError, KeyError, ValueError, TypeError, pd.errors.EmptyDataError, pd.errors.ParserError) as erro:
         return f"Erro ao calcular lucro: {erro}"
+
+
+@dspy_tool('VENDAS')
+def produtos_mais_lucrativos(limite: int = 0, data_inicio: str = "", data_fim: str = "", setor: str = "") -> str:
+    """Retorna ranking de lucro e setor. Recebe limite (0=todos), datas DD/MM/AAAA e setor opcionais.
+    Sem datas, usa todas as vendas disponíveis. Preço isolado não representa lucro.
+    """
+    return _responder_lucro("produtos", limite, data_inicio=data_inicio, data_fim=data_fim, setor=setor)
