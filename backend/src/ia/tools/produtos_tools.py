@@ -109,3 +109,69 @@ def _ler_csv_lucro(nome, colunas, numeros=(), tem_data=False):
     if tem_data:
         tabela["Data"] = pd.to_datetime(tabela["Data"], format="%d/%m/%Y", errors="raise")
     return tabela
+
+
+def _calcular_lucros_us08(data_inicio="", data_fim="", setor=""):
+    """Retorna ranking, cálculos diários, período e SKUs com unidades incompatíveis."""
+    if not all(isinstance(valor, str) for valor in (data_inicio, data_fim, setor)):
+        raise TypeError("Datas e setor devem ser textos; use vazio para não filtrar.")
+    inicio = pd.to_datetime(data_inicio, format="%d/%m/%Y") if data_inicio else None
+    fim = pd.to_datetime(data_fim, format="%d/%m/%Y") if data_fim else None
+    if inicio is not None and fim is not None and inicio > fim:
+        raise ValueError("A data inicial deve ser anterior ou igual à final.")
+    produtos = _ler_csv_lucro("produtos.csv", ["SKU", "Produto", "Setor"])
+    receitas = _ler_csv_lucro("receitas.csv", ["SKU", "Ingrediente", "Qtd", "Unidade"], ["Qtd"])
+    precos = _ler_csv_lucro("historico_produtos.csv", ["SKU", "Data", "Preço Venda"], ["Preço Venda"], True)
+    custos = _ler_csv_lucro("historico_ingredientes.csv", ["Ingrediente", "Data", "Preço Custo", "Unidade"], ["Preço Custo"], True)
+    if precos.duplicated(["SKU", "Data"]).any() or custos.duplicated(["Ingrediente", "Data"]).any():
+        raise ValueError("Há preços históricos duplicados para a mesma data.")
+    arquivos = sorted((DADOS_DIR / "vendas").glob("vendas_*.csv"))
+    if not arquivos:
+        raise FileNotFoundError("Não foram encontrados arquivos de vendas.")
+    vendas = pd.concat([
+        _ler_csv_lucro(f"vendas/{arquivo.name}", ["Data", "SKU", "Qtd"], ["Qtd"], True)
+        for arquivo in arquivos
+    ], ignore_index=True)
+    vendas = vendas.merge(produtos, on="SKU", how="left", validate="many_to_one")
+    if vendas["Produto"].isna().any():
+        raise ValueError("Há vendas com SKU sem cadastro.")
+    if inicio is not None:
+        vendas = vendas[vendas["Data"] >= inicio]
+    if fim is not None:
+        vendas = vendas[vendas["Data"] <= fim]
+    if setor.strip():
+        vendas = vendas[vendas["Setor"].str.casefold() == setor.strip().casefold()]
+    vendas = vendas[vendas["Qtd"] > 0]
+    periodo = f"{vendas['Data'].min():%d/%m/%Y} a {vendas['Data'].max():%d/%m/%Y}" if not vendas.empty else ""
+    vendas = vendas.groupby(["Data", "SKU"], as_index=False)["Qtd"].sum()
+
+    dias = []
+    excluidos = set()
+    for data, vendas_dia in vendas.groupby("Data"):
+        # Usa somente o último preço conhecido até a data da venda.
+        precos_dia = precos[precos["Data"] <= data].sort_values("Data").drop_duplicates("SKU", keep="last")
+        custos_dia = custos[custos["Data"] <= data].sort_values("Data").drop_duplicates("Ingrediente", keep="last")
+        ficha = receitas[receitas["SKU"].isin(vendas_dia["SKU"])].merge(
+            custos_dia.drop(columns="Data"), on="Ingrediente", how="left", suffixes=("", "_historico")
+        )
+        if ficha["Preço Custo"].isna().any():
+            raise ValueError("Falta preço histórico de um ingrediente.")
+        # Sem conversão entre unidades e quilos, o produto é excluído com aviso.
+        excluidos.update(ficha.loc[ficha["Unidade"] != ficha["Unidade_historico"], "SKU"])
+        ficha["Custo unitário"] = ficha["Qtd"] * ficha["Preço Custo"]
+        custo_produtos = ficha.groupby("SKU", as_index=False)["Custo unitário"].sum()
+        calculo = vendas_dia.merge(precos_dia[["SKU", "Preço Venda"]], on="SKU", how="left")
+        calculo = calculo.merge(custo_produtos, on="SKU", how="left")
+        if calculo[["Preço Venda", "Custo unitário"]].isna().any().any():
+            raise ValueError("Há produto sem receita ou sem preço histórico de venda.")
+        calculo["Receita"] = calculo["Preço Venda"] * calculo["Qtd"]
+        calculo["Custo"] = calculo["Custo unitário"] * calculo["Qtd"]
+        calculo["Lucro"] = calculo["Receita"] - calculo["Custo"]
+        dias.append(calculo)
+    if not dias:
+        return pd.DataFrame(), pd.DataFrame(), periodo, excluidos
+    detalhes = pd.concat(dias, ignore_index=True)
+    detalhes = detalhes[~detalhes["SKU"].isin(excluidos)]
+    ranking = detalhes.groupby("SKU", as_index=False)[["Qtd", "Receita", "Custo", "Lucro"]].sum()
+    ranking = ranking.merge(produtos, on="SKU").sort_values(["Lucro", "Produto"], ascending=[False, True])
+    return ranking, detalhes, periodo, excluidos
