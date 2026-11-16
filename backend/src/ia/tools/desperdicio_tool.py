@@ -29,12 +29,12 @@ def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", set
     Retorna o custo calculado a partir dos registros de descarte
     e dos custos dos ingredientes. Nunca estime o valor por conta própria.
     """
-    
+
     data_inicio, setor, texto_data = _tratar_parametros_iniciais(data_inicio, setor)
     if data_fim and str(data_fim).strip().lower() not in ['none', 'null']:
         data_fim, _, _ = _tratar_parametros_iniciais(data_fim, setor)
     else:
-        data_fim = data_inicio 
+        data_fim = data_inicio
 
     if data_inicio != data_fim:
         texto_data = f"no período de {data_inicio} a {data_fim}"
@@ -45,11 +45,26 @@ def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", set
     #Pega os descartes do intervalo
     )
     if setor:
-        produtos = pd.read_csv(
-            DADOS_DIR / "produtos.csv",
-            sep=";",
-            encoding="utf-8-sig"
-        )
+        try:
+            # Tenta carregar o arquivo de produtos
+            produtos = pd.read_csv(
+                DADOS_DIR / "produtos.csv",
+                sep=";",
+                encoding="utf-8-sig"
+            )
+
+        except FileNotFoundError:
+            return "Erro: arquivo produtos.csv não encontrado."
+
+        except pd.errors.EmptyDataError:
+            return "Erro: arquivo produtos.csv está vazio."
+
+        except pd.errors.ParserError:
+            return "Erro: não foi possível interpretar o arquivo CSV."
+
+        # Verifica se as colunas necessárias existem
+        if not {"SKU", "Setor"}.issubset(produtos.columns):
+            return "Erro: produtos.csv não possui as colunas SKU e Setor."
 
         resultado = resultado.merge(
             produtos[["SKU", "Setor"]],
@@ -62,11 +77,28 @@ def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", set
             resultado["Setor"].str.lower() == setor.lower()
         ]
     #Filtra pelo setor, se inserido
-    historico = pd.read_csv(
-        DADOS_DIR / "historico_ingredientes.csv",
-        sep=";",
-        encoding="utf-8-sig"
-    )
+    try:
+        # Tenta carregar o histórico de ingredientes
+        historico = pd.read_csv(
+            DADOS_DIR / "historico_ingredientes.csv",
+            sep=";",
+            encoding="utf-8-sig"
+        )
+
+
+
+    except FileNotFoundError:
+        return "Erro: arquivo historico_ingredientes.csv não encontrado."
+
+    except pd.errors.EmptyDataError:
+        return "Erro: arquivo historico_ingredientes.csv está vazio."
+
+    except pd.errors.ParserError:
+        return "Erro: não foi possível interpretar o arquivo CSV."
+
+    # Verifica se as colunas necessárias existem
+    if not {"Data", "Ingrediente", "Preço Custo"}.issubset(historico.columns):
+        return "Erro: historico_ingredientes.csv não possui todas as colunas necessárias."
     historico["Data"] = pd.to_datetime(
         historico["Data"], format="%d/%m/%Y"
     )
