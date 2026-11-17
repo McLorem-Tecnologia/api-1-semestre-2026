@@ -634,15 +634,69 @@ def buscar_por_data(data):
     return resultado
 
 def buscar_desperdicio_por_produto_data(produto, data):
+    """
+    Busca os registros de descarte de um produto em uma data específica.
+
+    Args:
+        produto (str): nome do produto que será pesquisado.
+        data (str): data no formato DD/MM/AAAA ou por extenso.
+
+    Returns:
+        pd.DataFrame: registros encontrados.
+        Retorna um DataFrame vazio caso os parâmetros sejam inválidos,
+        não existam dados ou não haja correspondências.
+    """
+
+    # Verifica se os parâmetros foram informados.
+    if produto is None or data is None:
+        print("Erro: informe o produto e a data.")
+        return pd.DataFrame()
+
+    # Verifica se os parâmetros são textos.
+    if not isinstance(produto, str) or not isinstance(data, str):
+        print("Erro: produto e data devem ser informados como texto.")
+        return pd.DataFrame()
+
+    # Remove espaços extras do nome do produto.
+    produto = produto.strip()
+
+    # Verifica se o nome do produto não está vazio.
+    if not produto:
+        print("Erro: o produto não pode estar vazio.")
+        return pd.DataFrame()
+
+    # Converte a data para o formato DD/MM/AAAA.
+    data_convertida = converter_data(data)
+
+    # Verifica se a conversão foi realizada.
+    if data_convertida is None:
+        return pd.DataFrame()
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
+    # Verifica se existem dados para realizar a consulta.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Filtra os registros que correspondem ao produto e à data.
     resultado = dados[
-        (dados["Produto"].str.lower() == produto.lower())
-        & (dados["Data"] == data)
+        (dados["Produto"].str.contains(
+            produto,
+            case=False,
+            na=False,
+            regex=False
+        ))
+        & (dados["Data"] == data_convertida)
     ]
 
+    # Verifica se encontrou registros.
+    if resultado.empty:
+        print("Aviso: não foram encontrados registros para esse produto e data.")
+        return pd.DataFrame()
+
     return resultado
-#consultar o desperdicio de um produto em uma data
 
 def produtos_acima_do_limite(limite):
     dados = carregar_dados()
