@@ -432,11 +432,26 @@ def listar_produtos():
     return produtos
 
 def calcular_desperdicio_total():
+    """
+    Calcula a quantidade total de descarte registrada.
+
+    Returns:
+        float ou int: soma de todos os descartes.
+        None: caso não existam dados para realizar o cálculo.
+    """
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
-    return dados["Descarte"].sum()
-#soma todo o disperdicio da planilha
+    # Verifica se existem dados para realizar o cálculo.
+    if dados.empty:
+        print("Aviso: não há dados para calcular o descarte total.")
+        return None
 
+    # Soma todos os valores da coluna Descarte.
+    total = dados["Descarte"].sum()
+
+    return total
 
 def produto_com_maior_desperdicio():
     dados = carregar_dados()
