@@ -200,6 +200,90 @@ def carregar_dados():
     # Retorna a tabela final tratada.
     return dados
 
+def converter_data(data):
+    """
+    Converte uma data para o formato DD/MM/AAAA.
+
+    Aceita datas no formato DD/MM/AAAA ou por extenso
+    em português.
+
+    Args:
+        data (str): data que será convertida.
+
+    Returns:
+        str: data padronizada no formato DD/MM/AAAA.
+        None: caso a data seja inválida ou não informada.
+    """
+
+    # Verifica se a data foi informada.
+    if data is None:
+        print("Erro: a data não foi informada.")
+        return None
+
+    # Verifica se a data é um texto.
+    if not isinstance(data, str):
+        print("Erro: a data deve ser informada como texto.")
+        return None
+
+    # Remove espaços extras e transforma o texto em minúsculo.
+    data = data.strip().lower()
+
+    # Verifica se a data está vazia.
+    if not data:
+        print("Erro: a data não pode estar vazia.")
+        return None
+
+    # Dicionário que relaciona os meses por extenso aos seus números.
+    meses = {
+        "janeiro": "01",
+        "fevereiro": "02",
+        "março": "03",
+        "abril": "04",
+        "maio": "05",
+        "junho": "06",
+        "julho": "07",
+        "agosto": "08",
+        "setembro": "09",
+        "outubro": "10",
+        "novembro": "11",
+        "dezembro": "12"
+    }
+
+    try:
+        # Verifica se a data já está no formato DD/MM/AAAA.
+        if "/" in data:
+            data_convertida = pd.to_datetime(
+                data,
+                format="%d/%m/%Y"
+            )
+
+        else:
+            # Separa o dia, o mês e o ano.
+            partes = data.replace(" de ", " ").split()
+
+            if len(partes) != 3:
+                raise ValueError
+
+            dia, mes, ano = partes
+
+            # Verifica se o mês existe no dicionário.
+            if mes not in meses:
+                raise ValueError
+
+            # Monta a data no formato DD/MM/AAAA.
+            data_formatada = f"{dia}/{meses[mes]}/{ano}"
+
+            data_convertida = pd.to_datetime(
+                data_formatada,
+                format="%d/%m/%Y"
+            )
+
+        # Retorna a data padronizada.
+        return data_convertida.strftime("%d/%m/%Y")
+
+    except (ValueError, TypeError):
+        print("Erro: data inválida.")
+        return None
 
 def buscar_por_produto(produto):
     dados = carregar_dados()
