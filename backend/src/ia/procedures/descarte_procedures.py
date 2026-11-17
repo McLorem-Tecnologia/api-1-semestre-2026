@@ -760,17 +760,63 @@ def produtos_acima_do_limite(limite):
     return resultado
 
 def buscar_por_intervalo(data_inicio, data_fim):
-    dados = carregar_dados()
-    dados["Data"] = pd.to_datetime(
-    dados["Data"],
-    format="%d/%m/%Y"
-    )
-    inicio = pd.to_datetime(data_inicio, format="%d/%m/%Y")
-    fim = pd.to_datetime(data_fim, format="%d/%m/%Y")
+    """
+    Busca os registros de descarte dentro de um intervalo de datas.
 
+    Args:
+        data_inicio (str): data inicial no formato DD/MM/AAAA
+        ou por extenso.
+        data_fim (str): data final no formato DD/MM/AAAA
+        ou por extenso.
+
+    Returns:
+        pd.DataFrame: registros encontrados no período informado.
+        Retorna um DataFrame vazio caso as datas sejam inválidas,
+        o período esteja invertido ou não existam registros.
+    """
+
+    # Converte as datas para o formato DD/MM/AAAA.
+    inicio = converter_data(data_inicio)
+    fim = converter_data(data_fim)
+
+    # Verifica se as datas foram convertidas corretamente.
+    if inicio is None or fim is None:
+        print("Erro: informe um período válido.")
+        return pd.DataFrame()
+
+    # Converte as datas para o formato de data do pandas.
+    inicio = pd.to_datetime(inicio, format="%d/%m/%Y")
+    fim = pd.to_datetime(fim, format="%d/%m/%Y")
+
+    # Verifica se a data inicial é posterior à data final.
+    if inicio > fim:
+        print("Erro: a data inicial não pode ser maior que a data final.")
+        return pd.DataFrame()
+
+    # Carrega os dados de descarte já tratados.
+    dados = carregar_dados()
+
+    # Verifica se existem dados para realizar a consulta.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Converte a coluna Data para o formato de data do pandas.
+    dados["Data"] = pd.to_datetime(
+        dados["Data"],
+        format="%d/%m/%Y"
+    )
+
+    # Filtra os registros dentro do intervalo informado.
     resultado = dados[
         (dados["Data"] >= inicio) &
         (dados["Data"] <= fim)
     ]
+
+    # Verifica se encontrou registros.
+    if resultado.empty:
+        print("Aviso: não foram encontrados registros nesse período.")
+        return pd.DataFrame()
+
     return resultado
-#busca em um intervalo de datas os dados
+
