@@ -7,6 +7,9 @@ def converter_data_relativa(data_alvo: str = None) -> str:
     Intercepta palavras relativas, dias da semana (passados/futuros), datas ISO
     e datas por extenso em português, convertendo tudo para DD/MM/AAAA.
     Se não especificado, assume a data de hoje.
+
+    Levanta:
+        ValueError: se o texto não for reconhecido como uma data válida (ex.: "32/13/2026").
     """
     hoje = datetime.now()
 
@@ -145,7 +148,8 @@ def converter_data_relativa(data_alvo: str = None) -> str:
             except ValueError:
                 pass
 
-    return data_alvo
+    # Nenhum formato reconhecido ou data que não existe no calendário
+    raise ValueError(f"Data inválida: '{data_alvo}'")
 
 def converter_periodo(periodo: str = None) -> list:
     """
