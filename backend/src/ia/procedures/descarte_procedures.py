@@ -382,10 +382,25 @@ def somar_desperdicio_por_produto_dia():
 
     return resultado
 
-
 def somar_desperdicio_por_data():
+    """
+    Calcula a quantidade total de descarte em cada data.
+
+    Returns:
+        pd.DataFrame: tabela contendo cada data e a soma
+        do descarte correspondente.
+        Retorna um DataFrame vazio caso não existam dados.
+    """
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
+    # Verifica se existem dados para realizar a soma.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Agrupa os registros por data e soma os descartes.
     resultado = (
         dados.groupby("Data")["Descarte"]
         .sum()
@@ -393,8 +408,6 @@ def somar_desperdicio_por_data():
     )
 
     return resultado
-#soma o desperdicio total de cada data
-
 
 def listar_produtos():
     dados = carregar_dados()
