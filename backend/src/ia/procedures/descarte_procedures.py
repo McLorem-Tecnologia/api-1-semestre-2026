@@ -699,17 +699,65 @@ def buscar_desperdicio_por_produto_data(produto, data):
     return resultado
 
 def produtos_acima_do_limite(limite):
+    """
+    Identifica os produtos cujo descarte mensal ultrapassou
+    o limite informado.
+
+    Args:
+        limite (int ou float): quantidade máxima de descarte
+        permitida por produto em cada mês.
+
+    Returns:
+        pd.DataFrame: tabela com os produtos, os meses e as
+        quantidades de descarte acima do limite.
+        Retorna um DataFrame vazio caso não existam dados
+        ou nenhum produto ultrapasse o limite.
+        Retorna None caso o limite seja inválido.
+    """
+
+    # Verifica se o limite é um número positivo.
+    if (
+        not isinstance(limite, (int, float))
+        or isinstance(limite, bool)
+        or limite <= 0
+    ):
+        print("Erro: o limite deve ser um número positivo.")
+        return None
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
-    resultado = (
-        dados.groupby("Produto")["Descarte"]
-        .sum()
+    # Verifica se existem dados para realizar a consulta.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Converte a coluna Data para o formato de data do pandas.
+    dados["Data"] = pd.to_datetime(
+        dados["Data"],
+        format="%d/%m/%Y"
     )
 
-    resultado = resultado[resultado > limite]
+    # Cria uma coluna com o mês e o ano de cada registro.
+    dados["Mes"] = dados["Data"].dt.to_period("M")
 
-    return resultado.sort_values(ascending=False)
-#verificar se a quantidade limite de desperdicio foi ultrapassada pelos produtos, por mes
+    # Agrupa por produto e mês e soma os descartes.
+    resultado = (
+        dados.groupby(["Produto", "Mes"])["Descarte"]
+        .sum()
+        .reset_index()
+    )
+
+    # Mantém somente os produtos que ultrapassaram o limite.
+    resultado = resultado[resultado["Descarte"] > limite]
+
+    # Ordena os resultados do maior descarte para o menor.
+    resultado = resultado.sort_values(
+        by="Descarte",
+        ascending=False
+    )
+
+    return resultado
 
 def buscar_por_intervalo(data_inicio, data_fim):
     dados = carregar_dados()
