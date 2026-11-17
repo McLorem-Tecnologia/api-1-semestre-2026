@@ -17,14 +17,15 @@
   <a href ="#us"> User Stories</a> &nbsp;&bull;&nbsp;  
   <a href ="#dor">DoR</a> &nbsp;&bull;&nbsp;
   <a href ="#dod">DoD</a> &nbsp;&bull;&nbsp;
-  <a href ="#burndown"> Burndown</a> &nbsp;&bull;&nbsp;
   <a href ="#equipe"> Equipe</a>
 </p>
 
 ---
 
 > [!IMPORTANT]
-> **Status do Projeto:**  Concluído ✅
+> **Status da Sprint:**  Concluído ✅<br>
+> **Relatório de Testes da Sprint:** [Link](./testes/Relatório%20de%20Testes%20-%20Sprint%202.md)<br>
+> **Vídeo da Sprint:** [Youtube](https://youtu.be/fICg24h3Boo)
 
 ## 🏅 Desafio <a id="desafio"></a>
 
@@ -32,10 +33,11 @@ Evoluir a MIA além do planejamento de produção, levando ao líder e ao gerent
 
 ## 📋 User Stories <a id="us"></a>
 
-| $\textsf{\textbf{Capacidade estimada da Equipe por Sprint:}}$                         | $\textsf{85 Story Points (\textbf{64 SP entregues} \color{#808080}{/ 21 SP não entregues})}$ |
-| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| $\color{#2e8b57}{\textsf{\textbf{Meta da Sprint:}}}$                                  | $\textsf{User Stories de rank 5, 6, 7 e 8 (\textit{39 Story Points — 100\% entregue})}$      |
-| $\textsf{\textbf{Previsão da Sprint} (\textit{extras, sem compromisso de entrega}):}$ | $\textsf{User Stories de rank 9 e 10 entregues (\textit{25 SP}) \color{#808080}{/ rank 11 e 12 não entregues (\textit{21 SP})}}$ |
+| $\textsf{\textbf{Capacidade estimada da Equipe por Sprint:}}$ | $\textsf{85 Story Points (\textbf{64 SP entregues} \color{#808080}{/ 21 SP não entregues})}$                 |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| $\color{#2e8b57}{\textsf{\textbf{Meta da Sprint:}}}$          | $\textsf{US 5, 6, 7 e 8 (\textit{39 Story Points — 100\% entregue})}$                                        |
+| $\textsf{\textbf{Previsão da Sprint*}:}$                      | $\textsf{US 9 e 10 entregues (\textit{25 SP}) \color{#808080}{/ US 11 e 12 não entregues (\textit{21 SP})}}$ |
+\* **Nota:** Extras, sem compromisso de entrega.
 
 |                  Rank                  |                 Prioridade                 | User Story                                                                                                                                                                                                          |              Story Points               |                 Sprint                 |                 Status                 |
 | :------------------------------------: | :----------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------: | :------------------------------------: | :------------------------------------: |
@@ -80,110 +82,7 @@ A avaliação detalhada de DoR e DoD, User Story por User Story, está em [`Chec
 | **Validação do PO**              | O Product Owner conversou de forma natural com o bot no Telegram e confirmou que o retorno atende à regra de negócio.                                                           |
 | **Pronto para Deploy**           | O código está limpo, mergeado na branch principal e pronto para ser executado.                                                                                                  |
 
-## 🏅 Sprint Burndown <a id="burndown"></a>
-
-<div align="center">
-  <img src="../../../img/burndown-s2.png" alt="Gráfico de Burndown da Sprint 2" width="60%">
-</div>
-
-<br>
-
-## 🎓 Equipe <a id="equipe"></a>
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/hcastrosilva96">
-          <img src="https://github.com/hcastrosilva96.png" width="115px;" alt="Foto de Henrique de Castro"/>
-        </a><br>
-        <sub><b>Henrique de Castro</b></sub><br>
-        <sub>Product Owner</sub><br>
-        <a href="https://github.com/hcastrosilva96"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/henrique-castro-silva-6568a012b/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/FelipeMoraisOC">
-          <img src="https://github.com/FelipeMoraisOC.png" width="115px;" alt="Foto de Felipe Morais"/>
-        </a><br>
-        <sub><b>Felipe Morais</b></sub><br>
-        <sub>Scrum Master</sub><br>
-        <a href="https://github.com/FelipeMoraisOC"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/felipemoraisoc/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-    </tr>
-  </table>
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/mirelacristina">
-          <img src="https://github.com/mirelacristina.png" width="100px;" alt="Foto de Mirela Cristina"/>
-        </a><br>
-        <sub><b>Mirela Cristina</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/mirelacristina"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/mirela-cristina-4325723a6/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/eduardogranja">
-          <img src="https://github.com/eduardogranja.png" width="100px;" alt="Foto de Eduardo Granja"/>
-        </a><br>
-        <sub><b>Eduardo Granja</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/eduardogranja"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/eduardo-granja-95273739a/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/IanVRV">
-          <img src="https://github.com/IanVRV.png" width="100px;" alt="Foto de Ian Victor"/>
-        </a><br>
-        <sub><b>Ian Victor</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/IanVRV"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/ian-victor-ribeiro-vieira-3147121ba/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/mvlsouza">
-          <img src="https://github.com/mvlsouza.png" width="100px;" alt="Foto de Marcus Vinícius"/>
-        </a><br>
-        <sub><b>Marcus Vinícius</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/mvlsouza"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/mvlsouza/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-    </tr>
-  </table>
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/leandrotc013-lab">
-          <img src="https://github.com/leandrotc013-lab.png" width="100px;" alt="Foto de Leandro Silva"/>
-        </a><br>
-        <sub><b>Leandro Silva</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/leandrotc013-lab"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/leandro-silva-a54ab4a2/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/ag0ulart-dev">
-          <img src="https://github.com/ag0ulart-dev.png" width="100px;" alt="Foto de Adham Goulart"/>
-        </a><br>
-        <sub><b>Adham Goulart</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/ag0ulart-dev"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/adham-goulart-4a7320394/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/MATHEUSORTEGA">
-          <img src="https://github.com/MATHEUSORTEGA.png" width="100px;" alt="Foto de Matheus Correia"/>
-        </a><br>
-        <sub><b>Matheus Correia</b></sub><br>
-        <sub>Dev Team</sub><br>
-        <a href="https://github.com/MATHEUSORTEGA"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-      </td>
-    </tr>
-  </table>
-</div>
-
 ---
-
-# 🎓 Contexto acadêmico
-
-A **MIA**, desenvolvida pela **McLorem Tecnologia**, faz parte da **Aprendizagem por Projetos Integrados (API)** do 1º semestre do curso de **Análise e Desenvolvimento de Sistemas da Fatec São José dos Campos**.
-
-<br>
 
 <div align="center">
 

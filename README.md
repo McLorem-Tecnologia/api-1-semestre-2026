@@ -27,12 +27,9 @@
 ---
 
 > [!IMPORTANT]
-> **Status do Projeto:** Em desenvolvimento 🛠️
-> 
-> **Relatório de Testes:** [Link](docs/processo/teste/Relatorio%20de%20Teste.md)
-> 
-> **Documentação:** [Pasta Principal](docs/cliente) • [Arquitetura](docs/cliente/tecnico/Arquitetura.md) • [Manual do Usuário](docs/cliente/usuário/Manual%20do%20Usuário.md) • [Estratégia de Branch](docs/processo/Estratégia%20de%20Branch.md) • [Padrão de Commits](docs/processo/Padrões%20de%20Commits.md)
->
+> **Status do Projeto:** Em desenvolvimento 🛠️<br>
+> **Relatório de Testes:** [Link](docs/processo/teste/Relatorio%20de%20Teste.md)<br>
+> **Documentação:** [Pasta Principal](docs/cliente) • [Arquitetura](docs/cliente/tecnico/Arquitetura.md) • [Manual do Usuário](docs/cliente/usuário/Manual%20do%20Usuário.md) • [Estratégia de Branch](docs/processo/Estratégia%20de%20Branch.md) • [Padrão de Commits](docs/processo/Padrões%20de%20Commits.md)<br>
 > **Vídeo do Projeto:** [Youtube](https://youtu.be/fICg24h3Boo)
 
 ## 🎯 Desafio <a id="desafio"></a>

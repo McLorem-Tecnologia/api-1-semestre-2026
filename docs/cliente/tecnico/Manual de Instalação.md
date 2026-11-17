@@ -14,6 +14,8 @@ Ollama instalado - [Download](https://ollama.com/download)
 
 Bot do Telegram configurado via [BotFather](https://t.me/BotFather)
 
+Na primeira execução: o `faster-whisper` baixa sozinho o modelo de transcrição de voz (`small`). Depois disso, a transcrição roda localmente. Não é preciso instalar o FFmpeg separadamente, pois a biblioteca `av` (instalada com o `requirements.txt`) faz a leitura do áudio.
+
 ## Clonando o Repositório
 
 Para clonar o repositório principal, execute o seguinte comando no seu terminal:
@@ -71,3 +73,15 @@ cd ./src
 # Inicie a Aplicação Principal
 python main.py
 ```
+
+**Saída esperada no terminal:**
+```text
+[IA] Conectando à IA...
+[IA] IA conectada.
+[IA] DSPy vinculado ao modelo com sucesso.
+[IA] Carregando o modelo (pode levar alguns segundos)...
+[IA] Modelo carregado e pronto para responder.
+[MIA] Bot no ar! Aguardando mensagens no Telegram...
+```
+
+> A primeira inicialização pode demorar mais, porque o modelo de transcrição de voz é baixado e carregado. Se aparecer "Não foi possível conectar à IA", abra o Ollama e inicie o bot novamente.
