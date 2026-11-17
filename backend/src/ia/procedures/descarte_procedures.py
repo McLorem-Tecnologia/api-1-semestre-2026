@@ -593,12 +593,45 @@ def media_desperdicio_por_dia():
     return media
 
 def buscar_por_data(data):
+    """
+    Busca os registros de descarte de uma data específica.
+
+    Args:
+        data (str): data no formato DD/MM/AAAA ou por extenso
+        em português.
+
+    Returns:
+        pd.DataFrame: registros encontrados na data informada.
+        Retorna um DataFrame vazio caso a data seja inválida,
+        não seja informada ou não existam registros.
+    """
+
+    # Converte a data para o formato DD/MM/AAAA.
+    data_convertida = converter_data(data)
+
+    # Verifica se a conversão foi realizada.
+    if data_convertida is None:
+        return pd.DataFrame()
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
-    resultado = dados[dados["Data"] == data]
+    # Verifica se existem dados para realizar a consulta.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Filtra os registros que correspondem à data informada.
+    resultado = dados[
+        dados["Data"] == data_convertida
+    ]
+
+    # Verifica se encontrou registros.
+    if resultado.empty:
+        print("Aviso: não foram encontrados registros nessa data.")
+        return pd.DataFrame()
 
     return resultado
-#consultar desperdicio em uma data especifica
 
 def buscar_desperdicio_por_produto_data(produto, data):
     dados = carregar_dados()
