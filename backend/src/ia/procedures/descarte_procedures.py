@@ -286,14 +286,47 @@ def converter_data(data):
         return None
 
 def buscar_por_produto(produto):
+    """
+    Busca os registros de descarte de um produto específico.
+
+    Args:
+        produto (str): nome ou parte do nome do produto que será pesquisado.
+
+    Returns:
+        pd.DataFrame: registros encontrados para o produto.
+        Retorna um DataFrame vazio se o produto não for informado
+        ou não for encontrado.
+    """
+
+    # Verifica se o nome do produto foi informado.
+    if produto is None:
+        print("Erro: o produto não foi informado.")
+        return pd.DataFrame()
+
+    # Carrega os dados de descarte.
     dados = carregar_dados()
 
+    # Verifica se existem dados para consultar.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Busca o produto pelo nome completo ou parcial,
+    # ignorando diferenças entre maiúsculas e minúsculas.
     resultado = dados[
-        dados["Produto"].str.lower() == produto.lower()
+        dados["Produto"].str.contains(
+            produto,
+            case=False,
+            na=False
+        )
     ]
 
+    # Verifica se algum produto foi encontrado.
+    if resultado.empty:
+        print("Aviso: produto não encontrado.")
+        return pd.DataFrame()
+
     return resultado
-#mostra os registros de um produto especifico
 
 
 def somar_desperdicio_por_produto():
