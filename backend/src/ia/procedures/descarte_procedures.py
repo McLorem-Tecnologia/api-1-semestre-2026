@@ -535,8 +535,24 @@ def data_com_menor_desperdicio():
     return resultado.head(1)
 
 def top_5_produtos_desperdicio():
+    """
+    Retorna os cinco produtos com maior quantidade total de descarte.
+
+    Returns:
+        pd.DataFrame: tabela com os cinco produtos e suas quantidades
+        de descarte.
+        Retorna um DataFrame vazio caso não existam dados.
+    """
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
+    # Verifica se existem dados para realizar a consulta.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return pd.DataFrame()
+
+    # Agrupa por produto, soma os descartes e ordena do maior para o menor.
     resultado = (
         dados.groupby("Produto")["Descarte"]
         .sum()
@@ -546,7 +562,6 @@ def top_5_produtos_desperdicio():
     )
 
     return resultado
-#5 produtos com mais desperdicio
 
 def media_desperdicio_por_dia():
     dados = carregar_dados()
