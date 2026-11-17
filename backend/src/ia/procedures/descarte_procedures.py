@@ -508,16 +508,31 @@ def data_com_maior_desperdicio():
     return resultado.head(1)
 
 def data_com_menor_desperdicio():
+    """
+    Identifica a data com a menor quantidade total de descarte.
+
+    Returns:
+        pd.Series: data e quantidade total descartada.
+        None: caso não existam dados para realizar a consulta.
+    """
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
+    # Verifica se existem dados para realizar a consulta.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return None
+
+    # Agrupa por data, soma os descartes e ordena do menor para o maior.
     resultado = (
         dados.groupby("Data")["Descarte"]
         .sum()
-        .sort_values()
+        .sort_values(ascending=True)
     )
 
+    # Retorna somente a data com menor descarte.
     return resultado.head(1)
-#descobrir o dia com menor desperdicio
 
 def top_5_produtos_desperdicio():
     dados = carregar_dados()
