@@ -564,15 +564,33 @@ def top_5_produtos_desperdicio():
     return resultado
 
 def media_desperdicio_por_dia():
+    """
+    Calcula a média diária de descarte considerando o total
+    descartado em cada data.
+
+    Returns:
+        float: média dos totais diários de descarte.
+        None: caso não existam dados para realizar o cálculo.
+    """
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
+    # Verifica se existem dados para realizar o cálculo.
+    if dados.empty:
+        print("Aviso: não há dados para calcular a média diária.")
+        return None
+
+    # Agrupa por data e soma os descartes de cada dia.
     desperdicio_por_data = (
         dados.groupby("Data")["Descarte"]
         .sum()
     )
 
-    return desperdicio_por_data.mean()
-#média de desperdicio por dia
+    # Calcula a média dos totais diários.
+    media = desperdicio_por_data.mean()
+
+    return media
 
 def buscar_por_data(data):
     dados = carregar_dados()
