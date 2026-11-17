@@ -410,11 +410,26 @@ def somar_desperdicio_por_data():
     return resultado
 
 def listar_produtos():
+    """
+    Retorna uma lista com os nomes dos produtos sem repetições.
+
+    Returns:
+        list: lista de produtos encontrados.
+        Retorna uma lista vazia caso não existam dados.
+    """
+
+    # Carrega os dados de descarte já tratados.
     dados = carregar_dados()
 
-    return dados["Produto"].unique().tolist()
-#lista os produtos sem repetir
+    # Verifica se existem dados para listar.
+    if dados.empty:
+        print("Aviso: não há dados para consultar.")
+        return []
 
+    # Obtém os nomes dos produtos sem repetições.
+    produtos = dados["Produto"].unique().tolist()
+
+    return produtos
 
 def calcular_desperdicio_total():
     dados = carregar_dados()
