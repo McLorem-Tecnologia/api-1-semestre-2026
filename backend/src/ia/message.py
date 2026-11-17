@@ -1,4 +1,5 @@
 import dspy
+import re
 from dspy.utils.exceptions import AdapterParseError
 from ia.config import IA_APRIMORADA 
 from ia.agentes import agente_roteador, agente_relacional, agente_redator, AgenteAnalista
@@ -28,7 +29,12 @@ def processar_mensagem(texto_usuario: str) -> str:
                     mensagem=texto_usuario, 
                     dado_consultado=resultado.dado_calculado
                 )
-                return texto_final.resposta_final
+                return re.sub(
+                    r"<b\b[^>]*>(.*?)</b\s*>",
+                    r"<b>\1</b>",
+                    texto_final.resposta_final,
+                    flags=re.IGNORECASE | re.DOTALL,
+                )
 
     except AdapterParseError as erro_dspy:
         print(f"[ERRO DSPY] O modelo travou e retornou nulo. Log: {erro_dspy}")
