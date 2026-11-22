@@ -30,11 +30,29 @@ def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", set
     e dos custos dos ingredientes. Nunca estime o valor por conta própria.
     """
 
-    data_inicio, setor, texto_data = _tratar_parametros_iniciais(data_inicio, setor)
-    if data_fim and str(data_fim).strip().lower() not in ['none', 'null']:
-        data_fim, _, _ = _tratar_parametros_iniciais(data_fim, setor)
-    else:
-        data_fim = data_inicio
+    try:
+        if not data_inicio:
+            return "Erro: data inicial não informada."
+
+        data_inicio, setor, texto_data = _tratar_parametros_iniciais(data_inicio, setor)
+
+        if data_fim and str(data_fim).strip().lower() not in ["none", "null"]:
+            data_fim, _, _ = _tratar_parametros_iniciais(data_fim, setor)
+        else:
+            data_fim = data_inicio
+
+    except (ValueError, TypeError) as erro:
+        return f"Erro: parâmetro de data inválido. {erro}"
+
+    try:
+        inicio = pd.to_datetime(data_inicio, format="%d/%m/%Y")
+        fim = pd.to_datetime(data_fim, format="%d/%m/%Y")
+
+        if inicio > fim:
+            return "Erro: a data inicial não pode ser posterior à data final."
+
+    except (ValueError, TypeError):
+        return "Erro: formato de data inválido."
 
     if data_inicio != data_fim:
         texto_data = f"no período de {data_inicio} a {data_fim}"
@@ -42,105 +60,138 @@ def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", set
     resultado = procedures.descarte.buscar_por_intervalo(
         data_inicio,
         data_fim
-    #Pega os descartes do intervalo
     )
+
+    if resultado is None or resultado.empty:
+        return "Não foram encontrados registros de desperdício no período informado."
+
+    if not {"SKU", "Data", "Descarte"}.issubset(resultado.columns):
+        return "Erro: faltam colunas obrigatórias nos registros de descarte."
+    #Filtra os descartes pelo setor informado
     if setor:
         try:
-            # Tenta carregar o arquivo de produtos
             produtos = pd.read_csv(
                 DADOS_DIR / "produtos.csv",
                 sep=";",
                 encoding="utf-8-sig"
             )
 
+            if produtos.empty:
+                return "Erro: produtos.csv está vazio."
+            if not {"SKU", "Setor"}.issubset(produtos.columns):
+                return "Erro: faltam colunas obrigatórias em produtos.csv."
+
         except FileNotFoundError:
             return "Erro: arquivo produtos.csv não encontrado."
-
         except pd.errors.EmptyDataError:
-            return "Erro: arquivo produtos.csv está vazio."
-
+            return "Erro: produtos.csv está vazio."
         except pd.errors.ParserError:
-            return "Erro: não foi possível interpretar o arquivo CSV."
-
-        # Verifica se as colunas necessárias existem
-        if not {"SKU", "Setor"}.issubset(produtos.columns):
-            return "Erro: produtos.csv não possui as colunas SKU e Setor."
+            return "Erro: não foi possível ler produtos.csv."
 
         resultado = resultado.merge(
             produtos[["SKU", "Setor"]],
             on="SKU",
             how="left"
         )
-        #Seleciona só SKU e Setor
 
         resultado = resultado[
-            resultado["Setor"].str.lower() == setor.lower()
+            resultado["Setor"].fillna("").str.lower() == setor.lower()
         ]
-    #Filtra pelo setor, se inserido
+    #Carrega e valida o histórico de ingredientes
     try:
-        # Tenta carregar o histórico de ingredientes
         historico = pd.read_csv(
             DADOS_DIR / "historico_ingredientes.csv",
             sep=";",
             encoding="utf-8-sig"
         )
 
+        if historico.empty:
+            return "Erro: historico_ingredientes.csv está vazio."
 
+        if not {"Data", "Ingrediente", "Preço Custo"}.issubset(historico.columns):
+            return "Erro: faltam colunas obrigatórias em historico_ingredientes.csv."
 
+        historico["Data"] = pd.to_datetime(
+            historico["Data"],
+            format="%d/%m/%Y",
+            errors="coerce"
+        )
+        historico = historico.dropna(subset=["Data"])
+
+        if historico.empty:
+            return "Erro: não existem datas válidas no histórico de ingredientes."
+
+        historico["Preço Custo"] = pd.to_numeric(
+            historico["Preço Custo"],
+            errors="coerce"
+        )
+
+        historico = historico.dropna(subset=["Preço Custo"])
+
+        if historico.empty:
+            return "Erro: não existem preços válidos no histórico de ingredientes."
     except FileNotFoundError:
         return "Erro: arquivo historico_ingredientes.csv não encontrado."
-
     except pd.errors.EmptyDataError:
-        return "Erro: arquivo historico_ingredientes.csv está vazio."
-
+        return "Erro: historico_ingredientes.csv está vazio."
     except pd.errors.ParserError:
-        return "Erro: não foi possível interpretar o arquivo CSV."
+        return "Erro: não foi possível ler historico_ingredientes.csv."
 
-    # Verifica se as colunas necessárias existem
-    if not {"Data", "Ingrediente", "Preço Custo"}.issubset(historico.columns):
-        return "Erro: historico_ingredientes.csv não possui todas as colunas necessárias."
-    historico["Data"] = pd.to_datetime(
-        historico["Data"], format="%d/%m/%Y"
+    # Converte os valores de descarte para números
+    resultado["Descarte"] = pd.to_numeric(
+        resultado["Descarte"],
+        errors="coerce"
     )
 
-    # Pega as tabelas dos descartes
-    produtos_agrupados = (
-        resultado.groupby(["Data", "SKU"])["Descarte"]
-        .sum()
-        .reset_index()
-    )
-
-    # Agrupa os repetidos
+    resultado = resultado.dropna(subset=["Descarte"])
+    if resultado.empty:
+        return "Não foram encontrados registros válidos de desperdício no período informado."
+    #Agrupa os descartes repetidos por produto e data
+    produtos_agrupados = resultado.groupby(
+        ["SKU", "Data"],
+        as_index=False
+    )["Descarte"].sum()
     custo_total_descarte = 0
-
+    #Calcula o custo dos ingredientes de cada produto descartado
     for _, linha in produtos_agrupados.iterrows():
         sku = linha["SKU"]
         quantidade_descartada = linha["Descarte"]
         data_descarte = linha["Data"]
-        #Percorres os produtos descartados
+        # Busca os ingredientes associados ao produto
         ingredientes = procedures.ingredientes.buscar_ingredientes(sku)
-        #Busca os ingredientes
+
+        if ingredientes is None or ingredientes.empty:
+            continue
+
+        if not {"Ingrediente", "Qtd"}.issubset(ingredientes.columns):
+            return "Erro: faltam colunas obrigatórias nos ingredientes."
+
+        ingredientes["Qtd"] = pd.to_numeric(
+            ingredientes["Qtd"],
+            errors="coerce"
+        )
+
+        ingredientes = ingredientes.dropna(subset=["Qtd"])
+        #Seleciona o preço histórico mais recente até a data do descarte
         precos = (
             historico[historico["Data"] <= data_descarte]
             .sort_values("Data")
             .drop_duplicates("Ingrediente", keep="last")
         )
-        #Encontra os preços históricos
-
+        #Associa os ingredientes aos respectivos preços históricos
         ingredientes = ingredientes.merge(
             precos[["Ingrediente", "Preço Custo"]],
             on="Ingrediente",
             how="left",
             suffixes=("", "_hist")
         )
-        #Junta os ingredientes aos preços
         if ingredientes["Preço Custo_hist"].isna().any():
             return "Erro: faltam preços históricos para alguns ingredientes."
-
+        #Calcula o custo total dos ingredientes
         custo_ingredientes = (
             ingredientes["Qtd"] * ingredientes["Preço Custo_hist"]
         ).sum()
-        #Verifica caso houver preços faltantes
+        #Calcula e acumula o custo de desperdício
         custo_descarte = custo_ingredientes * quantidade_descartada
         custo_total_descarte += custo_descarte
 
