@@ -1,101 +1,72 @@
-from ia.tools import dspy_tool
-from ia import procedures; from ia import services; from ia import utils
+# Funções para estimativa de produção.
+# Função para TOOLS do DSPY relacionadas a produção.
+import math
+import sys
+from pathlib import Path
+import pandas as pd
+from ia.procedures import procedures
+from ia.tools.utils import dspy_tool
+import traceback
 
-def _tratar_parametros_iniciais(data: str, setor: str):
-    """Trata a data, normaliza o setor e cria aquele texto bonito para a resposta."""
-    
-    data_limpa = data if data and str(data).strip().lower() not in ['none', 'null'] else "hoje"
-    
-    data_real = utils.converter_data_relativa(data_limpa)
-    setor_limpo = utils.normalizar_setor(setor) if setor else ""
-    
-    termo = data_limpa.strip().lower()
-    if termo in ['hoje', 'hj', 'ontem', 'anteontem', 'amanhã', 'amanha'] or 'dias' in termo:
-        texto_data_amigavel = f"{termo} ({data_real})"
-    else:
-        texto_data_amigavel = f"no dia {data_real}"
-        
-    return data_real, setor_limpo, texto_data_amigavel
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-def _formatar_lista_produtos(resultado: list, tipo_pergunta: str) -> str:
-    """Monta os bullet points dependendo se o usuário quer 'quais' ou 'quantos'."""
-    tipo_pergunta = tipo_pergunta if tipo_pergunta else "quanto"
-    texto = ""
-    i = 1
-    
-    for item in resultado:
-        if tipo_pergunta.lower() in ['qual', 'quais', 'o que']:
-            nome_produto = item.split(":")[0]
-            texto += f"{i} {nome_produto}\n"
-        else:
-            texto += f"{i} {item} unidades\n"
-        i += 1
-            
-    return texto
+from ia.procedures import procedures
+from ia.tools.utils import classificar_dia
 
-@dspy_tool('PRODUCAO')
-def tool_previsao_vendas_por_data(data: str = "hoje", setor: str = "", tipo_pergunta: str = "quanto") -> str:
-    # US-01 e US-02
-    # US-01: Eu, como líder, quero saber QUAIS produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto.
-    # US-02: Eu, como líder, quero saber QUANTOS produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto.
-    """Use esta ferramenta EXCLUSIVAMENTE para PREVISÃO DE PRODUÇÃO (foco em ação atual ou futura).
-    Acione-a para responder perguntas como: "O que precisamos produzir?", "Quanto devemos produzir amanhã?", "O que produzir daqui a 3 dias?".
-    
-    Lógica interna: A ferramenta analisa se a data solicitada é dia de pico ou comum, cruzando e calculando a média ideal de produção baseada no histórico.
-    
-    Parâmetros:
-    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem
-      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
-      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
-      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
-      Se não especificado, assume 'hoje'.
-    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
-    - tipo_pergunta (OBRIGATÓRIO AVALIAR): Você deve classificar a intenção da frase do usuário. Se ele usar palavras como "Qual", "Quais", ou perguntar "O que", preencha com "quais". Se pedir números, preencha com "quanto".
-        
-    REGRA ABSOLUTA: Entregue os dados com foco em AÇÃO. Repasse EXATAMENTE os números retornados.
+
+def media_vendas_produtos(vendas, setor=None):
     """
-    try:
-        data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
+    Calcula a média de vendas de cada produto e arredonda o resultado
+    para cima.
 
-        df_historico_limpo = services.producao.dataframe_vendas_similares(data_real)
-        
-        if df_historico_limpo.empty:
-            return f"Não encontrei dados históricos compatíveis para projetar a produção do dia {texto_data}."
-            
-        resultado = services.producao.media_vendas_produtos(df_historico_limpo, setor)
-        
-        if not resultado:
-            aviso = f" no setor '{setor}'" if setor else ""
-            return f"Não há histórico suficiente para projetar a produção{aviso} do dia {texto_data}."
-            
-        aviso_setor = f" (Setor: {setor})" if setor else ""
-        texto_resposta = f"PREVISÃO DE PRODUÇÃO: O que DEVE ser produzido para o dia {texto_data}{aviso_setor}:\n"
-        texto_resposta += "(Baseado no perfil de demanda projetado para esta data)\n\n"
-        
-        texto_resposta += _formatar_lista_produtos(resultado, tipo_pergunta)
-        return texto_resposta
+    Args:
+        vendas (list): Lista de vendas no formato de registros
+            de um DataFrame do pandas.
+        setor (str, opcional): Setor utilizado para filtrar os produtos.
+            Se não for informado, calcula a média de todos os produtos.
 
-    except Exception as e:
-        print(f"[ERRO - tool_previsao_vendas_por_data] Falha: {e}")
-        return "Ocorreu um erro técnico ao cruzar os dados. Informe ao usuário que não foi possível projetar a produção neste momento."
+    Returns:
+        list: Lista contendo o nome de cada produto e sua média
+            de vendas arredondada para cima.
 
-@dspy_tool('PRODUCAO')
-def tool_meta_producao_passada(data: str = "hoje", setor: str = "", tipo_pergunta: str = "quanto") -> str:
-    # US-04
-    # US-04: Eu, como gerente, quero saber o que deveria ter sido produzido no dia X pelo setor Y, a fim de consultar a meta ideal.
-    """Use esta ferramenta EXCLUSIVAMENTE para AUDITORIA e METAS PASSADAS (foco em cobrança ou verificação).
-    Acione-a para responder perguntas como: "O que DEVERIA ter sido produzido ontem?", "Qual era a meta de 3 dias atrás?".
-    
-    Lógica interna: Ela cruza o perfil histórico do dia para dizer a média ideal que a equipe DEVERIA ter alcançado.
-    
-    Parâmetros:
-    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem
-      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
-      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
-      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
-      Se não especificado, assume 'hoje'.
-    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
-    - tipo_pergunta (OBRIGATÓRIO AVALIAR): Se usar "Qual", "Quais", ou "O que", preencha com "quais". Se pedir números, preencha com "quanto".
+            Exemplo:
+            ['Brigadeiro: 4', 'Temaki: 7', 'Pão Francês: 4']
+    """
+
+    dados = pd.DataFrame(vendas)
+
+    if setor is not None:
+        produtos_setor = procedures.produtos.buscar_por_setor(setor)
+
+        nomes_produtos = [
+            produto["Produto"]
+            for produto in produtos_setor
+        ]
+
+        dados = dados[
+            dados["Produto"].isin(nomes_produtos)
+        ]
+
+    medias = dados.groupby("Produto")["Qtd"].mean()
+
+    resultado = []
+
+    for produto, media in medias.items():
+        media_arredondada = math.ceil(media)
+
+        resultado.append(
+            f"{produto}: {media_arredondada}"
+        )
+
+    return resultado
+
+
+@dspy_tool
+def producao_dia_pelo_setor(data: str, setor: str) -> str:
+    """Calcula a produção total de um setor em uma data específica.
+    A produção é a soma das vendas com o descarte.
+    REGRA ABSOLUTA: Retorne a lista EXATAMENTE no formato que esta ferramenta gerar. Se ocorrer um erro, mostre o erro técnico exato ao usuário.
     """
     try:
         data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
