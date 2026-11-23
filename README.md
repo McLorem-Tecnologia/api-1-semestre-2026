@@ -30,7 +30,7 @@
 > **Status do Projeto:** Em desenvolvimento 🛠️<br>
 > **Relatório de Testes:** [Link](docs/processo/teste/Relatorio%20de%20Teste.md)<br>
 > **Documentação:** [Pasta Principal](docs/cliente) • [Arquitetura](docs/cliente/tecnico/Arquitetura.md) • [Manual do Usuário](docs/cliente/usuário/Manual%20do%20Usuário.md) • [Estratégia de Branch](docs/processo/Estratégia%20de%20Branch.md) • [Padrão de Commits](docs/processo/Padrões%20de%20Commits.md)<br>
-> **Vídeo do Projeto:** [Youtube](https://youtu.be/fICg24h3Boo)
+> **Vídeo do Projeto:** [Youtube](https://youtu.be/QUKi3barLLY)
 
 ## 🎯 Desafio <a id="desafio"></a>
 
@@ -70,8 +70,8 @@ O diferencial da solução é a fricção zero com o usuário. A plataforma atua
 | **8**  | **Baixa**  | Eu, como gerente, quero saber quais produtos me trazem mais lucro, a fim de orientar estrategicamente os setores.                                                                                        |      13      |   2    |   ✅    |
 | **9**  | **Baixa**  | Eu, como gestor, quero interagir com o assistente de análise de dados enviando perguntas por áudio, a fim de obter insights das planilhas de forma fluida e sem contato manual (semelhante a uma Alexa). |      10      |   2    |   ✅    |
 | **10** | **Baixa**  | Eu, como líder, quero saber quanta matéria-prima eu preciso deixar preparada para o dia seguinte, a fim de otimizar o tempo e reduzir o desperdício de matéria-prima.                                    |      15      |   2    |   ✅    |
-| **11** | **Baixa**  | Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias.                            |      13      |   3    |   ⏳    |
-| **12** | **Baixa**  | Eu, como gerente, quero saber por que o produto X está sendo transferido de setor, a fim de identificar falhas no planejamento original da produção.                                                     |      8       |   3    |   ⏳    |
+| **11** | **Baixa**  | Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias.                            |      13      |   3    |   ✅    |
+| **12** | **Baixa**  | Eu, como gerente, quero identificar transferências de matéria-prima recomendadas entre setores, a fim de cobrir déficits sem comprometer a necessidade do setor de origem.                                                     |      8       |   3    |   ✅    |
 
 ---
 

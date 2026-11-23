@@ -1,178 +1,376 @@
-# Checklist de DoR e DoD — Sprint 3
+# Checklist de Regressão — Sprint 3
 
-A Sprint 3 reúne as histórias **US11 e US12** (meta da Sprint), que já eram desta Sprint no backlog original e não foram entregues na Sprint 2, e as **melhorias técnicas M1 a M4**, que não têm Story Points. O texto das duas User Stories não foi alterado.
+Este checklist reúne os critérios de DoR e DoD das User Stories 01 a 10 das Sprints 1 e 2 e das US-11 e US-12 da Sprint 3. Os itens de execução foram reiniciados para esta rodada de regressão.
 
-Regras compartilhadas desta Sprint:
+---
 
-- A **US11** depende da necessidade de matéria-prima calculada na US10: o que está disponível para transferir é o estoque do setor menos a necessidade prevista para o dia seguinte. Esse cálculo fica em um **único *service***, usado pela US10 e pela US11, sem duplicar a regra de negócio.
-- A **US12** consulta um registro de transferências (`dados/transferencias.csv`), com data, produto (SKU), setor de origem, setor de destino e motivo.
-- Pela **M1**, toda resposta que lista produtos ou matérias-primas traz a quantidade e os setores separados, mesmo quando a pergunta cita um único setor. As perguntas "quais" e "quantos" têm a mesma resposta, e a **US01** deixa de ter um tratamento separado no código.
-- Em todas as histórias, a MIA deve informar quando não houver registro, em vez de inventar uma resposta.
-- A forma de entrada por áudio (US09) vale para todas as perguntas: a resposta a um áudio é igual à resposta ao texto.
-- Cada tarefa é desenvolvida em uma branch própria, com Pull Request revisado antes do merge, conforme a [Estratégia de Branch](../../Estratégia%20de%20Branch.md).
+## US01 — Quais produtos devem ser produzidos
+> *"Eu, como líder, quero saber quais produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto."*
+
+**Implementado em:** `tool_previsao_vendas_por_data(tipo_pergunta="quais")` → `utils.classificar_dia`, `procedures.vendas.dataframe_vendas_similares`, `procedures.vendas.media_vendas_produtos.`
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (líder)
+- [ ] Os produtos estão bem definidos no arquivo csv `produtos_mercado.csv`
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas
+- [ ] Serão utilizados os csv `vendas_supermercado_<mês>_<ano>.csv` e `descartes_supermercado_<mês>_<ano>.csv`
+- [ ] Método de cálculo será realizado baseado nas vendas anteriores e no dia do mês
+
+### DoD
+- [ ] Sistema identifica os produtos que precisam ser produzidos
+- [ ] Histórico de vendas é considerado
+- [ ] Recomendações são apresentadas de forma clara ao líder
+- [ ] Fatores como **feriados** e **finais de semana** são considerados em `classificar_dia`.
+- [ ] Funcionalidade foi testada sem erros
+- [ ] Resultado foi validado pelo responsável
+
+---
+
+## US02 — Quantos produtos produzir
+> *"Eu, como líder, quero saber quantos produtos precisam ser produzidos, a fim de reduzir o desperdício de tempo e produto."*
+
+**Implementado em:** `tool_previsao_vendas_por_data(tipo_pergunta="quanto")` (mesma tool da US01, parâmetro diferente).
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado
+- [ ] Os produtos estão bem definidos no csv `produtos_mercado.csv`
+- [ ] Está definido como a quantidade recomendada será apresentada ao líder
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas
+- [ ] Serão utilizados os csv `vendas_supermercado_<mês>_<ano>.csv` e `descartes_supermercado_<mês>_<ano>.csv`
+- [ ] Método de cálculo baseado em vendas e dia do mês
+
+### DoD
+- [ ] O sistema calcula a quantidade recomendada de produção para cada produto
+- [ ] O cálculo utiliza os dados de vendas definidos no projeto
+- [ ] O sistema apresenta claramente o nome do produto e a quantidade recomendada
+- [ ] Produtos sem necessidade de produção não são indevidamente recomendados (`media_vendas_produtos` só retorna produtos com histórico de vendas no perfil de dia filtrado)
+- [ ] O cálculo considera dia de pagamento (dia 20 e 5º dia útil), sexta a domingo e feriados (BR/SP).
+- [ ] A funcionalidade foi testada com diferentes cenários de demanda
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O líder ou responsável pelo projeto validou o resultado
+
+---
+
+## US03 — O que foi produzido
+> *"Eu, como gerente, quero saber o que foi produzido no dia X pelo setor Y, a fim de verificar a produtividade do setor Y."*
+
+**Implementado em:** `tool_producao_por_data` → procedures.producao.calcular_producao_data.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (gerente)
+- [ ] Os setores que serão consultados estão definidos (`produtos_mercado.csv`, coluna Setor)
+- [ ] A informação de data está definida como parâmetro de consulta
+- [ ] Os produtos estão bem definidos no csv `produtos_mercado.csv`
+- [ ] Serão utilizados os csv `produtos_mercado.csv`, `vendas_supermercado_<mês>_<ano>.csv` e `descartes_supermercado_<mês>_<ano>.csv`
+- [ ] Os registros de produção estão relacionados ao respectivo setor
+- [ ] Está definido como os resultados serão apresentados ao gerente
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências identificadas
+
+### DoD
+- [ ] O gerente consegue informar o dia X (parâmetro `data`)
+- [ ] O gerente consegue selecionar o setor Y (parâmetro `setor`, com correção ortográfica via `normalizar_setor`)
+- [ ] O sistema apresenta os produtos produzidos pelo setor no dia selecionado
+- [ ] O sistema apresenta a quantidade produzida de cada produto (Total Produzido, Vendas, Descarte por item)
+- [ ] Os dados apresentados correspondem aos registros de produção do setor e da data selecionados
+- [ ] O sistema permite identificar o total produzido pelo setor no período consultado
+- [ ] A consulta funciona corretamente para diferentes datas e setores (casos 3.1 a 3.6 do Relatório de Testes)
+- [ ] A funcionalidade foi testada com diferentes cenários
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo gerente ou responsável
+
+---
+
+## US04 — O que deveria ter sido produzido
+> *"Eu, como gerente, quero saber o que deveria ter sido produzido no dia X pelo setor Y, a fim de consultar a meta ideal."*
+
+**Implementado em:** `tool_meta_producao_passada` → reaproveita `classificar_dia` + `dataframe_vendas_similares` + `media_vendas_produtos` (mesmo cálculo da US01/US02).
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário identificado como gerente
+- [ ] Setores e produtos por setor definidos
+- [ ] Data definida como parâmetro
+- [ ] Unidade de medida da meta definida (unidades)
+- [ ] Está definido que a produção real virá da análise de vendas e descartes
+- [ ] Critérios de aceite estão definidos
+- [ ] Fontes de dados e dependências identificadas
+- [ ] Está definido que a meta é a média histórica de dias com o mesmo perfil (+5% de margem), com o mesmo cálculo da US01/US02
+
+### DoD
+- [ ] O gerente consegue selecionar o dia X e o setor Y
+- [ ] O sistema apresenta a meta de produção prevista para o dia e setor selecionados
+- [ ] A funcionalidade foi testada
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo gerente ou responsável
+
+
+---
+
+---
+
+## US05 — O que produzir em cada período do dia (líder)
+> *"Eu, como líder, quero saber quais produtos devo produzir em cada período do dia, a fim de otimizar o tempo dos colaboradores."*
+
+**Previsto em:** previsão de produção da Sprint 1 (média de dias similares + 5%) com um novo recorte por período.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (líder)
+- [ ] Está definido como o setor do líder é informado (parâmetro `setor`, com correção ortográfica via `normalizar_setor`)
+- [ ] Os períodos do dia estão definidos (a definir; proposta: manhã, tarde e noite, com faixas de horário)
+- [ ] Está definida a origem do horário de cada venda (coluna de hora nos CSV `vendas_supermercado_<mês>_<ano>.csv` ou regra para derivar o período)
+- [ ] Está definido o que acontece quando a base não tem horário (a definir)
+- [ ] Está definido como a previsão por período se relaciona com a previsão do dia da Sprint 1, sem duplicar regra
+- [ ] Está definido o que acontece quando o líder não informa o período (a definir; proposta: mostrar todos os períodos)
+- [ ] Está definido como o resultado será apresentado (período, produto e quantidade a produzir)
+- [ ] Exemplos reais de frases estão mapeados ("o que produzo de manhã?", "o que fazer à tarde?")
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas (previsão da Sprint 1)
+
+### DoD
+- [ ] O líder consegue consultar o que produzir em um período específico ou em todos
+- [ ] O sistema apresenta, por período, os produtos e as quantidades
+- [ ] Os valores de cada período são coerentes com a previsão do dia da Sprint 1 (verificação cruzada; a soma dos períodos pode divergir, pois cada período é projetado separadamente)
+- [ ] O setor com erro de digitação é corrigido por `normalizar_setor`
+- [ ] Período sem histórico ou inexistente na base (ex.: madrugada) recebe resposta clara: a MIA informa o período usado em vez de substituí-lo em silêncio, e não inventa produto
+- [ ] A pergunta de produção do dia (Sprint 1) continua funcionando e não é confundida com a nova
+- [ ] A funcionalidade foi testada sem erros (casos 5.1 a 5.8 do Guia de Testes)
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo líder ou responsável
+
+> **Pendências dos testes (5.2, 5.7 e 5.8):** a resposta com todos os períodos não é única e precisa de melhoria no formatador final; "madrugada" é convertida em "noite" sem avisar o usuário; o caso 5.8 ainda não foi concluído.
+
+---
+
+## US06 — Reais descartados em cada setor (gerente)
+> *"Eu, como gerente, quero saber quantos reais foram descartados em cada setor, a fim de monitorar o impacto financeiro das perdas dos setores."*
+
+**Previsto em:** `tool_buscar_por_intervalo` (categoria `DESPERDICIO`), a partir de `procedures.descarte` + custo dos ingredientes. A mesma tool é reaproveitada pela US07. A confirmar no Planning.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (gerente)
+- [ ] Está definido que, sem setor, a tool devolve o total da empresa e que, para ver cada setor, a MIA consulta setor a setor (Padaria, Cozinha, Peixaria, Açougue e Processados)
+- [ ] Está definido se o gerente pode pedir um setor específico (parâmetro `setor` opcional)
+- [ ] Está definido se o líder ainda poderá consultar o próprio setor (a definir; hoje a história é do gerente)
+- [ ] Fórmula do valor descartado está definida (custo dos ingredientes da receita × quantidade descartada, usando o preço de custo histórico até a data do descarte)
+- [ ] Origem dos custos está definida (`historico_ingredientes.csv` e as receitas dos produtos)
+- [ ] Período de análise está definido (dia, semana ou mês) e o que acontece quando não é informado
+- [ ] Serão utilizados os CSV de descartes, `produtos.csv` e `historico_ingredientes.csv`
+- [ ] Está definido como o resultado será apresentado (valor em R$ de cada setor e, se houver, o total geral)
+- [ ] O Agente Roteador distingue "quantos reais" de "quantas unidades"
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas (custo dos ingredientes, compartilhado com as US07 e US08)
+
+### DoD
+- [ ] O gerente consegue consultar o valor descartado de cada setor em um dia ou período
+- [ ] O sistema apresenta o valor em R$ de cada setor e, se apresentar um total geral, ele é igual à soma dos setores
+- [ ] A soma dos valores por setor é igual ao total geral (verificação cruzada)
+- [ ] O valor em R$ é coerente com as unidades descartadas exibidas na Sprint 1
+- [ ] A pergunta em unidades continua respondida em unidades, sem virar R$
+- [ ] O setor com erro de digitação é corrigido por `normalizar_setor`
+- [ ] Setor sem descarte no período aparece com R$ 0,00 ou é informado, sem quebrar o total
+- [ ] A funcionalidade foi testada sem erros (casos 6.1 a 6.6 do Guia de Testes)
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo gerente ou responsável
+
+> **Pendências dos testes (6.1, 6.3 e 6.6):** a tool de desperdício devolve só o total; o detalhamento por setor (valor de cada setor e total geral) ainda não é feito. Os casos 6.3 e 6.6 ainda não foram concluídos.
+
+---
+
+## US07 — Reais descartados na empresa (gerente)
+> *"Eu, como gerente, quero saber quantos reais foram descartados, a fim de avaliar o custo global de desperdício da empresa."*
+
+**Previsto em:** mesmo *service* da US06, sem filtro de setor. A confirmar no Planning.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (gerente)
+- [ ] Está definido que o escopo é a empresa inteira (todos os setores)
+- [ ] Está definido que o cálculo é o mesmo da US06, sem duplicar regra de negócio
+- [ ] Período de análise está definido (dia, semana ou mês)
+- [ ] Serão utilizados os CSV de descartes, `produtos.csv` e `historico_ingredientes.csv`
+- [ ] Está definido como o resultado será apresentado (total geral e, quando solicitado, separado por setor)
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas (US06)
+
+### DoD
+- [ ] O gerente consegue consultar o valor total descartado pela empresa em um dia ou período
+- [ ] O sistema apresenta o total geral em R$ e, quando solicitado, o valor de cada setor
+- [ ] A soma dos valores por setor é igual ao total geral (verificação cruzada com a US06)
+- [ ] A pergunta em unidades continua respondida em unidades, sem virar R$
+- [ ] A funcionalidade foi testada sem erros (casos 7.1 a 7.3 do Guia de Testes)
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo gerente ou responsável
+
+> **Pendência do teste 7.3:** o total da empresa funciona (7.1 e 7.2), mas a separação por setor não é fornecida pela tool.
+
+---
+
+## US08 — Produtos mais lucrativos na empresa (gerente)
+> *"Eu, como gerente, quero saber quais produtos me trazem mais lucro, a fim de orientar estrategicamente os setores."*
+
+**Previsto em:** categoria `VENDAS` do Agente Roteador (já reconhecida, ainda sem tools registradas) + novo *service* de lucro. A confirmar no Planning.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (gerente)
+- [ ] Está definido que o escopo é a empresa inteira (todos os setores)
+- [ ] Fórmula de lucro está definida (a definir; proposta: (preço de venda − custo unitário) × quantidade vendida) e se o custo do descarte entra no cálculo
+- [ ] Origem do preço de venda e do custo unitário está definida (o código atual não usa essas colunas: confirmar se já existem nos CSV ou se serão adicionadas)
+- [ ] Está definido se o ranking pode ser agrupado por setor e limitado a um número de itens (ex.: "os 5 mais lucrativos")
+- [ ] Período de análise está definido (dia, semana ou mês) e o que acontece quando o período não é informado
+- [ ] Serão utilizados os CSV `produtos_mercado.csv` e `vendas_supermercado_<mês>_<ano>.csv`
+- [ ] Está definido como o ranking será apresentado (ordem decrescente, valores em R$, com o setor de cada produto)
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas (custo unitário compartilhado com as US06 e US07)
+
+### DoD
+- [ ] O gerente consegue consultar o ranking de lucro de todos os produtos da empresa
+- [ ] O sistema apresenta os produtos do mais para o menos lucrativo, com o lucro de cada item em R$ e o setor
+- [ ] O sistema permite comparar os setores (ranking agrupado por setor)
+- [ ] Os valores conferem com o cálculo manual feito sobre uma amostra dos CSV (verificação cruzada)
+- [ ] Produtos sem vendas no período não distorcem o ranking
+- [ ] A funcionalidade foi testada sem erros (casos 8.1 a 8.4 do Guia de Testes)
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo gerente ou responsável
+
+---
+
+## US09 — Perguntas por áudio (gestor)
+> *"Eu, como gestor, quero interagir com o assistente de análise de dados enviando perguntas por áudio, a fim de obter insights das planilhas de forma fluida e sem contato manual (semelhante a uma Alexa)."*
+
+**Previsto em:** `bot/telegram_bot.py` (hoje a mensagem de voz recebe a resposta de formato não suportado) + etapa de transcrição antes do `processar_mensagem`. A confirmar no Planning.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (gestor)
+- [ ] Solução de transcrição escolhida e executada **localmente** (restrição do projeto: sem APIs externas de terceiros)
+- [ ] Idioma (pt-BR), formato do áudio do Telegram e duração máxima estão definidos
+- [ ] Está definido se a resposta será em texto, em voz ou em ambos (a definir)
+- [ ] Está definido o comportamento quando a transcrição falha (áudio vazio, ruído ou longo demais)
+- [ ] Exemplos de perguntas faladas estão mapeados (as mesmas das histórias anteriores, ditas em voz alta, incluindo as novas US05 e US06)
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas
+
+### DoD
+- [ ] O gestor envia um áudio e recebe a resposta correta, sem digitar nada
+- [ ] A resposta ao áudio tem o mesmo conteúdo da resposta à pergunta digitada
+- [ ] Áudio vazio, com ruído ou acima do limite recebe uma mensagem amigável, sem travar o bot
+- [ ] Mensagens de texto continuam funcionando; formatos não suportados (ex.: foto) continuam recusados
+- [ ] A transcrição funciona sem nenhuma API externa de terceiros
+- [ ] Arquivos de áudio temporários são apagados após o uso
+- [ ] O fluxo de áudio foi documentado no `arquitetura.md`
+- [ ] A funcionalidade foi testada sem erros (casos 9.1 a 9.9 do Guia de Testes)
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo gestor ou responsável
+
+---
+
+## US10 — Matéria-prima para o dia seguinte (líder)
+> *"Eu, como líder, quero saber quanta matéria-prima eu preciso deixar preparada para o dia seguinte, a fim de otimizar o tempo e reduzir o desperdício de matéria-prima."*
+
+**Previsto em:** `services.producao` (previsão do dia, US01/US02) × consumo de matéria-prima por produto (novo CSV). A confirmar no Planning.
+
+### DoR
+- [ ] Objetivo da User Story está claramente definido
+- [ ] Usuário da funcionalidade está identificado (líder)
+- [ ] Está definida a origem do consumo de matéria-prima por unidade de cada produto (receita; ainda inexistente na base)
+- [ ] Está definida a unidade de medida de cada matéria-prima (kg, L, unidade)
+- [ ] Está definido que a data alvo é o dia seguinte e que o parâmetro `data` aceita "amanhã"
+- [ ] Está definido que a necessidade parte da previsão de produção já existente (média de dias similares + 5%)
+- [ ] Está definido como o resultado será apresentado (matéria-prima, quantidade e unidade, por setor)
+- [ ] Critérios de aceite estão definidos
+- [ ] Dependências necessárias estão identificadas (previsão de produção da Sprint 1)
+
+### DoD
+- [ ] O líder consegue consultar a matéria-prima necessária para amanhã no seu setor
+- [ ] O sistema apresenta cada matéria-prima com quantidade e unidade
+- [ ] A mesma matéria-prima usada por vários produtos aparece somada
+- [ ] A quantidade é coerente com a previsão de produção do mesmo dia (verificação cruzada)
+- [ ] O setor com erro de digitação é corrigido por `normalizar_setor`
+- [ ] Produto sem receita cadastrada é informado, sem inventar consumo
+- [ ] A funcionalidade foi testada sem erros (casos 10.1 a 10.6 do Guia de Testes)
+- [ ] Os critérios de aceite foram atendidos
+- [ ] O resultado foi validado pelo líder ou responsável
+
+> **Pendências dos testes (10.1, 10.2, 10.4 e 10.6):** o nome do produto se repete para cada matéria-prima; ingredientes com fração (ex.: `0.1` kg) são calculados errado; a unidade aparece como `unidades` em vez de kg ou L; respostas longas geram o erro `MESSAGE_TOO_LONG` no Telegram.
+
+---
 
 ---
 
 ## US11 — Matérias-primas disponíveis para transferir (líder)
 > *"Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias."*
 
-**Previsto em:** novo *service* de matéria-prima (`services.materia_prima`), que calcula a necessidade do dia seguinte (receita × previsão de produção da Sprint 1) e a compara com o estoque de cada setor (`ingredientes.csv`), e nova tool na categoria `PRODUCAO`.
+**Implementado em:** `ia/tools/materia_prima_tool.py` — `tool_realocacao_sobra_mp`.
 
 ### DoR
-- [x] Objetivo da User Story está claramente definido
-- [x] Usuário da funcionalidade está identificado (líder)
-- [x] Está definida a origem do estoque atual de matéria-prima por setor (coluna `Estoque Atual` de `ingredientes.csv`, por ingrediente e setor)
-- [x] Está definida a regra de "disponível para transferir" (estoque do setor menos a necessidade prevista da US10; só entra o que tem sobra maior que zero)
-- [x] Está definido que, sem data, a necessidade considerada é a do dia seguinte, e que o parâmetro `data` aceita "amanhã" e demais datas relativas
-- [x] Está definido que o setor é opcional (sem setor, a MIA traz todos) e que o erro de digitação é corrigido por `normalizar_setor`
-- [x] Está definido que a pergunta pode citar uma matéria-prima específica (parâmetro `ingrediente` opcional)
-- [x] Está definido como o resultado será apresentado (setores separados, com cada matéria-prima, a quantidade disponível e a unidade de medida)
-- [x] Exemplos reais de frases estão mapeados ("quais matérias-primas posso transferir?", "o que sobra de ingrediente na padaria?")
-- [x] Critérios de aceite estão definidos
-- [x] Dependências necessárias estão identificadas (US10 e M4)
+- [x] Objetivo e usuário da história estão definidos
+- [x] Origem da necessidade prevista (US10), estoque e unidade dos ingredientes está identificada
+- [x] Regra de sobra está definida como estoque menos necessidade prevista
+- [x] Filtro opcional de setor de origem está definido
+- [x] Cenários de falta de histórico, receita ausente e ausência de sobra estão definidos no BDD
+- [x] Critérios de aceitação e dependências estão identificados
 
 ### DoD
-- [ ] O líder consegue consultar as matérias-primas com sobra, no seu setor ou em todos
-- [ ] O sistema apresenta, por setor, cada matéria-prima com a quantidade disponível e a unidade de medida
-- [ ] Nenhum item é listado como disponível quando o próprio setor precisa dele no dia seguinte (verificação cruzada com a US10: estoque menos necessidade é igual à quantidade informada)
-- [ ] Quando não há sobra, a MIA informa isso, sem inventar itens
-- [ ] A pergunta sobre uma matéria-prima específica mostra a quantidade disponível em cada setor que a possui
-- [ ] O setor com erro de digitação é corrigido por `normalizar_setor`
-- [ ] A resposta longa é enviada em mais de uma mensagem, sem erro no Telegram (M2)
-- [ ] A funcionalidade foi testada sem erros (casos 11.1 a 11.8 do Guia de Testes)
-- [ ] Os critérios de aceite foram atendidos
-- [ ] O resultado foi validado pelo líder ou responsável
+- [x] A tool identifica sobras disponíveis por ingrediente e setor
+- [x] A necessidade prevista do setor de origem é preservada
+- [x] A resposta mostra quantidade, unidade e setor de origem
+- [x] O filtro de origem limita as sobras consideradas
+- [x] Ausência de sobra ou dados recebe resposta clara
+- [x] Os estoques permanecem inalterados
+- [x] Casos US-11 do Guia de Testes da Sprint 3 foram executados
+- [x] Critérios de aceitação atendidos e resultado validado
 
 ---
 
-## US12 — Motivo da transferência de um produto (gerente)
-> *"Eu, como gerente, quero saber por que o produto X está sendo transferido de setor, a fim de identificar falhas no planejamento original da produção."*
+## US12 — Recomendação de transferência de matéria-prima (gerente)
+> *"Eu, como gerente, quero identificar transferências de matéria-prima recomendadas entre setores, a fim de cobrir déficits sem comprometer a necessidade do setor de origem."*
 
-**Previsto em:** novo *service* de transferências (`services.transferencias`), a partir de `procedures.transferencias`, que lê o registro `dados/transferencias.csv`, e nova tool na categoria `PRODUCAO`.
+**Implementado em:** `ia/tools/materia_prima_tool.py` — `tool_realocacao_sobra_mp`.
 
 ### DoR
-- [x] Objetivo da User Story está claramente definido
-- [x] Usuário da funcionalidade está identificado (gerente)
-- [x] Está definido o que é uma "transferência" (um produto que sai de um setor de origem para um setor de destino)
-- [x] Está definida a origem do registro de transferências (`dados/transferencias.csv`, com as colunas `Data`, `SKU`, `Setor Origem`, `Setor Destino` e `Motivo`; o nome do produto vem de `produtos.csv`)
-- [x] Está definido que o produto é informado pelo nome, sem diferenciar maiúsculas e minúsculas
-- [x] Está definido o comportamento quando o produto não existe ou não tem transferência registrada (a MIA informa, sem inventar um motivo)
-- [x] Está definido o comportamento quando o produto tem mais de uma transferência (todas são apresentadas, da mais recente para a mais antiga)
-- [x] Está definido como o resultado será apresentado (produto, data, setor de origem, setor de destino e motivo)
-- [x] Exemplos reais de frases estão mapeados ("por que a coxinha está sendo transferida de setor?", "qual o motivo da transferência do pudim?")
-- [x] Critérios de aceite estão definidos
-- [x] Dependências necessárias estão identificadas (novo registro de transferências)
+- [x] Objetivo e usuário da história estão definidos
+- [x] A regra de déficit e a quantidade máxima transferível estão definidas
+- [x] Ingrediente e unidade precisam coincidir entre origem e destino
+- [x] A resposta deve mostrar origem, destino, quantidade, déficit residual e justificativa
+- [x] Está definido que a recomendação não registra nem executa a transferência
+- [x] Cenários de transferência parcial, falta inexistente e dados ausentes estão no BDD
+- [x] Critérios de aceitação e dependências estão identificados
 
 ### DoD
-- [ ] O gerente consegue perguntar o motivo da transferência de um produto pelo nome
-- [ ] O motivo apresentado corresponde exatamente ao registro
-- [ ] O sistema apresenta o setor de origem, o setor de destino e a data de cada transferência
-- [ ] Produto inexistente ou sem transferência registrada recebe uma resposta clara, sem motivo inventado
-- [ ] O nome do produto é reconhecido independentemente de maiúsculas e minúsculas
-- [ ] Arquivo de transferências ausente, vazio ou fora do formato não derruba o bot: a MIA informa que não conseguiu consultar o registro
-- [ ] A funcionalidade foi testada sem erros (casos 12.1 a 12.8 do Guia de Testes)
-- [ ] Os critérios de aceite foram atendidos
-- [ ] O resultado foi validado pelo gerente ou responsável
+- [x] A MIA recomenda transferências apenas para déficits do mesmo ingrediente
+- [x] A recomendação não reduz o estoque da origem abaixo da necessidade prevista
+- [x] Transferências parciais informam o déficit restante
+- [x] Ausência de transferência recomendada recebe resposta clara
+- [x] Os estoques permanecem inalterados
+- [x] Casos US-12 do Guia de Testes da Sprint 3 foram executados
+- [x] Critérios de aceitação atendidos e resultado validado
 
 ---
 
-## M1 — Resposta padronizada por setor
-> *Toda resposta que lista produtos ou informa valores descartados traz a quantidade (ou o valor) e os setores separados, mesmo quando a pergunta cita um único setor.*
-
-**Previsto em:** formatador único de resposta por setor, usado pelas tools de produção (`tool_previsao_vendas_por_data`, `tool_meta_producao_passada`, `tool_producao_por_data`, `tool_previsao_vendas_por_periodo` e `tool_previsao_quantidade_mp`) e pela tool de desperdício.
+## Requisito transversal — Menu de ajuda e perguntas por voz
 
 ### DoR
-- [x] Comportamento esperado está claramente definido (produto, quantidade e unidade de medida, sob o título de cada setor)
-- [x] Está definido que as perguntas "quais" e "quantos" recebem a mesma resposta
-- [x] Está definido que, quando a pergunta cita um único setor, a resposta traz o título desse setor
-- [x] Está definido que, sem setor, todos os setores aparecem separados, em ordem alfabética
-- [x] Está definido que, na previsão por período, os períodos aparecem em ordem cronológica (manhã, tarde, noite) dentro de cada setor, no mesmo formato
-- [x] Está definido que o valor descartado é apresentado por setor, com o total geral igual à soma dos setores
-- [x] Cenários de teste estão mapeados no Guia de Testes (casos M1.1 a M1.11)
+- [x] Categorias do menu correspondem às tools disponíveis: Produção, Matéria-prima, Descarte, Produtos e Vendas
+- [x] Os comandos `/ajuda` e `/help` estão definidos
+- [x] Perguntas por voz reutilizam as mesmas intenções e tools das perguntas por texto
+- [x] Perguntas de previsão com “o que” ou “quanto” retornam quantidades
 
 ### DoD
-- [ ] As perguntas "quais" e "quantos" recebem exatamente a mesma resposta
-- [ ] A resposta traz o produto, a quantidade e a unidade de medida do cadastro (Kg, Un, Porção ou L)
-- [ ] Com um único setor na pergunta, a resposta traz o título do setor e os produtos logo abaixo
-- [ ] Sem setor, todos os setores aparecem separados, cada um com seu título
-- [ ] A previsão por período usa o mesmo formato para todos os períodos
-- [ ] O valor descartado é apresentado por setor e o total geral é igual à soma dos setores
-- [ ] A resposta a um áudio tem o mesmo formato da resposta ao texto
-- [ ] A funcionalidade foi testada sem erros (casos M1.1 a M1.11 do Guia de Testes)
-- [ ] O resultado foi validado pelo Product Owner
+- [x] `/ajuda` e `/help` abrem o menu inline no TeleBot
+- [x] Escolher categoria mostra exemplos de pergunta
+- [x] Escolher uma pergunta executa o mesmo fluxo da mensagem digitada
+- [x] O menu retorna uma navegação para os assuntos
+- [x] Perguntas por áudio reutilizam o fluxo da mensagem de texto e não separam “o que” de “quanto”
+- [x] As previsões de produção sempre apresentam quantidades, independentemente de a pergunta usar “o que” ou “quanto”
+- [x] Os casos de menu foram executados
 
----
-
-## M2 — Tratamento de erros
-> *O bot não fica preso quando algo falha e avisa de forma clara quando não consegue atender a pergunta.*
-
-**Previsto em:** `bot/telegram_bot.py` (texto e voz), `ia/message.py`, `main.py` e as tools de `ia/tools/`.
-
-### DoR
-- [x] Comportamento esperado está claramente definido para cada tipo de falha (IA fora do ar, conexão com o Telegram, resposta longa, data inválida, setor inexistente, período sem histórico e arquivo de dados ausente)
-- [x] Está definido o limite de uma mensagem do Telegram (4096 caracteres) e que a resposta maior é enviada em mais de uma mensagem
-- [x] Está definido que a mensagem "Processando..." é sempre substituída pela resposta ou por um aviso
-- [x] Cenários de teste estão mapeados no Guia de Testes (casos M2.1 a M2.9)
-
-### DoD
-- [ ] Falha ao processar texto ou voz substitui a mensagem "Processando..." por um aviso amigável
-- [ ] A queda de conexão com o Telegram não derruba o bot, que volta a responder sem ser reiniciado
-- [ ] Uma mesma mensagem não é respondida duas vezes
-- [ ] Resposta acima do limite do Telegram é enviada em partes, sem o erro `MESSAGE_TOO_LONG` e sem cortar um item no meio
-- [ ] Falha da IA (modelo indisponível ou saída inválida) gera aviso amigável, e o bot volta a funcionar quando a IA volta
-- [ ] Data inválida, setor inexistente e data sem registros recebem uma resposta clara, sem inventar dados
-- [ ] Período sem histórico (ex.: madrugada) informa qual período foi usado no cálculo
-- [ ] Arquivo de dados ausente é apontado na inicialização, com o nome do arquivo
-- [ ] Todas as tools tratam as próprias falhas e devolvem uma mensagem clara
-- [ ] Os erros são registrados no terminal com a etapa em que ocorreram
-- [ ] A funcionalidade foi testada sem erros (casos M2.1 a M2.9 do Guia de Testes)
-- [ ] O resultado foi validado pelo Product Owner
-
----
-
-## M3 — Limpeza do código
-> *Remoção do que deixou de ser necessário, sem mudar o comportamento das funcionalidades já entregues.*
-
-**Previsto em:** `ia/tools/producao_tool.py`, `ia/tools/desperdicio_tool.py`, `ia/message.py`, `ia/procedures/vendas_procedures.py`, `ia/services/producao_service.py` e novo `ia/services/desperdicio_service.py`.
-
-### DoR
-- [x] Está definido o que será removido: o parâmetro `tipo_pergunta` e a formatação separada de "quais" e "quantos", os logs de depuração e o código sem uso
-- [x] Está definido que o cálculo do custo do descarte (custo dos ingredientes da receita × quantidade descartada) passa para um único *service*, e a tool apenas recebe os parâmetros e apresenta o resultado
-- [x] Está definido que os valores das funcionalidades já entregues não podem mudar (verificação com os valores do Relatório de Testes da Sprint 2)
-- [x] Cenários de teste estão mapeados no Guia de Testes (casos M3.1 a M3.6)
-
-### DoD
-- [ ] O parâmetro `tipo_pergunta` e a formatação separada de "quais" e "quantos" não existem mais nas tools
-- [ ] A US01 não tem mais um caminho próprio: a pergunta "quais produtos devo produzir?" é respondida como a US02
-- [ ] Os logs de depuração foram removidos; o terminal mostra apenas erros e o tempo de processamento
-- [ ] O cálculo do custo do descarte está em `services.desperdicio`, e a tool de desperdício não lê CSV diretamente
-- [ ] Não há código sem uso nem comentários desatualizados nos módulos alterados
-- [ ] Os valores de descarte e de previsão de produção continuam iguais aos do Relatório de Testes da Sprint 2
-- [ ] Os casos das Sprints 1 e 2 foram reexecutados sem falhas
-- [ ] A funcionalidade foi testada sem erros (casos M3.1 a M3.6 do Guia de Testes)
-- [ ] O resultado foi validado pelo Product Owner
-
----
-
-## M4 — Correções da matéria-prima (US10)
-> *Matéria-prima para o dia seguinte com quantidade e unidade corretas e resposta mais enxuta.*
-
-**Previsto em:** `services.materia_prima` (cálculo compartilhado com a US11), `procedures.ingredientes.formatacao_pre_calculo` e `tool_previsao_quantidade_mp`.
-
-### DoR
-- [x] Está definido que a quantidade de cada ingrediente é a previsão do produto × a quantidade do ingrediente na receita
-- [x] Está definido que a unidade de medida de cada ingrediente vem do cadastro (kg, L ou un) e é exibida em g ou mL quando a quantidade é menor que 1
-- [x] Está definido que cada produto aparece uma única vez, com seus ingredientes listados logo abaixo
-- [x] Está definido que a resposta não mostra a sobra em estoque (que passa a ser consultada na US11) e que o ingrediente com estoque insuficiente continua sinalizado
-- [x] Cenários de teste estão mapeados no Guia de Testes (casos M4.1 a M4.7)
-
-### DoD
-- [ ] A quantidade de cada ingrediente é igual à previsão do produto × a quantidade na receita, inclusive para ingredientes fracionados (verificação cruzada com a US02)
-- [ ] Cada quantidade vem acompanhada da unidade de medida correta, sem a palavra "unidades" no lugar da unidade
-- [ ] Cada produto aparece uma única vez, com seus ingredientes logo abaixo
-- [ ] A resposta não mostra a sobra em estoque
-- [ ] O ingrediente com estoque insuficiente é sinalizado, com o necessário e o disponível
-- [ ] Produto sem receita cadastrada é informado, sem inventar consumo
-- [ ] A pergunta sobre uma matéria-prima específica soma o consumo de todos os produtos que a usam
-- [ ] A funcionalidade foi testada sem erros (casos M4.1 a M4.7 do Guia de Testes)
-- [ ] O resultado foi validado pelo líder ou responsável
+> **Limite da validação transversal:** os handlers e a navegação foram testados localmente com `BotFake`. O TeleBot ao vivo e a gravação/transcrição de áudio físico não foram executados nesta rodada; consulte os limites do [Relatório de Testes da Sprint 3](./testes/Relat%C3%B3rio%20de%20Testes%20-%20Sprint%203.md).

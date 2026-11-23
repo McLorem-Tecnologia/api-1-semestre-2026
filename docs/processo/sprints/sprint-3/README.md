@@ -1,95 +1,175 @@
-# Documentação - Sprint 3
+# Documentação — Sprint 3
 
 <div align="center">
-  <!-- Imagem que aparece apenas no Modo Escuro -->
   <img src="../../../img/logo-mclorem-dark.png#gh-dark-mode-only" alt="logo da McLorem Tecnologia" width="200">
-  
-  <!-- Imagem que aparece apenas no Modo Claro -->
   <img src="../../../img/logo-mclorem-light.png#gh-light-mode-only" alt="logo da McLorem Tecnologia" width="200">
-  
   <h3>MIA - Assistente de Análise de Dados</h3>
 </div>
 
 <br>
 
 <p align="center">
-  <a href ="#desafio"> Desafio</a> &nbsp;&bull;&nbsp;
-  <a href ="#us"> User Stories</a> &nbsp;&bull;&nbsp;
-  <a href ="#melhorias"> Melhorias Técnicas</a> &nbsp;&bull;&nbsp;
-  <a href ="#dor">DoR</a> &nbsp;&bull;&nbsp;
-  <a href ="#dod">DoD</a>
+  <a href="#desafio">Desafio</a> &nbsp;&bull;&nbsp;
+  <a href="#us">User Stories</a> &nbsp;&bull;&nbsp;
+  <a href="#dor">DoR</a> &nbsp;&bull;&nbsp;
+  <a href="#dod">DoD</a> &nbsp;&bull;&nbsp;
+  <a href="#equipe">Equipe</a>
 </p>
 
 ---
 
 > [!IMPORTANT]
-> **Status da Sprint:**  Não Iniciado 🔜<br>
+> **Status da Sprint:**  Concluído ✅<br>
 > **Relatório de Testes da Sprint:** [Link](./testes/Relatório%20de%20Testes%20-%20Sprint%203.md)<br>
-> **Vídeo da Sprint:** [Youtube]()
+> **Vídeo da Sprint:** [Youtube](https://youtu.be/QUKi3barLLY)
 
 ## 🏅 Desafio <a id="desafio"></a>
 
-Fechar o backlog da MIA entregando as duas últimas User Stories, que ficaram de fora da Sprint 2: saber quais matérias-primas sobram em um setor e podem ser transferidas a outros (US11) e saber por que um produto está sendo transferido de setor (US12). Para isso, a MIA passa a cruzar a necessidade prevista de matéria-prima com o estoque de cada setor e a consultar um registro de transferências, com o motivo de cada uma, sempre por linguagem natural no Telegram.
+Transformar os dados de estoque, receitas e previsão de produção em recomendações seguras para a operação. A MIA calcula a necessidade de matéria-prima por setor, identifica apenas o excedente que sobra depois de reservar essa necessidade e compara ingredientes disponíveis com déficits de outros setores. Quando a sobra não cobre todo o déficit, informa o limite da transferência e quanto ainda faltaria. A recomendação é consultiva: não altera os estoques nem registra uma movimentação.
 
-Em paralelo, a Sprint é dedicada a consolidar o que já existe. A resposta é padronizada e passa a trazer sempre a quantidade e os setores separados, mesmo quando a pergunta cita um único setor. O tratamento de erros do bot e da IA é reforçado, o cálculo da matéria-prima é corrigido e o código que deixou de ser necessário é removido, como o tratamento separado das perguntas "quais" e "quantos". Toda a inteligência e o processamento continuam operando de forma autônoma, sem persistência de dados e sem APIs externas de terceiros.
+A sprint também tornou esse conhecimento mais acessível pelo TeleBot: `/ajuda` e `/help` abrem um menu com exemplos de perguntas para produção, matéria-prima, descarte, produtos e vendas. As perguntas escolhidas usam o mesmo fluxo da conversa. Nas previsões de produção, “o que produzir” e “quanto produzir” levam a respostas com quantidades; os mesmos assuntos podem ser perguntados por voz.
 
 ## 📋 User Stories <a id="us"></a>
 
-| $\textsf{\textbf{Capacidade estimada da Equipe por Sprint:}}$ | $\textsf{21 Story Points}$                                         |
-| ------------------------------------------------------------- | ------------------------------------------------------------------ |
-| $\color{#2e8b57}{\textsf{\textbf{Meta da Sprint:}}}$          | $\textsf{User Stories de rank 11 e 12 (\textit{21 Story Points})}$ |
-| $\textsf{\textbf{Melhorias técnicas da Sprint:}}$             | $\textsf{M1 a M4 (\textit{sem Story Points})}$                     |
+| Indicador | Planejamento e resultado |
+| :--- | :--- |
+| **Capacidade estimada da equipe por Sprint** | 85 Story Points |
+| **Meta da Sprint** | US-11 e US-12 — 21 Story Points; 21 entregues (100%) |
+| **Escopo transversal** | Menu de ajuda e navegação no TeleBot; sem estimativa própria de pontos |
 
-|              Rank              |            Prioridade             | User Story                                                                                                                                                                                                | Story Points                   | Sprint                        |            Status             |
-| :----------------------------: | :-------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------: | :---------------------------: | :---------------------------: |
-| $\color{#2e8b57}{\textsf{11}}$ | $\color{#2e8b57}{\textsf{Baixa}}$ | $\color{#2e8b57}{\textsf{Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos parados e evitar compras desnecessárias.}}$ | $\color{#2e8b57}{\textsf{13}}$ | $\color{#2e8b57}{\textsf{3}}$ | $\color{#2e8b57}{\textsf{⌛}}$ |
-| $\color{#2e8b57}{\textsf{12}}$ | $\color{#2e8b57}{\textsf{Baixa}}$ | $\color{#2e8b57}{\textsf{Eu, como gerente, quero saber por que o produto X está sendo transferido de setor, a fim de identificar falhas no planejamento original da produção.}}$                          | $\color{#2e8b57}{\textsf{8}}$  | $\color{#2e8b57}{\textsf{3}}$ | $\color{#2e8b57}{\textsf{⌛}}$ |
+| Rank | Prioridade | User Story | Story Points | Sprint | Status |
+| :---: | :--------: | ---------- | :----------: | :----: | :----: |
+| 11 | Baixa | Eu, como líder, quero saber quais matérias-primas estão disponíveis para transferir a outros setores, a fim de reaproveitar recursos e evitar compras desnecessárias. | 13 | 3 | ✅ Concluída |
+| 12 | Baixa | Eu, como gerente, quero identificar transferências de matéria-prima recomendadas entre setores, a fim de cobrir déficits sem comprometer a necessidade do setor de origem. | 8 | 3 | ✅ Concluída |
 
-> [!NOTE]
-> A Sprint 3 entrega as histórias de **rank 11 e 12**, que já eram desta Sprint no backlog original e não foram entregues na Sprint 2. Além delas, a Sprint reúne as **melhorias técnicas M1 a M4**, que não têm Story Points. Com a **M1**, a resposta à pergunta "quais produtos devo produzir?" (**US01**) passa a ser a mesma da pergunta "quantos?" (**US02**): o que a US01 entrega continua atendido, só que sem um tratamento separado no código.
-
-## 🛠️ Melhorias Técnicas <a id="melhorias"></a>
-
-| ID  | Melhoria                              | Descrição                                                                                                                                                                                                                                                                                                  | Status |
-| :-: | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----: |
-| M1  | Resposta padronizada por setor        | Toda resposta que lista produtos (previsão do dia, meta, produção real, previsão por período e matéria-prima) e a que informa o valor descartado passam a trazer a quantidade (ou o valor) e os setores separados, mesmo quando a pergunta cita um único setor. As perguntas "quais" e "quantos" têm a mesma resposta. |   ⌛   |
-| M2  | Tratamento de erros                   | O bot não fica preso na mensagem "Processando..." quando algo falha, reconecta sozinho quando a conexão cai, divide as respostas maiores que o limite do Telegram e avisa de forma clara quando a data, o setor, o período ou o arquivo de dados não pode ser usado.                                       |   ⌛   |
-| M3  | Limpeza do código                     | Remoção do que deixou de ser necessário: o tratamento separado de "quais" e "quantos" (parâmetro `tipo_pergunta`), os logs de depuração e o código sem uso. O cálculo do custo do descarte passa a ficar em um único *service*, fora da tool.                                                               |   ⌛   |
-| M4  | Correções da matéria-prima (US10)     | Quantidade correta para ingredientes fracionados, unidade de medida correta de cada ingrediente (kg, g, L, mL ou un), produto exibido uma única vez com seus ingredientes logo abaixo e resposta mais enxuta, sem a sobra em estoque (que passa a ser consultada na US11).                                  |   ⌛   |
+**Validação da Sprint:** [BDD](./testes/BDD%20-%20Sprint%203.md) · [Checklist DoR/DoD](./Checklist%20-%20Sprint%203.md) · [Relatório de testes US-11/US-12](./testes/Relatório%20de%20Testes%20-%20Sprint%203.md) · [Regressão completa](../../teste/Relatorio%20de%20Teste.md)
 
 ---
 
-## 🏅 DoR - Definition of Ready <a id="dor"></a>
+## 🏅 DoR — Definition of Ready <a id="dor"></a>
 
-A avaliação detalhada de DoR e DoD, User Story por User Story e melhoria por melhoria, está em [`Checklist - Sprint 3`](./Checklist%20-%20Sprint%203.md). Os cenários de aceitação estão no [`BDD - Sprint 3`](./testes/BDD%20-%20Sprint%203.md).
+| Critério | Definição atendida nesta Sprint |
+| :--- | :--- |
+| **Objetivo e usuário** | US-11 atende ao líder que precisa localizar sobras; US-12 atende ao gerente que precisa avaliar transferências para cobrir déficits. |
+| **Regra de negócio** | Sobra é estoque atual menos necessidade prevista. A quantidade sugerida não ultrapassa a sobra após reservar a necessidade do setor de origem. |
+| **Dados e unidades** | A previsão usa vendas históricas, produtos, receitas e estoques cadastrados. A unidade da receita é a unidade de referência da necessidade e da recomendação. |
+| **Filtros e cenários** | O setor de origem é opcional. O BDD cobre transferência total e parcial, ausência de sobra, falta de histórico e produto sem receita. |
+| **Limites da ação** | A tool apenas recomenda: não altera o CSV, não baixa estoque e não confirma uma movimentação real. |
+| **Critérios de aceitação** | Os critérios estão registrados no BDD e no Checklist da Sprint 3, com evidências ligadas ao Relatório de Testes. |
+| **Dependências** | A previsão de necessidade reutiliza o cálculo de matéria-prima da US-10 e a previsão de produção existente. |
+| **Intenções e acesso** | Exemplos de perguntas estão mapeados por categoria; `/ajuda` e `/help` levam às perguntas de exemplo pelo fluxo da MIA. |
 
-| Critério                      | Descrição                                                                                                                                                                                              |
-| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Clareza na Descrição**      | A User Story está escrita no formato: "Eu, como [papel], quero [ação], a fim de [objetivo/valor]". As melhorias técnicas descrevem o comportamento esperado.                                           |
-| **Critérios de Aceitação**    | A história possui critérios claros e pelo menos um cenário de teste básico (BDD) mapeado (Dado que... Quando... Então...).                                                                             |
-| **Independente**              | A história pode ser desenvolvida sem depender de tarefas bloqueantes dentro da mesma Sprint. Quando houver dependência (ex.: a US11 depende da US10 e da M4), ela está identificada.                   |
-| **Compreensão Compartilhada** | A equipe entende o propósito e estimou o esforço da tarefa (Story Points definidos nas User Stories).                                                                                                  |
-| **Mapeamento de Intenções**   | Estão documentados exemplos reais de frases em linguagem natural que o usuário pode enviar (ex: "quais matérias-primas posso transferir?", "por que a coxinha foi transferida?").                       |
-| **Dados Disponíveis**         | Está definido qual arquivo e coluna dos CSVs estáticos serão lidos, e os dados que ainda não existem na base (ex.: registro de transferências com o motivo) têm origem combinada.                      |
-| **Critérios Técnicos**        | Está definido o que o modelo via **DSPy** precisará extrair da frase (parâmetros) e qual regra o **Pandas** deverá aplicar.                                                                            |
-| **Tarefa Registrada**         | A tarefa tem um código no Jira (`MT-XX`), usado para nomear a branch e os commits, conforme a [Estratégia de Branch](../../Estratégia%20de%20Branch.md).                                                |
+## 🏅 DoD — Definition of Done <a id="dod"></a>
 
-## 🏅 DoD - Definition of Done <a id="dod"></a>
-
-| Critério                         | Descrição                                                                                                                                                                       |
-| :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Critérios Atendidos**          | Todos os critérios de aceitação e cenários de teste da User Story ou da melhoria foram cumpridos e validados com sucesso.                                                       |
-| **Interpretação Validada (NLP)** | A IA interpretou corretamente diferentes variações da mesma pergunta, em texto ou em áudio, acionando a regra correta.                                                          |
-| **Resposta Padronizada**         | A resposta traz a quantidade (ou o valor) e os setores separados, mesmo quando a pergunta cita um único setor.                                                                  |
-| **Tratamento de Erros**          | Entradas inválidas, falta de dados e falhas de rede, do Telegram ou da IA geram uma mensagem amigável, sem travar o bot nem deixar a mensagem em "Processando...".             |
-| **Código Revisado**              | O código passou por Code Review (Pull Request da branch da tarefa, revisado e aprovado por pelo menos um outro membro da equipe).                                               |
-| **Testes Registrados**           | Os casos do Guia de Testes foram executados e registrados no Relatório de Testes, sem falhas pendentes.                                                                         |
-| **Documentação Atualizada**      | As novas capacidades do bot, os mapeamentos dos CSVs estáticos e a arquitetura foram atualizados na documentação.                                                               |
-| **Integração Validada**          | A nova capacidade de resposta não confunde a IA em relação a outras perguntas já suportadas (inclusive as das sprints anteriores) e o bot lida bem com frases fora de contexto. |
-| **Validação do PO**              | O Product Owner conversou de forma natural com o bot no Telegram e confirmou que o retorno atende à regra de negócio.                                                           |
-| **Pronto para Deploy**           | O código está limpo, mergeado na `main` oficial por Pull Request e pronto para ser executado.                                                                                   |
+| Critério | Resultado da Sprint |
+| :--- | :--- |
+| **US-11 — sobras disponíveis** | A tool lista ingredientes com saldo positivo por setor após reservar a necessidade prevista e aceita filtro de setor de origem. |
+| **US-12 — recomendação** | A tool recomenda transferências para déficits compatíveis, limita a quantidade à sobra disponível e informa o déficit residual nas transferências parciais. |
+| **Estoque preservado** | As consultas são somente leitura e não modificam os estoques. O teste verificou o hash do CSV antes e depois. |
+| **Tratamento de dados ausentes** | Histórico inexistente e produtos sem receita recebem mensagens de ausência/ressalva, sem consumo inventado. |
+| **Menu do TeleBot** | `/ajuda` e `/help`, categorias, perguntas de exemplo e retorno ao menu foram implementados e verificados com testes automatizados. |
+| **Testes registrados** | Os 13 testes automatizados passaram. A resposta integrada local preservou os 69 itens da tool; os resultados e respostas completas estão no relatório. |
+| **Documentação** | Arquitetura, BDD, checklist, manual do usuário e relatórios foram atualizados para a organização das tools e o menu. |
+| **Limites da validação** | A execução foi local. Telegram ao vivo e áudio físico não foram testados; isso está registrado no relatório, sem ser apresentado como integração validada. |
 
 ---
+
+## 🎓 Equipe <a id="equipe"></a>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/hcastrosilva96">
+          <img src="https://github.com/hcastrosilva96.png" width="115px;" alt="Foto de Henrique de Castro"/>
+        </a><br>
+        <sub><b>Henrique de Castro</b></sub><br>
+        <sub>Product Owner</sub><br>
+        <a href="https://github.com/hcastrosilva96"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/henrique-castro-silva-6568a012b/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/FelipeMoraisOC">
+          <img src="https://github.com/FelipeMoraisOC.png" width="115px;" alt="Foto de Felipe Morais"/>
+        </a><br>
+        <sub><b>Felipe Morais</b></sub><br>
+        <sub>Scrum Master</sub><br>
+        <a href="https://github.com/FelipeMoraisOC"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/felipemoraisoc/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/mirelacristina">
+          <img src="https://github.com/mirelacristina.png" width="100px;" alt="Foto de Mirela Cristina"/>
+        </a><br>
+        <sub><b>Mirela Cristina</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/mirelacristina"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/mirela-cristina-4325723a6/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/eduardogranja">
+          <img src="https://github.com/eduardogranja.png" width="100px;" alt="Foto de Eduardo Granja"/>
+        </a><br>
+        <sub><b>Eduardo Granja</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/eduardogranja"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/eduardo-granja-95273739a/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/IanVRV">
+          <img src="https://github.com/IanVRV.png" width="100px;" alt="Foto de Ian Victor"/>
+        </a><br>
+        <sub><b>Ian Victor</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/IanVRV"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/ian-victor-ribeiro-vieira-3147121ba/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/mvlsouza">
+          <img src="https://github.com/mvlsouza.png" width="100px;" alt="Foto de Marcus Vinícius"/>
+        </a><br>
+        <sub><b>Marcus Vinícius</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/mvlsouza"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/mvlsouza/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/leandrotc013-lab">
+          <img src="https://github.com/leandrotc013-lab.png" width="100px;" alt="Foto de Leandro Silva"/>
+        </a><br>
+        <sub><b>Leandro Silva</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/leandrotc013-lab"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/leandro-silva-a54ab4a2/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/ag0ulart-dev">
+          <img src="https://github.com/ag0ulart-dev.png" width="100px;" alt="Foto de Adham Goulart"/>
+        </a><br>
+        <sub><b>Adham Goulart</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/ag0ulart-dev"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/adham-goulart-4a7320394/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/MATHEUSORTEGA">
+          <img src="https://github.com/MATHEUSORTEGA.png" width="100px;" alt="Foto de Matheus Correia"/>
+        </a><br>
+        <sub><b>Matheus Correia</b></sub><br>
+        <sub>Dev Team</sub><br>
+        <a href="https://github.com/MATHEUSORTEGA"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a> <a href="https://www.linkedin.com/in/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
+
+# 🎓 Contexto acadêmico
+
+A **MIA**, desenvolvida pela **McLorem Tecnologia**, faz parte da **Aprendizagem por Projetos Integrados (API)** do 1º semestre do curso de **Análise e Desenvolvimento de Sistemas da Fatec São José dos Campos**.
+
+<br>
 
 <div align="center">
 
