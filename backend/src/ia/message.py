@@ -24,6 +24,11 @@ def processar_mensagem(texto_usuario: str) -> str:
                 resultado = analista(pergunta=texto_usuario)
                 
                 dspy.inspect_history(n=1) 
+
+                # Em matéria-prima, preserve a lista calculada integralmente.
+                # O redator pode omitir ingredientes em respostas longas.
+                if categoria == "MATERIA_PRIMA":
+                    return str(resultado.dado_calculado)
                 
                 texto_final = agente_redator(
                     mensagem=texto_usuario, 

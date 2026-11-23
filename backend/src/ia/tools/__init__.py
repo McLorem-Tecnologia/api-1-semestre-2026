@@ -31,4 +31,5 @@ def obter_ferramentas_por_categoria(categoria: str) -> list:
 # sejam lidas pelo Python e os decoradores sejam executados ao iniciar o bot.
 import ia.tools.produtos_tools
 import ia.tools.producao_tool
+import ia.tools.materia_prima_tools
 import ia.tools.desperdicio_tool

@@ -4,9 +4,11 @@ import tempfile
 import telebot
 from ia.message import processar_mensagem
 from ia.transcricao import transcrever_audio
+from bot.ajuda_bot import registrar_comandos_ajuda
 
 def iniciar_bot(bot_key):
     bot = telebot.TeleBot(bot_key)
+    registrar_comandos_ajuda(bot, processar_mensagem)
 
     tipos_nao_suportados = [
         'audio', 'document', 'photo', 'sticker', 'video', 'video_note', 
@@ -21,7 +23,8 @@ def iniciar_bot(bot_key):
             "Pode conversar comigo do seu jeito, de forma natural, como se estivesse batendo um papo com alguém da equipe! 🧠💬\n\n"
             "Para testar, que tal me perguntar coisas como:\n\n"
             "🍞 _\"MIA, quais produtos precisamos produzir hoje?\"_\n"
-            "📈 _\"Quantas unidades devo produzir amanhã?\"_\n\n"
+            "📈 _\"O que devo produzir amanhã?\"_ (a resposta inclui as quantidades)\n\n"
+            "Digite /ajuda ou /help para ver o menu interativo de perguntas.\n\n"
             "Como eu posso facilitar o seu planejamento hoje? 🥰"
         )   
         
@@ -30,9 +33,6 @@ def iniciar_bot(bot_key):
     
     @bot.message_handler(content_types=['text'])
     def receber_texto(message):
-        print(f"[DEBUG] Mensagem recebida: {message.text}")
-
-        t0 = time.perf_counter()
         msg_temp = bot.reply_to(message, "⏳ <b><i>Processando sua solicitação...</i></b>", parse_mode='HTML')
         
         resposta = str(processar_mensagem(message.text.lower()))
@@ -43,13 +43,9 @@ def iniciar_bot(bot_key):
             text=resposta,
             parse_mode='HTML'
         )
-                        
-        print(f"[TEMPO TEXTO] Processamento completo: {time.perf_counter()-t0:.2f}s")
-
     
     @bot.message_handler(content_types=['voice'])
     def receber_audio(message):
-        t0 = time.perf_counter()
         msg_temp = bot.reply_to(
             message,
             "🎧 <b>Recebi seu áudio! Estou transcrevendo...</b>",
@@ -79,8 +75,6 @@ def iniciar_bot(bot_key):
             if not texto:
                 resposta = "Não consegui identificar a fala no áudio. Tente enviar novamente."
             else:
-                print(f"[DEBUG] Áudio transcrito: {texto}")
-
                 bot.edit_message_text(
                     chat_id=message.chat.id,
                     message_id=msg_temp.message_id,
@@ -112,12 +106,6 @@ def iniciar_bot(bot_key):
             # Remove o arquivo temporário após o processamento
             if caminho_audio and os.path.exists(caminho_audio):
                 os.remove(caminho_audio)
-
-            print(
-                f"[TEMPO ÁUDIO] Processamento completo: "
-                f"{time.perf_counter() - t0:.2f}s"
-            )
-
     
     @bot.message_handler(content_types=tipos_nao_suportados)
     def receber_formatos_invalidos(message):
