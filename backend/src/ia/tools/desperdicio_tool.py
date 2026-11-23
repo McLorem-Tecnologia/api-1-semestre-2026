@@ -44,6 +44,10 @@ def tool_buscar_por_intervalo(data_inicio: str = "hoje", data_fim: str = "", set
         data_fim
     #Pega os descartes do intervalo
     )
+    if resultado.empty:
+        aviso_setor = f" (Setor: {setor})" if setor else ""
+        return f"Custo total do desperdício {texto_data}{aviso_setor}: R$ 0.00"
+
     if setor:
         try:
             # Tenta carregar o arquivo de produtos

@@ -62,7 +62,6 @@ def _formatar_lista_produtos(resultado: list) -> str:
 
     return "\n".join(linhas).rstrip()
 
-
 def _formatar_quantidade(quantidade, unidade: str) -> str:
     try:
         plural = float(str(quantidade).replace(",", ".").strip()) != 1
@@ -75,7 +74,6 @@ def _formatar_quantidade(quantidade, unidade: str) -> str:
         unidade = "unidades" if plural else "unidade"
 
     return f"{quantidade} {unidade}"
-
 
 def _calcular_previsao_do_dia(data: str, setor: str):
     """Calcula a produção média ideal de cada produto para a data (base das tools de previsão e de meta).
@@ -95,15 +93,24 @@ def _calcular_previsao_do_dia(data: str, setor: str):
     """
     data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
 
-    # Dias do passado com o mesmo perfil (pico ou comum) da data pedida
+    # Busca dias do passado com mesmo dia efetivo (feriado/véspera), ciclo financeiro e clima
     vendas_similares = services.producao.dataframe_vendas_similares(data_real)
     if vendas_similares.empty:
         return None, setor, texto_data
 
-    # Média de saída de cada produto, já com a margem de produção
-    previsao_por_produto = services.producao.media_vendas_produtos(vendas_similares, setor)
-    return previsao_por_produto, setor, texto_data
+    # Enriquecimento opcional do texto_data com o perfil climático/calendário do dia
+    perfil = utils.perfil_do_dia(data_real)
+    detalhes = [f"clima {perfil['clima'].lower()}", perfil['fase_financeira'].lower()]
+    if perfil["eh_feriado"]:
+        detalhes.append("feriado")
+    elif perfil["eh_vespera"]:
+        detalhes.append("véspera de feriado")
 
+    texto_data_enriquecido = f"{texto_data} ({', '.join(detalhes)})"
+
+    # Média de saída de cada produto, já com a margem de produção (+5%)
+    previsao_por_produto = services.producao.media_vendas_produtos(vendas_similares, setor)
+    return previsao_por_produto, setor, texto_data_enriquecido
 
 @dspy_tool('PRODUCAO')
 def tool_previsao_vendas_por_data(data: str = "hoje", setor: str = "") -> str:
@@ -303,60 +310,6 @@ def tool_producao_por_data(data: str, setor: str = "") -> str:
     except Exception as erro:
         print(f"[ERRO - tool_producao_por_data] Falha: {erro!r}")
         return "Ocorreu um erro técnico inesperado ao tentar acessar os dados reais de produção."
-
-@dspy_tool('PRODUCAO')
-def tool_previsao_quantidade_mp (data = "hoje", setor = "" ):
-    """
-    Parâmetros:US-10: Quantidade de Matéria-Prima ou Ingredientes para deixar preparada ou separada para a produção de um dia específico.
-
-Permite consultar e calcular a quantidade total de cada matéria-prima necessária
-para atender ao planejamento de produção de uma determinada data, consolidando
-os insumos utilizados por todos os produtos programados. O objetivo é auxiliar
-na separação e preparação antecipada dos materiais necessários para a operação.
-
-    - data (opcional): data ou referência de tempo exatamente como o usuário disse, sem
-      calcular a data. Aceita datas numéricas ('20/09/2026'), por extenso ('2 de novembro de 2026'),
-      termos relativos ('hoje', 'ontem', 'amanhã', 'depois de amanhã'), contagem de dias
-      ('há 2 dias', 'daqui a 5 dias') e dias da semana ('segunda passada', 'próxima sexta').
-      Se não especificado, assume 'hoje'.
-    - setor (opcional): nome do setor (ex: 'Padaria'). Deixe vazio se não for especificado.
-    """
-    data_real, setor, texto_data = _tratar_parametros_iniciais(data, setor)
-
-    df_historico_limpo = services.producao.dataframe_vendas_similares(data_real)
-    
-    if df_historico_limpo.empty:
-        return f"Não encontrei histórico compatível para auditar a meta do dia {texto_data}."
-        
-    resultado = services.producao.media_vendas_produtos(df_historico_limpo, setor)
-    texto = ""
-    lista = []
-    for item in resultado:
-        nome = item.split(":")[0]
-        nome = procedures.produtos.nome_para_skus(nome)
-        lista.append(nome)
-
-    produtos_disponiveis = procedures.ingredientes.formatacao_pre_calculo(lista)
-
-    for item in resultado:
-        nome_produto = item.split(":")[0]
-        quantidade_produto = float(item.split(":")[1])
-        sku_produto = procedures.produtos.nome_para_skus(nome_produto)
-        for obj in produtos_disponiveis:
-            if obj['SKU'] == sku_produto:
-              ingredientes = obj['Ingrediente']
-              quantidade_produto *= obj['Quantidade na Receita']
-              sobra = obj['Quantidade em Estoque'] - quantidade_produto
-              if sobra > 0 :
-                  texto += f"- {nome_produto}: {ingredientes} - {quantidade_produto:.2f} unidades (Sobra: {sobra:.2f} unidades)\n"
-              else:
-                  texto += f"- {nome_produto}: quantidade insuficiente em estoque (Necessário: {quantidade_produto:.2f} unidades, Estoque: {obj['Quantidade em Estoque']:.2f} unidades)\n"
-
-    return f"""
-Matéria-prima necessária para {texto_data}:
-
-{texto}
-"""
 
 @dspy_tool('PRODUCAO')
 def tool_previsao_vendas_por_periodo(periodo: str = "", data: str = "hoje", setor: str = "") -> str:

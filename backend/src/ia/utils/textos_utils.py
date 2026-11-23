@@ -7,13 +7,13 @@ def normalizar_setor(setor_informado: str) -> str:
     if not setor_informado or setor_informado.lower() in ['none', 'null', 'vazio']:
         return None
         
-    setores_oficiais = ["Açougue", "Padaria", "Cozinha/Rotisseria", "Peixaria", "Confeitaria"]
+    setores_oficiais = ["Açougue", "Padaria", "Cozinha", "Peixaria", "Confeitaria", "Processados"]
     texto_limpo = setor_informado.strip().lower()
     
     alias_map = {
-        "cozinha": "Cozinha/Rotisseria",
-        "rotisseria": "Cozinha/Rotisseria",
-        "roti": "Cozinha/Rotisseria",
+        "cozinha": "Cozinha",
+        "rotisseria": "Cozinha",
+        "roti": "Cozinha",
         "acougue": "Açougue",
         "carne": "Açougue",
         "peixe": "Peixaria",
